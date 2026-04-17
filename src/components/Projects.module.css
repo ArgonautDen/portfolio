@@ -1,0 +1,235 @@
+.projects {
+  padding: 120px 0 160px;
+  background: #0e0e0e;
+  color: #f0f0f0;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Заголовок ── */
+.header {
+  max-width: 1200px;
+  margin: 0 auto 80px;
+  padding: 0 48px;
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+}
+
+.label {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+
+.title {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 300;
+  letter-spacing: -1px;
+  color: #f0f0f0;
+  line-height: 1;
+}
+
+/* ── Обёртка списка — relative для превью ── */
+.listWrap {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ── Плавающее превью ── */
+.preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 380px;
+  aspect-ratio: 16/10;
+  pointer-events: none;
+  z-index: 10;
+  border-radius: 6px;
+  overflow: hidden;
+  /* Смещаем чтобы не перекрывало курсор */
+  translate: 24px -50%;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+}
+
+.previewMedia {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.previewPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.previewLabel {
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+}
+
+/* ── Список ── */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Верхняя линия перед первым элементом */
+.list::before {
+  content: '';
+  display: block;
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+}
+
+/* ── Строка проекта ── */
+.item {
+  position: relative;
+}
+
+.itemLink {
+  display: grid;
+  grid-template-columns: 48px 1fr auto auto;
+  align-items: center;
+  gap: 24px;
+  padding: 28px 0;
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.item:hover .itemLink {
+  color: #fff;
+}
+
+/* Номер */
+.num {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.25);
+  transition: color 0.3s;
+}
+
+.item:hover .num {
+  color: rgba(255,255,255,0.5);
+}
+
+/* Название */
+.name {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  display: flex;
+  flex-wrap: wrap;
+  transition: letter-spacing 0.4s ease;
+}
+
+.item:hover .name {
+  letter-spacing: 1px;
+}
+
+.char {
+  display: inline-block;
+}
+
+/* Теги */
+.tags {
+  font-family: 'Courier New', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.item:hover .tags {
+  color: rgba(255,255,255,0.55);
+}
+
+/* Год + стрелка */
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.year {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.25);
+  transition: color 0.3s;
+}
+
+.item:hover .year {
+  color: rgba(255,255,255,0.6);
+}
+
+.arrow {
+  font-size: 1.3rem;
+  color: rgba(255,255,255,0.2);
+  transform: translateY(0) rotate(0deg);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.3s;
+  display: inline-block;
+}
+
+.item:hover .arrow {
+  transform: translateY(-3px) rotate(12deg);
+  color: #fff;
+}
+
+/* ── Разделитель ── */
+.line {
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+  overflow: hidden;
+}
+
+.lineFill {
+  height: 100%;
+  background: rgba(255,255,255,0.1);
+  transform-origin: left;
+}
+
+/* ── Адаптив ── */
+@media (max-width: 768px) {
+  .header {
+    padding: 0 24px;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .listWrap {
+    padding: 0 24px;
+  }
+
+  .preview {
+    display: none; /* На мобильных прячем превью */
+  }
+
+  .itemLink {
+    grid-template-columns: 36px 1fr auto;
+    gap: 16px;
+  }
+
+  .tags {
+    display: none;
+  }
+
+  .name {
+    font-size: clamp(1.4rem, 6vw, 2rem);
+  }
+}

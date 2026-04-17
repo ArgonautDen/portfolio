@@ -1,0 +1,252 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: rgb(242, 242, 242);
+  overflow: hidden;
+  position: relative;
+  
+  /* Фоновый цвет на случай, если фото не загрузится */
+  background: linear-gradient(180deg, 
+  rgb(145, 145, 145) 0%, 
+  rgb(163, 163, 163) 25%, 
+  rgb(170, 170, 170) 50%, 
+  rgb(189, 189, 189) 75%, 
+  rgb(145, 145, 145) 100%);
+}
+
+/* Тёмная диагональная линия — вариант Б */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    /* главная линия — тёмная диагональ с затуханием по краям */
+    linear-gradient(
+      to bottom right,
+      transparent 0%,
+      transparent 62%,
+      rgba(28, 29, 32, 0) 64%,
+      rgba(28, 29, 32, 0.42) 66%,
+      rgba(28, 29, 32, 0.42) 67%,
+      rgba(28, 29, 32, 0) 69%,
+      transparent 71%,
+      /* параллельная тонкая */
+      transparent 72%,
+      rgba(28, 29, 32, 0) 74%,
+      rgba(28, 29, 32, 0.10) 75%,
+      rgba(28, 29, 32, 0.10) 76%,
+      rgba(28, 29, 32, 0) 78%,
+      transparent 100%
+    );
+}
+
+/* Псевдоэлемент с фоновым изображением */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/src/assets/images/me.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 1;
+  opacity: 0.8;
+}
+
+/* Контент поверх фона */
+.marqueeOverlay,
+.container,
+.buttons {
+  position: relative;
+  z-index: 2;
+}
+
+/* Бегущая строка */
+.marqueeOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.marqueeContent {
+  display: flex;
+  gap: 50px;
+  width: max-content;
+  font-size: clamp(6rem, 20vw, 15rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: rgb(245, 245, 245);
+  opacity: 0.3;
+  letter-spacing: 10px;
+  user-select: none;
+  animation: marquee 25s linear infinite;
+}
+
+.marqueeContent.normal {
+  animation-direction: normal;
+}
+
+.marqueeContent.reverse {
+  animation-direction: reverse;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Контейнер для контента */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Левая колонка */
+.leftColumn {
+  flex: 0 0 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.subtitleBlock {
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-align: center;
+  color: white;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.rightColumn {
+  flex: 1;
+}
+
+/* Кнопки */
+.buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 50px;
+  position: relative;
+  z-index: 10;
+  animation: fadeIn 1s ease 0.6s both;
+}
+
+.btn {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-decoration: none;
+  position: relative;
+  z-index: 20;
+}
+
+.btnPrimary {
+  background: rgb(236, 236, 236);
+  color: #1c1d20;
+}
+
+.btnPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(234, 234, 234, 0.2);
+}
+
+.btnOutline {
+  background: transparent;
+  color: rgb(233, 233, 233);
+  border: 2px solid rgb(239, 239, 239);
+  backdrop-filter: blur(5px);
+}
+
+.btnOutline:hover {
+  background: rgb(232, 232, 232);
+  color: #1c1d20;
+  transform: translateY(-2px);
+}
+
+/* Адаптация */
+@media (max-width: 968px) {
+  .container {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .leftColumn {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .subtitleBlock {
+    font-size: 1.2rem;
+  }
+
+  .marqueeContent {
+    font-size: clamp(4rem, 15vw, 8rem);
+    opacity: 0.25;
+    letter-spacing: 5px;
+  }
+}
+
+@media (max-width: 768px) {
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn {
+    width: 200px;
+  }
+  .hero::after {
+    background-size: cover; /* исходный размер, без масштабирования */
+  }
+}
+
+@media (width: 820px) and (height: 1180px) {
+  .hero::after {
+    background-size: cover;
+  }
+}
+
+@media (width: 1024px) and (height: 1366px) {
+  .hero::after {
+    background-size: cover;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

@@ -1,0 +1,46 @@
+/* ═════════════════════════════════════════════════════════════════════════════
+   scrollReveal.css — подключи ОДИН РАЗ в index.css или App.css
+   Управляет начальным состоянием и переходом для [data-reveal] элементов.
+   Хук useScrollReveal добавляет класс .is-visible когда элемент в viewport.
+═════════════════════════════════════════════════════════════════════════════ */
+
+/* ── Базовое скрытое состояние ── */
+[data-reveal] {
+  opacity: 0;
+  will-change: opacity, transform;
+  transition:
+    opacity  0.72s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Направления — начальный offset ── */
+[data-reveal="up"] {
+  transform: translateY(48px);
+}
+
+[data-reveal="down"] {
+  transform: translateY(-48px);
+}
+
+[data-reveal="left"] {
+  transform: translateX(-64px);
+}
+
+[data-reveal="right"] {
+  transform: translateX(64px);
+}
+
+/* ── Видимое состояние (добавляет хук) ── */
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* ── Уважаем prefers-reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

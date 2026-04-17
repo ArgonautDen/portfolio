@@ -1,0 +1,50 @@
+.screen {
+  position: fixed;
+  inset: 0;
+  background: #1c1d20;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.screen.exit {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+/* Дуга — отдельный элемент, едет вместе с экраном */
+.arc {
+  position: fixed;
+  bottom: -60px;
+  left: -5%;
+  width: 110%;
+  height: 120px;
+  background: #1c1d20;
+  border-radius: 0 0 50% 50%;
+  z-index: 9999;
+  transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.arc.exit {
+  transform: translateY(calc(-100vh - 120px));
+}
+
+.word {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: clamp(20px, 8vw, 35px);
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 0.08em;
+  transition: opacity 1.5s ease;
+  user-select: none;
+}
+
+.word.show {
+  opacity: 1;
+}
+
+.word.hide {
+  opacity: 0;
+}

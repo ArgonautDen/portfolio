@@ -1,0 +1,487 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&family=Raleway:wght@200&display=swap');
+
+/* ─────────────────────────────────────────────
+   СЕКЦИЯ
+───────────────────────────────────────────── */
+.section {
+  position: relative;
+  background: #eeeeec;
+  overflow: hidden;
+  font-family: 'DM Mono', monospace;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.022;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─────────────────────────────────────────────
+   ВЕРХ
+───────────────────────────────────────────── */
+.top {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 100px 48px 0;
+}
+
+.label {
+  font-size: 0.62rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(91, 185, 154, 0.75);
+  margin-bottom: 14px;
+  display: block;
+}
+
+.title {
+  display: inline-block;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-family: 'Raleway', sans-serif;
+  font-weight: 200;
+  color: #1c1c1e;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin: 0 0 40px;
+  position: relative;
+  overflow: visible;
+}
+
+/* Кружок залитый — начинается за 30px от текста */
+.title::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 35px);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgb(170, 170, 170);
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+/* Линия — стартует сразу после кружка, уходит вправо */
+.title::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 30px + 12px + 4px);
+  right: -9999px;
+  height: 1.5px;
+  background: rgb(170, 170, 170);
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+.title em {
+  font-style: italic;
+  color: #5bb99a;
+}
+
+/* ─────────────────────────────────────────────
+   БЕГУЩАЯ СТРОКА
+───────────────────────────────────────────── */
+.tickerWrap {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 15px 0;
+  margin-bottom: 50px;
+}
+
+.ticker {
+  display: flex;
+  gap: 60px;
+  width: max-content;
+  animation: ticker 22s linear infinite;
+  font-size: 0.60rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(175, 177, 177, 0.55);
+  white-space: nowrap;
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ─────────────────────────────────────────────
+   КОНТЕНТ
+───────────────────────────────────────────── */
+.inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 48px 90px;
+}
+
+/* ─────────────────────────────────────────────
+   КАРТОЧКИ — грид
+───────────────────────────────────────────── */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  overflow: visible;
+}
+
+/* ─────────────────────────────────────────────
+   КАРТОЧКА — 3D tilt
+───────────────────────────────────────────── */
+.card {
+  padding: 40px 36px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+
+  background: linear-gradient(
+    155deg,
+    rgba(32, 34, 38, 0.96) 0%,
+    rgba(14, 14, 16, 0.98) 60%,
+    rgba(20, 22, 26, 0.96) 100%
+  );
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 8px 32px rgba(0, 0, 0, 0.45),
+    0 2px 8px rgba(0, 0, 0, 0.3);
+
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: box-shadow 0.4s ease;
+  isolation: isolate;
+
+  --glare-x: 50%;
+  --glare-y: 50%;
+}
+
+.card:hover {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.14) inset,
+    0 0 0 1px rgba(91, 185, 154, 0.18),
+    0 20px 60px rgba(0, 0, 0, 0.55),
+    0 4px 16px rgba(0, 0, 0, 0.35),
+    0 0 40px rgba(91, 185, 154, 0.06);
+}
+
+/* Верхний глянцевый блик */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.07) 0%,
+    rgba(255, 255, 255, 0.02) 50%,
+    transparent 100%
+  );
+  border-radius: 16px 16px 0 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Линия-акцент снизу при ховере */
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(91, 185, 154, 0.6), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover::after {
+  transform: scaleX(1);
+}
+
+/* ─────────────────────────────────────────────
+   SPIN — быстрые обороты при клике (~1 сек)
+───────────────────────────────────────────── */
+@keyframes cardSpin {
+  0%   { transform: perspective(900px) scale3d(1,    1,    1); }
+  30%  { transform: perspective(900px) scale3d(0.88, 0.88, 0.88); }
+  55%  { transform: perspective(900px) scale3d(0.84, 0.84, 0.84); }
+  78%  { transform: perspective(900px) scale3d(1.06, 1.06, 1.06); }
+  100% { transform: perspective(900px) scale3d(1,    1,    1); }
+}
+
+.spinning {
+  animation: cardSpin 0.55s ease-in-out forwards;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────
+   ФОНОВЫЙ ЛОГОТИП
+───────────────────────────────────────────── */
+.cardBgLogoWrap {
+  position: absolute;
+  left: -10%;
+  top: -10%;
+  width: 72%;
+  aspect-ratio: 1 / 1;
+  pointer-events: none;
+  z-index: 0;
+
+  opacity: 0;
+  transform: scale(0.82);
+  transition:
+    opacity  0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover .cardBgLogoWrap,
+.card[data-hovered] .cardBgLogoWrap {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cardBgLogo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  border-radius: 50%;
+  opacity: 0.12;
+  filter: grayscale(30%) drop-shadow(0 0 24px rgba(91, 185, 154, 0.12));
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), filter 0.55s ease;
+}
+
+.card[data-hovered] .cardBgLogo {
+  opacity: 0.28;
+  filter: grayscale(0%) drop-shadow(0 0 24px rgba(91, 185, 154, 0.15));
+}
+
+/* ─────────────────────────────────────────────
+   GLARE OVERLAY
+───────────────────────────────────────────── */
+
+
+/* ─────────────────────────────────────────────
+   ИКОНКА
+───────────────────────────────────────────── */
+.cardIcon {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 20px;
+  color: rgba(91, 185, 154, 0.45);
+  transition: color 0.35s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease;
+  transform-style: preserve-3d;
+  transform: translateZ(0px);
+  width: fit-content;
+}
+
+.card:hover .cardIcon {
+  color: rgba(91, 185, 154, 0.9);
+  transform: translateZ(24px) scale(1.08);
+  opacity: 0;
+}
+
+/* ─────────────────────────────────────────────
+   ХЕДЕР
+───────────────────────────────────────────── */
+.cardHeader {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.cardIdx {
+  font-size: 0.5rem;
+  letter-spacing: 3px;
+  color: rgba(255, 255, 255, 0.12);
+}
+
+.cardArrow {
+  font-size: 1rem;
+  color: rgba(180, 180, 190, 0.2);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s;
+  display: inline-block;
+  transform-style: preserve-3d;
+}
+
+.card:hover .cardArrow {
+  transform: translate(4px, -4px) translateZ(12px);
+  color: rgba(91, 185, 154, 0.7);
+}
+
+/* ─────────────────────────────────────────────
+   ТИПЫ / ЗНАЧЕНИЯ / CTA
+───────────────────────────────────────────── */
+.cardType {
+  position: relative;
+  z-index: 2;
+  font-size: 0.55rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.2);
+  display: block;
+  margin-bottom: 14px;
+  transition: color 0.3s;
+}
+
+.card:hover .cardType {
+  color: rgba(91, 185, 154, 0.6);
+}
+
+.cardVal {
+  position: relative;
+  z-index: 2;
+  font-family: 'DM Mono', monospace;
+  font-size: clamp(0.85rem, 1.4vw, 1.1rem);
+  color: rgba(240, 240, 240, 0.45);
+  display: block;
+  transition: color 0.3s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  word-break: break-all;
+  margin-bottom: 32px;
+  line-height: 1.2;
+  transform-style: preserve-3d;
+  transform: translateZ(0px);
+}
+
+.card:hover .cardVal {
+  color: rgba(240, 240, 240, 0.85);
+  transform: translateZ(16px);
+}
+
+/* ─────────────────────────────────────────────
+   ВОЛНА-КРИСТАЛЛЫ — в строке с CTA, слева
+───────────────────────────────────────────── */
+.cardWave {
+  flex: 1;
+  min-width: 0;
+  height: 28px;
+  pointer-events: none;
+  overflow: visible;
+  /* полупрозрачная по умолчанию — всегда видна */
+  opacity: 0.22;
+  transition: opacity 0.4s ease;
+}
+
+.card[data-hovered] .cardWave {
+  opacity: 0.65;
+}
+
+.waveLine {
+  stroke: rgba(255, 255, 255, 0.25);
+  stroke-width: 0.6;
+}
+
+.waveCrystal {
+  fill: rgba(255, 255, 255, 0.85);
+}
+
+.waveDot {
+  fill: rgba(255, 255, 255, 1.0);
+}
+
+@keyframes crystalPulse {
+  0%, 100% { opacity: 0.85; }
+  50%       { opacity: 0.30; }
+}
+
+.card[data-hovered] .waveCrystal {
+  animation: crystalPulse 2.0s ease-in-out infinite;
+}
+
+.card[data-hovered] .waveDot {
+  animation: crystalPulse 2.0s ease-in-out 0.3s infinite;
+}
+
+/* ─────────────────────────────────────────────
+   CTA — волна слева, текст справа
+───────────────────────────────────────────── */
+.cardCta {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.cardCtaText {
+  font-size: 0.55rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.15);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color 0.3s;
+}
+
+.card:hover .cardCtaText {
+  color: rgba(91, 185, 154, 0.6);
+}
+
+/* ─────────────────────────────────────────────
+   ФУТЕР
+───────────────────────────────────────────── */
+.foot {
+  margin-top: 44px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.50rem;
+  letter-spacing: 3px;
+  color: rgba(0, 0, 0, 0.28);
+  text-transform: uppercase;
+}
+
+.footBar {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(91, 185, 154, 0.35), transparent);
+}
+
+/* ─────────────────────────────────────────────
+   АДАПТИВ
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .top   { padding: 72px 24px 0; }
+  .inner { padding: 0 24px 72px; }
+  .cards { grid-template-columns: 1fr; gap: 12px; }
+
+  .card {
+    border-radius: 12px;
+    transform: none !important;
+  }
+
+  /* На мобильных логотип показываем статично */
+  .cardBgLogoWrap {
+    opacity: 0.4;
+    transform: scale(1) rotate(0deg);
+  }
+
+  .cardGlare { display: none; }
+
+  .title { font-size: clamp(1.6rem, 6vw, 2.4rem); }
+}
