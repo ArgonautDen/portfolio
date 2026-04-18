@@ -194,17 +194,17 @@ const contacts = [
   {
     idx: '01', type: 'Email',    val: 'jokko0704@gmail.com', cta: 'Написать →',
     href: 'mailto:denis.rodichev@example.com',
-    avatar: '/src/assets/images/mail.jpg',
+    avatar: '/images/mail.jpg',
   },
   {
     idx: '02', type: 'GitHub',   val: 'github.com/ArgonautDen', cta: 'Смотреть →',
     href: 'https://github.com/твойлогин',
-    avatar: '/src/assets/images/avatar-github.jpg',
+    avatar: '/images/avatar-github.jpg',
   },
   {
     idx: '03', type: 'Telegram', val: '@DeniRDV', cta: 'Написать →',
     href: 'https://t.me/твойник',
-    avatar: '/src/assets/images/about.png',
+    avatar: '/images/about.png',
   },
 ];
 
