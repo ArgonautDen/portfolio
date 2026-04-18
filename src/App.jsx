@@ -12,6 +12,7 @@ import './scrollReveal.css'; // глобальные стили scroll-аним�
 const App = () => {
   const [loading, setLoading] = useState(true);
   const preloadStarted = useRef(false);
+  const videoPreloaders = useRef([]);
 
   useEffect(() => {
     if (preloadStarted.current) return;
@@ -29,6 +30,7 @@ const App = () => {
       video.preload = 'auto';
       video.src = src;
       video.load();
+      videoPreloaders.current.push(video); // <-- сохраняем
     });
   }, []);
 

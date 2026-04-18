@@ -91,7 +91,7 @@ const Projects = () => {
                 muted
                 loop
                 playsInline
-                preload="auto"
+                preload="matadata"
               />
             ) : (
               <div
