@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './Hero.module.css';
+import ShaderBackground from './ShaderBackground';
 
 const Hero = () => {
   const [direction, setDirection] = useState('normal');
@@ -25,6 +26,7 @@ const Hero = () => {
 
   return (
     <section id="hero" className={styles.hero}>
+      <ShaderBackground />
       {/* Бегущая строка */}
       <div className={styles.marqueeOverlay}>
         <div className={`${styles.marqueeContent} ${styles[direction]}`}>

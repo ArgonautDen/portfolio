@@ -6,7 +6,7 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  background: rgb(145, 145, 145);
+  background: #1c1d20;
 }
 
 .header.hidden {
