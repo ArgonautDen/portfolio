@@ -204,7 +204,7 @@ const contacts = [
   {
     idx: '03', type: 'Telegram', val: '@DeniRDV', cta: 'Написать →',
     href: 'https://t.me/твойник',
-    avatar: '/images/about.png',
+    avatar: '/images/about.webp',
   },
 ];
 

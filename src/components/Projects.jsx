@@ -9,7 +9,6 @@ const projects = [
     year: '2024',
     tags: ['CSS3', 'HTML5', 'Анимации'],
     link: 'https://github.com/твойлогин/css-project',
-    // замени на реальное видео: video: '/videos/css-project.mp4'
     video: '/videos/Sedona.mp4',
     placeholder: '#1a1a2e',
   },
@@ -38,10 +37,13 @@ const projects = [
     placeholder: '#1a1500',
   },
 ];
+// ^^^ Замени ссылки на реальные когда будешь готов
 
 const Projects = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const containerRef = useRef(null);
+  // Храним refs на все video-элементы чтобы управлять play/pause
+  const videoRefs = useRef([]);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -56,9 +58,28 @@ const Projects = () => {
     mouseY.set(e.clientY - rect.top);
   }, [mouseX, mouseY]);
 
+  const handleMouseEnter = useCallback((i) => {
+    setActiveIndex(i);
+    // Запускаем видео сразу — оно уже загружено в DOM
+    const video = videoRefs.current[i];
+    if (video) {
+      video.currentTime = 0;
+      video.play().catch(() => {}); // catch на случай autoplay policy
+    }
+  }, []);
+
+  const handleMouseLeave = useCallback((i) => {
+    setActiveIndex(null);
+    const video = videoRefs.current[i];
+    if (video) {
+      video.pause();
+    }
+  }, []);
+
   return (
     <section id="projects" className={styles.projects}>
       <ShaderBackground />
+
       {/* Заголовок секции */}
       <div className={styles.header}>
         <span className={styles.label}>Избранное</span>
@@ -71,7 +92,7 @@ const Projects = () => {
         className={styles.listWrap}
         onMouseMove={handleMouseMove}
       >
-        {/* Плавающая картинка */}
+        {/* Плавающий контейнер — один на все проекты, без пересоздания video */}
         <motion.div
           className={styles.preview}
           style={{ x: springX, y: springY }}
@@ -79,31 +100,34 @@ const Projects = () => {
             opacity: activeIndex !== null ? 1 : 0,
             scale: activeIndex !== null ? 1 : 0.88,
           }}
-          transition={{ opacity: { duration: 0.25 }, scale: { duration: 0.3 } }}
+          transition={{ opacity: { duration: 0.2 }, scale: { duration: 0.25 } }}
         >
-          {activeIndex !== null && (
-            projects[activeIndex].video ? (
+          {projects.map((project, i) => (
+            project.video ? (
               <video
-                key={activeIndex}
-                src={projects[activeIndex].video}
+                key={i}
+                src={project.video}
                 className={styles.previewMedia}
-                autoPlay
+                style={{ display: activeIndex === i ? 'block' : 'none' }}
+                ref={el => void (videoRefs.current[i] = el)}
                 muted
                 loop
                 playsInline
-                preload="matadata"
+                preload="auto"
               />
             ) : (
               <div
+                key={i}
                 className={styles.previewPlaceholder}
-                style={{ background: projects[activeIndex].placeholder }}
+                style={{
+                  background: project.placeholder,
+                  display: activeIndex === i ? 'flex' : 'none',
+                }}
               >
-                <span className={styles.previewLabel}>
-                  {projects[activeIndex].title}
-                </span>
+                <span className={styles.previewLabel}>{project.title}</span>
               </div>
             )
-          )}
+          ))}
         </motion.div>
 
         {/* Строки проектов */}
@@ -112,8 +136,8 @@ const Projects = () => {
             <motion.li
               key={i}
               className={styles.item}
-              onMouseEnter={() => setActiveIndex(i)}
-              onMouseLeave={() => setActiveIndex(null)}
+              onMouseEnter={() => handleMouseEnter(i)}
+              onMouseLeave={() => handleMouseLeave(i)}
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
@@ -125,10 +149,8 @@ const Projects = () => {
                 rel="noopener noreferrer"
                 className={styles.itemLink}
               >
-                {/* Номер */}
                 <span className={styles.num}>0{i + 1}</span>
 
-                {/* Название */}
                 <span className={styles.name}>
                   {project.title.split('').map((char, ci) => (
                     <motion.span
@@ -142,19 +164,16 @@ const Projects = () => {
                   ))}
                 </span>
 
-                {/* Теги */}
                 <span className={styles.tags}>
                   {project.tags.join(' · ')}
                 </span>
 
-                {/* Год + стрелка */}
                 <span className={styles.meta}>
                   <span className={styles.year}>{project.year}</span>
                   <span className={styles.arrow}>↗</span>
                 </span>
               </a>
 
-              {/* Разделитель */}
               <div className={styles.line}>
                 <motion.div
                   className={styles.lineFill}

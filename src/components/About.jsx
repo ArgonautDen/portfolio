@@ -1,5 +1,5 @@
 import { useRef, useCallback } from 'react';
-import aboutImage from '../assets/images/about.png';
+import aboutImage from '/images/about.webp';
 import styles from './About.module.css';
 import useScrollReveal from '../hooks/useScrollReveal';
 import BubbleSkills from './BubbleSkills';
