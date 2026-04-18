@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import LoadingScreen    from './components/LoadingScreen';
 import Navigation       from './components/Navigation';
 import Hero             from './components/Hero';
@@ -11,6 +11,26 @@ import './scrollReveal.css'; // глобальные стили scroll-аним�
 
 const App = () => {
   const [loading, setLoading] = useState(true);
+  const preloadStarted = useRef(false);
+
+  useEffect(() => {
+    if (preloadStarted.current) return;
+    preloadStarted.current = true;
+
+    const videos = [
+      '/videos/Sedona.mp4',
+      '/videos/Energy.mp4',
+      '/videos/Kekstagram.mp4',
+      '/videos/voidrealm.mov'
+    ];
+
+    videos.forEach(src => {
+      const video = document.createElement('video');
+      video.preload = 'auto';
+      video.src = src;
+      video.load();
+    });
+  }, []);
 
   return (
     <div>
