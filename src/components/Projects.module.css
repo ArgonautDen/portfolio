@@ -22,6 +22,7 @@
   letter-spacing: 3px;
   text-transform: uppercase;
   color: rgba(255,255,255,0.3);
+  z-index: 1;
 }
 
 .title {
@@ -30,6 +31,7 @@
   letter-spacing: -1px;
   color: #f0f0f0;
   line-height: 1;
+  z-index: 1;
 }
 
 /* ── Обёртка списка — relative для превью ── */
@@ -204,6 +206,36 @@
   transform-origin: left;
 }
 
+/* ── Описание проекта ── */
+.desc {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              padding 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+.item:hover .desc {
+  grid-template-rows: 1fr;
+  padding-bottom: 20px;
+}
+
+.descText {
+  min-height: 0;
+  overflow: hidden;
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.38);
+  max-width: 520px;
+  transition: color 0.3s ease;
+}
+
+.item:hover .descText {
+  color: rgba(255, 255, 255, 0.55);
+}
+
 /* ── Адаптив ── */
 @media (max-width: 768px) {
   .header {
@@ -233,3 +265,4 @@
     font-size: clamp(1.4rem, 6vw, 2rem);
   }
 }
+

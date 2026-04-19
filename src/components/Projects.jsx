@@ -7,6 +7,7 @@ const projects = [
   {
     title: 'CSS Master',
     year: '2024',
+    description: 'Анимированный лендинг с нуля — только HTML и CSS3. Кастомные анимации, адаптивная верстка.',
     tags: ['CSS3', 'HTML5', 'Анимации'],
     link: 'https://github.com/твойлогин/css-project',
     video: '/videos/Sedona.mp4',
@@ -15,6 +16,7 @@ const projects = [
   {
     title: 'БЭМ-портал',
     year: '2024',
+    description: 'Корпоративный портал по БЭМ-методологии. Flexbox-сетка, строгая структура классов.',
     tags: ['БЭМ', 'Адаптивность', 'Flexbox'],
     link: 'https://github.com/твойлогин/bem-project',
     video: '/videos/Energy.mp4',
@@ -23,6 +25,7 @@ const projects = [
   {
     title: 'JS-вселенная',
     year: '2024',
+    description: 'Интерактивное приложение с внешним API и LocalStorage. Динамичный UI без фреймворков.',
     tags: ['JavaScript', 'API', 'LocalStorage'],
     link: 'https://github.com/твойлогин/js-project',
     video: '/videos/Kekstagram.mp4',
@@ -31,6 +34,7 @@ const projects = [
   {
     title: 'Карточная онлайн игра 1vs1',
     year: '2026',
+    description: 'Мультиплеерная карточная игра в реальном времени. Матчмейкинг, состояния сессий, анимации.',
     tags: ['JavaScript', 'API', 'LocalStorage'],
     link: 'https://voidrealm-battles.vercel.app/',
     video: '/videos/voidrealm.mov',
@@ -173,7 +177,11 @@ const Projects = () => {
                   <span className={styles.arrow}>↗</span>
                 </span>
               </a>
-
+              {project.description && (
+                <div className={styles.desc}>
+                  <p className={styles.descText}>{project.description}</p>
+                </div>
+              )}
               <div className={styles.line}>
                 <motion.div
                   className={styles.lineFill}
