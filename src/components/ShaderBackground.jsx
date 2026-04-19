@@ -91,11 +91,6 @@ const fragmentShader = /* glsl */`
     float vign = 1.0 - dot(vc * vec2(0.7, 1.0), vc * vec2(0.7, 1.0)) * 0.35;
     col *= vign;
 
-    // Лёгкое свечение под курсором
-    vec2  muv      = gl_FragCoord.xy / uResolution.xy;
-    float mdist    = length(muv - uMouse);
-    float glow     = smoothstep(0.35, 0.0, mdist) * 0.06 * uMouseActive;
-    col += vec3(0.667, 0.667, 0.667) * glow;  // rgb(170,170,170)
 
     // Film grain
     float grain = (hash(gl_FragCoord.xy + uTime * 0.1) - 0.5) * 0.018;
