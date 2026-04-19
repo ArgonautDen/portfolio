@@ -6,17 +6,72 @@
   color: rgb(242, 242, 242);
   overflow: hidden;
   position: relative;
-  
-  /* Фоновый цвет на случай, если фото не загрузится */
   background: linear-gradient(180deg, 
-  rgb(145, 145, 145) 0%, 
-  rgb(163, 163, 163) 25%, 
-  rgb(170, 170, 170) 50%, 
-  rgb(189, 189, 189) 75%, 
-  rgb(145, 145, 145) 100%);
+    rgb(145, 145, 145) 0%, 
+    rgb(163, 163, 163) 25%, 
+    rgb(170, 170, 170) 50%, 
+    rgb(189, 189, 189) 75%, 
+    rgb(145, 145, 145) 100%);
 }
 
-/* Тёмная диагональная линия — вариант Б */
+/* ─── Location Tab ─── */
+.locationTab {
+  position: fixed;
+  left: 0;
+  top: 25%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  background: #1c1d20;
+  border-radius: 0 40px 40px 0;
+  padding: 14px 8px 14px 20px;
+  box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.4);
+  user-select: none;
+  opacity: 0.7;
+}
+
+.locationText {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-right: 12px;
+}
+
+.locationLabel {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: rgb(200, 200, 200);
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+}
+
+.locationCity {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.2;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.locationGlobe {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgb(90, 90, 90);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.globeCanvas {
+  display: block;
+}
+/* ─── End Location Tab ─── */
+
 .hero::before {
   content: '';
   position: absolute;
@@ -24,7 +79,6 @@
   z-index: 0;
   pointer-events: none;
   background:
-    /* главная линия — тёмная диагональ с затуханием по краям */
     linear-gradient(
       to bottom right,
       transparent 0%,
@@ -34,7 +88,6 @@
       rgba(28, 29, 32, 0.42) 67%,
       rgba(28, 29, 32, 0) 69%,
       transparent 71%,
-      /* параллельная тонкая */
       transparent 72%,
       rgba(28, 29, 32, 0) 74%,
       rgba(28, 29, 32, 0.10) 75%,
@@ -44,7 +97,6 @@
     );
 }
 
-/* Псевдоэлемент с фоновым изображением */
 .hero::after {
   content: '';
   position: absolute;
@@ -60,15 +112,6 @@
   opacity: 0.8;
 }
 
-/* Контент поверх фона */
-.marqueeOverlay,
-.container,
-.buttons {
-  position: relative;
-  z-index: 2;
-}
-
-/* Бегущая строка */
 .marqueeOverlay {
   position: absolute;
   top: 0;
@@ -105,58 +148,50 @@
 }
 
 @keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-/* Контейнер для контента */
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 40px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 50px;
-  position: relative;
-  z-index: 10;
-}
-
-/* Левая колонка */
-.leftColumn {
-  flex: 0 0 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
+/* ─── Subtitle block ─── */
 .subtitleBlock {
+  position: absolute;
+  top: 150px;
+  right: 15%;
+  z-index: 10;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.subtitleText {
   font-size: 1.5rem;
   font-weight: 300;
   letter-spacing: 1px;
-  text-align: center;
   color: white;
   text-transform: uppercase;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1;
 }
 
-.rightColumn {
-  flex: 1;
+/* SVG стрелка — чуть выше базовой линии текста */
+.subtitleArrowSvg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: -18px;
+  opacity: 0.75;
 }
 
-/* Кнопки */
+/* ─── Кнопки — по центру ─── */
 .buttons {
+  position: relative;
+  z-index: 10;
   display: flex;
   gap: 20px;
   justify-content: center;
-  margin-top: 50px;
-  position: relative;
-  z-index: 10;
+  margin-top: 170px;
+  padding-bottom: 60px;
   animation: fadeIn 1s ease 0.6s both;
 }
 
@@ -195,24 +230,15 @@
   transform: translateY(-2px);
 }
 
-/* Адаптация */
 @media (max-width: 968px) {
-  .container {
-    flex-direction: column;
-    text-align: center;
-    gap: 30px;
-  }
-
-  .leftColumn {
-    flex: 0 0 auto;
-    width: 100%;
-    max-width: 400px;
-  }
-
   .subtitleBlock {
     font-size: 1.2rem;
+    right: 20px;
+    top: 50px;
   }
-
+  .subtitleText {
+    font-size: 1.2rem;
+  }
   .marqueeContent {
     font-size: clamp(4rem, 15vw, 8rem);
     opacity: 0.25;
@@ -224,26 +250,47 @@
   .buttons {
     flex-direction: column;
     align-items: center;
+    padding-bottom: 40px;
   }
-  
   .btn {
     width: 200px;
   }
   .hero::after {
-    background-size: cover; /* исходный размер, без масштабирования */
+    background-size: cover;
+  }
+  .locationTab {
+    padding: 10px 6px 10px 14px;
+  }
+  .locationCity {
+    font-size: 0.75rem;
+  }
+  .locationLabel {
+    font-size: 0.7rem;
+  }
+  .locationGlobe {
+    width: 44px;
+    height: 44px;
+  }
+  .subtitleBlock {
+    right: 190px;
+    top: 50px;
+  }
+  .subtitleText {
+    font-size: 1rem;
+  }
+  .subtitleArrowSvg {
+    width: 20px;
+    height: 20px;
+    margin-top: -18px;
   }
 }
 
 @media (width: 820px) and (height: 1180px) {
-  .hero::after {
-    background-size: cover;
-  }
+  .hero::after { background-size: cover; }
 }
 
 @media (width: 1024px) and (height: 1366px) {
-  .hero::after {
-    background-size: cover;
-  }
+  .hero::after { background-size: cover; }
 }
 
 @keyframes fadeIn {
