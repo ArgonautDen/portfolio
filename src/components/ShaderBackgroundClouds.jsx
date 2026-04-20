@@ -1,3 +1,4 @@
+// ShaderBackgroundClouds.jsx
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
@@ -10,10 +11,9 @@ const vertexShader = /* glsl */`
 const fragmentShader = /* glsl */`
   uniform float uTime;
   uniform vec2  uResolution;
-  uniform vec2  uMouse;       // нормализованные координаты мыши 0..1
-  uniform float uMouseActive; // 0 = мышь ушла, 1 = мышь над секцией
+  uniform vec2  uMouse;
+  uniform float uMouseActive;
 
-  // ── Noise ──────────────────────────────────────────────────────────────────
   float hash(vec2 p) {
     return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
   }
@@ -39,10 +39,8 @@ const fragmentShader = /* glsl */`
     return v;
   }
 
-  // ── Облака с mouse offset ──────────────────────────────────────────────────
   float cloudDensity(vec2 uv, float t, vec2 mouseOffset) {
     uv += mouseOffset;
-
     vec2 q = vec2(
       fbm(uv + vec2(t * 0.05, t * 0.03)),
       fbm(uv + vec2(3.2, 1.6) + vec2(t * 0.04, t * 0.06))
@@ -51,7 +49,6 @@ const fragmentShader = /* glsl */`
       fbm(uv + 2.5 * q + vec2(1.7, 9.2) + t * 0.02),
       fbm(uv + 2.5 * q + vec2(8.3, 2.8) + t * 0.015)
     );
-
     return smoothstep(0.38, 0.75, fbm(uv + 3.0 * r));
   }
 
@@ -69,7 +66,6 @@ const fragmentShader = /* glsl */`
     uv *= 1.8;
 
     float t = uTime;
-
     vec2 mouseOffset = (uMouse - 0.5) * 0.18 * uMouseActive;
 
     float density = cloudDensity(uv, t, mouseOffset);
@@ -79,21 +75,17 @@ const fragmentShader = /* glsl */`
     vec3 cloudDark  = vec3(0.08, 0.09, 0.13);
     vec3 cloudLight = vec3(0.22, 0.24, 0.32);
     vec3 cloudColor = mix(cloudDark, cloudLight, scatter);
-
     vec3 col = mix(bgColor, cloudColor, density);
 
-    // Виньетка
     vec2  vc   = (gl_FragCoord.xy / uResolution.xy) * 2.0 - 1.0;
     float vign = 1.0 - dot(vc * vec2(0.7, 1.0), vc * vec2(0.7, 1.0)) * 0.35;
     col *= vign;
 
-    // Лёгкое свечение под курсором
-    vec2  muv      = gl_FragCoord.xy / uResolution.xy;
-    float mdist    = length(muv - uMouse);
-    float glow     = smoothstep(0.35, 0.0, mdist) * 0.06 * uMouseActive;
+    vec2  muv   = gl_FragCoord.xy / uResolution.xy;
+    float mdist = length(muv - uMouse);
+    float glow  = smoothstep(0.35, 0.0, mdist) * 0.06 * uMouseActive;
     col += vec3(0.12, 0.15, 0.22) * glow;
 
-    // Film grain
     float grain = (hash(gl_FragCoord.xy + uTime * 0.1) - 0.5) * 0.018;
     col += grain;
 
@@ -128,35 +120,62 @@ const ShaderBackgroundClouds = () => {
     );
     scene.add(mesh);
 
-    // ── Resize: только по ширине окна, высота = window ──────────────────────
-    // Canvas покрывает весь viewport по высоте — шейдер фоновый, ему не нужно
-    // точно следовать за высотой секции. Раскрытие .desc меняет только высоту
-    // секции — мы это игнорируем и не делаем setSize вообще.
-    // Ресайз срабатывает только когда меняется ширина окна (реальный resize).
     const section = el.parentElement;
-    let lastWidth = 0;
+
+    // ═══════════════════════════════════════════════════════════════
+    // Ключевая идея: запоминаем максимальные размеры canvas.
+    // setSize вызываем ТОЛЬКО когда секция стала БОЛЬШЕ (ширина
+    // или высота превысили предыдущий максимум).
+    // Когда секция уменьшается (hover ушёл, desc схлопнулся) —
+    // canvas остаётся большим, CSS overflow:hidden на секции
+    // обрезает лишнее. Никаких мерцаний.
+    // ═══════════════════════════════════════════════════════════════
+    let maxW = 0;
+    let maxH = 0;
     let resizeTimer;
 
-    const resize = () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        const w = window.innerWidth;
-        const h = window.innerHeight;
-        if (w === lastWidth) return; // высота изменилась — игнорируем
-        lastWidth = w;
-        renderer.setSize(w, h, false);
-        uniforms.uResolution.value.set(w, h);
-      }, 100);
+    const applySize = (w, h) => {
+      // Округляем вверх до ближайших 64px — чтобы не ресайзить
+      // из-за каждого пикселя при плавной анимации высоты
+      const ceilW = Math.ceil(w / 64) * 64;
+      const ceilH = Math.ceil(h / 64) * 64;
+
+      let needsResize = false;
+
+      if (ceilW > maxW) {
+        maxW = ceilW;
+        needsResize = true;
+      }
+      if (ceilH > maxH) {
+        maxH = ceilH;
+        needsResize = true;
+      }
+
+      if (needsResize) {
+        renderer.setSize(maxW, maxH, false);
+        uniforms.uResolution.value.set(maxW, maxH);
+      }
     };
 
-    const ro = new ResizeObserver(resize);
-    ro.observe(section);
-    // Первый вызов — сразу без дебаунса
-    lastWidth = window.innerWidth;
-    renderer.setSize(window.innerWidth, window.innerHeight, false);
-    uniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
+    // Дебаунс на ResizeObserver — но первый вызов мгновенный
+    const onResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const rect = section.getBoundingClientRect();
+        applySize(rect.width, rect.height);
+      }, 80);
+    };
 
-    // IntersectionObserver — рендер только когда секция видна
+    const ro = new ResizeObserver(onResize);
+    ro.observe(section);
+
+    // Первоначальная установка — сразу без дебаунса
+    {
+      const rect = section.getBoundingClientRect();
+      applySize(rect.width, rect.height);
+    }
+
+    // IntersectionObserver — рендер только когда видно
     let isVisible = false;
     const io = new IntersectionObserver(
       ([entry]) => { isVisible = entry.isIntersecting; },
@@ -164,10 +183,11 @@ const ShaderBackgroundClouds = () => {
     );
     io.observe(el);
 
+    // Mouse
     const onMouseMove = (e) => {
       const rect = section.getBoundingClientRect();
       uniforms.uMouse.value.set(
-        (e.clientX - rect.left)  / rect.width,
+        (e.clientX - rect.left) / rect.width,
         1.0 - (e.clientY - rect.top) / rect.height
       );
     };
@@ -180,7 +200,7 @@ const ShaderBackgroundClouds = () => {
     section.addEventListener('mouseenter', onMouseEnter);
     section.addEventListener('mouseleave', onMouseLeave);
 
-    // Render loop — cap 30fps, рендер только когда секция видна
+    // Render loop — 30fps cap
     let rafId;
     const clock = new THREE.Clock();
     const FPS_INTERVAL = 1000 / 30;
@@ -193,7 +213,6 @@ const ShaderBackgroundClouds = () => {
       lastFrame = now;
 
       uniforms.uTime.value = clock.getElapsedTime();
-
       const cur = uniforms.uMouseActive.value;
       uniforms.uMouseActive.value = cur + (activeTarget - cur) * 0.05;
 
@@ -202,7 +221,7 @@ const ShaderBackgroundClouds = () => {
     requestAnimationFrame(tick);
 
     return () => {
-      clearTimeout(resizeTimer); // <-- чистим дебаунс-таймер
+      clearTimeout(resizeTimer);
       cancelAnimationFrame(rafId);
       ro.disconnect();
       io.disconnect();
@@ -220,7 +239,11 @@ const ShaderBackgroundClouds = () => {
     <div
       ref={mountRef}
       style={{
-        position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
+        position: 'absolute',
+        inset: 0,
+        zIndex: 0,
+        pointerEvents: 'none',
+        overflow: 'hidden',          // ← обрезаем лишний canvas
         willChange: 'transform',
         transform: 'translateZ(0)',
       }}
