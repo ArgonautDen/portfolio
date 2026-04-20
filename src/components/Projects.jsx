@@ -19,7 +19,7 @@ const projects = [
     description: 'Кастомный fragment shader с процедурным FBM-шумом, облаками и mouse-parallax эффектом, Оптимизация WebGL: ResizeObserver, IntersectionObserver, cap 30 fps, pixel ratio ≤ 1, Floating video preview с Framer Motion spring-анимацией, предзагрузка через preload="auto"',
     tags: ['React', 'Three.js', 'WebGL / GLSL', 'Canvas API', 'Framer Motion', 'Vite'],
     link: 'https://portfolio-denisrdv.vercel.app',
-    video: '/videos/voidrealm.mov',
+    video: '/videos/potfolio.mp4',
     placeholder: '#1a1500',
   },
   {
