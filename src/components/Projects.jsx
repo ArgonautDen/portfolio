@@ -5,33 +5,6 @@ import styles from './Projects.module.css';
 
 const projects = [
   {
-    title: 'CSS Master',
-    year: '2024',
-    description: 'Анимированный лендинг с нуля — только HTML и CSS3. Кастомные анимации, адаптивная верстка.',
-    tags: ['CSS3', 'HTML5', 'Анимации'],
-    link: 'https://github.com/твойлогин/css-project',
-    video: '/videos/Sedona.mp4',
-    placeholder: '#1a1a2e',
-  },
-  {
-    title: 'БЭМ-портал',
-    year: '2024',
-    description: 'Корпоративный портал по БЭМ-методологии. Flexbox-сетка, строгая структура классов.',
-    tags: ['БЭМ', 'Адаптивность', 'Flexbox'],
-    link: 'https://github.com/твойлогин/bem-project',
-    video: '/videos/Energy.mp4',
-    placeholder: '#1a0a2e',
-  },
-  {
-    title: 'JS-вселенная',
-    year: '2024',
-    description: 'Интерактивное приложение с внешним API и LocalStorage. Динамичный UI без фреймворков.',
-    tags: ['JavaScript', 'API', 'LocalStorage'],
-    link: 'https://github.com/твойлогин/js-project',
-    video: '/videos/Kekstagram.mp4',
-    placeholder: '#1a1500',
-  },
-  {
     title: 'Карточная онлайн игра 1vs1',
     year: '2026',
     description: 'Мультиплеерная карточная игра в реальном времени. Матчмейкинг, состояния сессий, анимации.',
@@ -40,6 +13,42 @@ const projects = [
     video: '/videos/voidrealm.mov',
     placeholder: '#1a1500',
   },
+  {
+    title: 'Interactive Portfolio Website',
+    year: '2026',
+    description: 'Кастомный fragment shader с процедурным FBM-шумом, облаками и mouse-parallax эффектом, Оптимизация WebGL: ResizeObserver, IntersectionObserver, cap 30 fps, pixel ratio ≤ 1, Floating video preview с Framer Motion spring-анимацией, предзагрузка через preload="auto"',
+    tags: ['React', 'Three.js', 'WebGL / GLSL', 'Canvas API', 'Framer Motion', 'Vite'],
+    link: 'https://portfolio-denisrdv.vercel.app',
+    video: '/videos/voidrealm.mov',
+    placeholder: '#1a1500',
+  },
+  {
+    title: 'JavaScript. Разработка веб-интерфейсов',
+    year: '2026',
+    description: 'Кекстаграм — сервис просмотра изображений. Пользователям предоставлена возможность загружать свои фотографии или просматривать фотографии, загруженные ранее другими пользователями. Интерактивное приложение с внешним API и LocalStorage. Динамичный UI без фреймворков.',
+    tags: ['JavaScript', 'API', 'LocalStorage'],
+    link: 'https://argonautden.github.io/2564453-kekstagram-2/',
+    video: '/videos/Kekstagram.mp4',
+    placeholder: '#1a1500',
+  },
+  {
+    title: 'Адаптивная вёрстка и автоматизация',
+    year: '2025',
+    description: 'Адаптивность сетки: мобильная, планшетная и десктопная версии. Методология БЭМ, препроцессор: Sass. Адаптивность графики: ретинизация, векторные изображения',
+    tags: ['БЭМ', 'Адаптивность', 'Flexbox'],
+    link: 'https://htmlacademy-adaptive.github.io/2564453-cat-energy-2/',
+    video: '/videos/Energy.mp4',
+    placeholder: '#1a0a2e',
+  },
+  {
+    title: 'HTML и CSS. Профессиональная вёрстка сайтов',
+    year: '2025',
+    description: 'Лендинг с нуля — только HTML и CSS3.',
+    tags: ['CSS3', 'HTML5'],
+    link: 'https://argonautden.github.io/2564453-sedona-2',
+    video: '/videos/Sedona.mp4',
+    placeholder: '#1a1a2e',
+  }
 ];
 // ^^^ Замени ссылки на реальные когда будешь готов
 
@@ -86,7 +95,7 @@ const Projects = () => {
 
       {/* Заголовок секции */}
       <div className={styles.header}>
-        <span className={styles.label}>Избранное</span>
+        <span className={styles.label}>Сделанные</span>
         <h2 className={styles.title}>Проекты</h2>
       </div>
 
@@ -112,7 +121,11 @@ const Projects = () => {
                 key={i}
                 src={project.video}
                 className={styles.previewMedia}
-                style={{ display: activeIndex === i ? 'block' : 'none' }}
+                style={{ 
+                  opacity: activeIndex === i ? 1 : 0,
+                  visibility: activeIndex === i ? 'visible' : 'hidden',
+                  position: 'absolute',  // все видео стакаются друг на друга
+                }}
                 ref={el => void (videoRefs.current[i] = el)}
                 muted
                 loop
@@ -160,7 +173,6 @@ const Projects = () => {
                     <motion.span
                       key={ci}
                       className={styles.char}
-                      whileHover={{ y: -4 }}
                       transition={{ duration: 0.15, delay: ci * 0.02 }}
                     >
                       {char === ' ' ? '\u00A0' : char}

@@ -210,7 +210,11 @@ requestAnimationFrame(tick);
   return (
     <div
       ref={mountRef}
-      style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}
+      style={{ 
+        position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
+        willChange: 'transform',        // <-- фиксирует canvas в своём слое
+        transform: 'translateZ(0)',     // <-- форсирует GPU layer заранее
+      }}
     />
   );
 };

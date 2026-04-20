@@ -41,7 +41,6 @@ const fragmentShader = /* glsl */`
 
   // ── Облака с mouse offset ──────────────────────────────────────────────────
   float cloudDensity(vec2 uv, float t, vec2 mouseOffset) {
-    // Мышь мягко тянет uv — создаёт эффект "притяжения" облаков
     uv += mouseOffset;
 
     vec2 q = vec2(
@@ -57,7 +56,6 @@ const fragmentShader = /* glsl */`
   }
 
   float fakeScatter(vec2 uv, float t, vec2 mouseOffset) {
-    // Направление света слегка следует за мышью
     vec2 lightDir = normalize(vec2(0.6, 0.8) + uMouse * 0.4 * uMouseActive);
     float d0 = cloudDensity(uv, t, mouseOffset);
     float d1 = cloudDensity(uv + lightDir * 0.04, t, mouseOffset);
@@ -72,8 +70,6 @@ const fragmentShader = /* glsl */`
 
     float t = uTime;
 
-    // Мышь в диапазоне -0.5..0.5, умножаем на силу эффекта
-    // uMouseActive плавно появляется/исчезает на JS стороне
     vec2 mouseOffset = (uMouse - 0.5) * 0.18 * uMouseActive;
 
     float density = cloudDensity(uv, t, mouseOffset);
@@ -122,7 +118,7 @@ const ShaderBackgroundClouds = () => {
     const uniforms = {
       uTime:        { value: 0 },
       uResolution:  { value: new THREE.Vector2() },
-      uMouse:       { value: new THREE.Vector2(0.5, 0.5) }, // центр по умолчанию
+      uMouse:       { value: new THREE.Vector2(0.5, 0.5) },
       uMouseActive: { value: 0 },
     };
 
@@ -132,16 +128,33 @@ const ShaderBackgroundClouds = () => {
     );
     scene.add(mesh);
 
-    // Resize
+    // ── Resize: только по ширине окна, высота = window ──────────────────────
+    // Canvas покрывает весь viewport по высоте — шейдер фоновый, ему не нужно
+    // точно следовать за высотой секции. Раскрытие .desc меняет только высоту
+    // секции — мы это игнорируем и не делаем setSize вообще.
+    // Ресайз срабатывает только когда меняется ширина окна (реальный resize).
+    const section = el.parentElement;
+    let lastWidth = 0;
+    let resizeTimer;
+
     const resize = () => {
-      const w = el.clientWidth;
-      const h = el.clientHeight;
-      renderer.setSize(w, h, false);
-      uniforms.uResolution.value.set(w, h);
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        if (w === lastWidth) return; // высота изменилась — игнорируем
+        lastWidth = w;
+        renderer.setSize(w, h, false);
+        uniforms.uResolution.value.set(w, h);
+      }, 100);
     };
+
     const ro = new ResizeObserver(resize);
-    ro.observe(el);
-    resize();
+    ro.observe(section);
+    // Первый вызов — сразу без дебаунса
+    lastWidth = window.innerWidth;
+    renderer.setSize(window.innerWidth, window.innerHeight, false);
+    uniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
 
     // IntersectionObserver — рендер только когда секция видна
     let isVisible = false;
@@ -151,20 +164,14 @@ const ShaderBackgroundClouds = () => {
     );
     io.observe(el);
 
-    // Mouse — слушаем на секции, не на window
-    // target — родительская секция (el — это абсолютный div внутри неё)
-    const section = el.parentElement;
-
     const onMouseMove = (e) => {
       const rect = section.getBoundingClientRect();
-      // нормализуем 0..1, Y инвертируем под GL координаты
       uniforms.uMouse.value.set(
         (e.clientX - rect.left)  / rect.width,
         1.0 - (e.clientY - rect.top) / rect.height
       );
     };
 
-    // Плавное появление/исчезновение эффекта мыши
     let activeTarget = 0;
     const onMouseEnter = () => { activeTarget = 1; };
     const onMouseLeave = () => { activeTarget = 0; };
@@ -173,25 +180,29 @@ const ShaderBackgroundClouds = () => {
     section.addEventListener('mouseenter', onMouseEnter);
     section.addEventListener('mouseleave', onMouseLeave);
 
-    // Render loop
+    // Render loop — cap 30fps, рендер только когда секция видна
     let rafId;
     const clock = new THREE.Clock();
+    const FPS_INTERVAL = 1000 / 30;
+    let lastFrame = 0;
 
-    const tick = () => {
-      if (isVisible) {
-        uniforms.uTime.value = clock.getElapsedTime();
-
-        // Плавный lerp для uMouseActive — нет рывков при входе/выходе курсора
-        const cur = uniforms.uMouseActive.value;
-        uniforms.uMouseActive.value = cur + (activeTarget - cur) * 0.05;
-
-        renderer.render(scene, camera);
-      }
+    const tick = (now) => {
       rafId = requestAnimationFrame(tick);
+      if (!isVisible) return;
+      if (now - lastFrame < FPS_INTERVAL) return;
+      lastFrame = now;
+
+      uniforms.uTime.value = clock.getElapsedTime();
+
+      const cur = uniforms.uMouseActive.value;
+      uniforms.uMouseActive.value = cur + (activeTarget - cur) * 0.05;
+
+      renderer.render(scene, camera);
     };
-    tick();
+    requestAnimationFrame(tick);
 
     return () => {
+      clearTimeout(resizeTimer); // <-- чистим дебаунс-таймер
       cancelAnimationFrame(rafId);
       ro.disconnect();
       io.disconnect();
@@ -208,7 +219,11 @@ const ShaderBackgroundClouds = () => {
   return (
     <div
       ref={mountRef}
-      style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}
+      style={{
+        position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
+        willChange: 'transform',
+        transform: 'translateZ(0)',
+      }}
     />
   );
 };
