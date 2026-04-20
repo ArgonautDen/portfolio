@@ -4,6 +4,7 @@ import styles from './About.module.css';
 import useScrollReveal from '../hooks/useScrollReveal';
 import BubbleSkills from './BubbleSkills';
 import VerticalTicker from './VerticalTicker';
+import WaveBackground from './WaveBackground';
 
 
 const About = () => {
@@ -46,7 +47,7 @@ const About = () => {
 
   return (
     <section id="about" className={styles.about} ref={sectionRef}>
-
+      <WaveBackground />
       {/* ── Вертикальный ticker ── */}
       <VerticalTicker />
 
