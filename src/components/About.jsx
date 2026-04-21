@@ -5,7 +5,7 @@ import useScrollReveal from '../hooks/useScrollReveal';
 import BubbleSkills from './BubbleSkills';
 import VerticalTicker from './VerticalTicker';
 import WaveBackground from './WaveBackground';
-
+import DiplomaPopup from './DiplomaPopup';
 
 const About = () => {
   const sectionRef     = useRef(null);
@@ -99,7 +99,7 @@ const About = () => {
                 Привет! Я Денис, начинающий фронтенд‑разработчик.
                 <br /><br />
                 Сначала увлёкся 3D в Blender, но понял, что это слишком творческое занятие, а хочется что-то на стыке конркетики, входящих данных и творчества - в итоге нашел все это во фронтенде.
-                Около полугода самостоятельно осваивал вёрстку и JavaScript по туториалам и видео, понял, что завлекло и нравится. Потом решил по-серьезнее - пройти годовые курсы. 
+                Около полугода самостоятельно осваивал вёрстку и JavaScript по туториалам и видео, понял, что завлекло и нравится. Потом решил по-серьезнее - пройти годовые <DiplomaPopup />. 
                 Далее практики, всевозможные стажировочные задачи, сайты, лендинги для друзей и работа над онлайн игрой.
               </p>
               <div className={styles.textCardFooter}>
