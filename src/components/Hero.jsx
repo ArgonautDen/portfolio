@@ -95,8 +95,8 @@ const Hero = () => {
     <>
       <div className={styles.locationTab}>
         <div className={styles.locationText}>
-          <span className={styles.locationLabel}>Located</span>
-          <span className={styles.locationCity}>Moscow</span>
+          <span className={styles.locationLabel}>город</span>
+          <span className={styles.locationCity}>Москва</span>
         </div>
         <div className={styles.locationGlobe}>
           <GlobeCanvas />
@@ -108,17 +108,18 @@ const Hero = () => {
 
         <div className={styles.marqueeOverlay}>
           <div className={`${styles.marqueeContent} ${styles[direction]}`}>
-            <span>Rodichev Denis</span>
-            <span>Rodichev Denis</span>
-            <span>Rodichev Denis</span>
-            <span>Rodichev Denis</span>
-            <span>Rodichev Denis</span>
-            <span>Rodichev Denis</span>
+            <span>Все ушло в дым</span>
+            <span>Все ушло в дым</span>
+            <span>Все ушло в дым</span>
+            <span>Все ушло в дым</span>
+            <span>Все ушло в дым</span>
+            <span>Все ушло в дым</span>
           </div>
         </div>
 
         <div className={styles.subtitleBlock}>
           <span className={styles.subtitleText}>Frontend developer</span>
+          <span className={styles.subtitleName}>Родичев Денис</span>
           {/* Стрелка справа от текста, наклонная вниз-влево ↙ — указывает на текст */}
           <svg
             className={styles.subtitleArrowSvg}
@@ -139,7 +140,7 @@ const Hero = () => {
           <button className={`${styles.btn} ${styles.btnPrimary}`} onClick={() => {
             document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
           }}>
-            Смотреть проекты
+            Проекты
           </button>
           <button className={`${styles.btn} ${styles.btnOutline}`} onClick={() => {
             document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });

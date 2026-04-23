@@ -39,7 +39,7 @@
 }
 
 .locationLabel {
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   font-weight: 400;
   color: rgb(200, 200, 200);
   line-height: 1.2;
@@ -133,7 +133,7 @@
   text-transform: uppercase;
   white-space: nowrap;
   color: rgb(245, 245, 245);
-  opacity: 0.3;
+  opacity: 0.2;
   letter-spacing: 10px;
   user-select: none;
   animation: marquee 25s linear infinite;
@@ -159,7 +159,7 @@
   right: 15%;
   z-index: 10;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
   gap: 6px;
 }
@@ -173,13 +173,22 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   line-height: 1;
 }
+.subtitleName{
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: white;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1;
+}
 
 /* SVG стрелка — чуть выше базовой линии текста */
 .subtitleArrowSvg {
   width: 20px;
   height: 20px;
   flex-shrink: 0;
-  margin-top: -18px;
+  margin-top: -86px;
   opacity: 0.75;
 }
 
@@ -199,7 +208,7 @@
   padding: 12px 30px;
   border: none;
   border-radius: 5px;
-  font-size: 1rem;
+  font-size: 1.5rem;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
   text-decoration: none;
@@ -281,7 +290,7 @@
   .subtitleArrowSvg {
     width: 20px;
     height: 20px;
-    margin-top: -18px;
+    margin-top: -84px;
   }
 }
 
