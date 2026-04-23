@@ -7,7 +7,7 @@ const diplomas = [
   { src: '/images/adaptive.webp', label: 'Adaptive' },
 ];
 
-const WORD = 'курсы';
+const WORD = 'курсы.';
 
 const DiplomaPopup = () => {
   const [zoomedIndex, setZoomedIndex] = useState(null);
@@ -49,6 +49,7 @@ const DiplomaPopup = () => {
           className={styles.overlay}
           onClick={(e) => { e.stopPropagation(); setZoomedIndex(null); }}
         >
+          <button className={styles.closeBtn} onClick={(e) => { e.stopPropagation(); setZoomedIndex(null); }}>&#10005;</button>
           <button className={`${styles.navBtn} ${styles.navPrev}`} onClick={prev}>&#8592;</button>
 
           <div className={styles.overlayContent} onClick={e => e.stopPropagation()}>

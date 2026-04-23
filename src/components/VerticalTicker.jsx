@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import styles from './VerticalTicker.module.css';
 
-const TICKER_TEXT = '◎ FRONTEND DEVELOPER ◈ REACT · CSS · JS ◉ BLENDER · GIT ◈ ОТКРЫТ К СОТРУДНИЧЕСТВУ ◈  ';
+const TICKER_TEXT = '◎ FRONTEND DEVELOPER ◈ REACT · CSS · JS ◉ TREE · GIT ◈ ВСЕ УШЛО В ДЫМ ◈  ';
 const COPIES = 6;
 const SPEED  = 0.4;
 

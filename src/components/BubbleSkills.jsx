@@ -81,10 +81,14 @@ const createBubble = (canvasRef, skillPoolRef) => {
     pulseSpeed: 0.0008  + Math.random() * 0.0012,
     pulsePhase: Math.random() * Math.PI * 2,
     _init(initial) {
-      this.x = this.r * 2 + Math.random() * (W - this.r * 4);
+      // Читаем размеры canvas в момент вызова _init, а не createBubble —
+      // иначе если canvas ещё не смонтирован (width===0), x окажется в [0,0]
+      const cW = canvasRef.current?.width  || W;
+      const cH = canvasRef.current?.height || H;
+      this.x = this.r * 2 + Math.random() * Math.max(cW - this.r * 4, 1);
       this.y = initial
-        ? Math.random() * (H - this.r * 2) + this.r
-        : H + this.r + 20;
+        ? Math.random() * (cH - this.r * 2) + this.r
+        : cH + this.r + 20;
       /* lifetime: 5–12 секунд рандомно у каждого пузыря */
       this.birthTime = performance.now();
       this.lifetime  = 5000 + Math.random() * 7000;
@@ -99,6 +103,8 @@ const bubbleBoop = (b, nx, ny, strength) => {
   b.sqVY -= ny * s;
 };
 
+const WALL_PAD = 18; // невидимый буфер от края — пузырь не доходит до него
+
 const bubbleUpdate = (b, canvasWidth, canvasHeight) => {
   b._canvasH = canvasHeight;
   b.wobble += b.wobbleSpd;
@@ -106,23 +112,35 @@ const bubbleUpdate = (b, canvasWidth, canvasHeight) => {
   b.x += b.vx + Math.sin(b.wobble * 0.7) * 0.20;
   b.y += b.vy;
 
-  if (b.x - b.r < 0) {
-    b.x  = b.r;
-    b.vx = Math.abs(b.vx) * 0.55;
-    bubbleBoop(b, -1, 0, 0.5);
-  }
-  if (b.x + b.r > canvasWidth) {
-    b.x  = canvasWidth - b.r;
-    b.vx = -Math.abs(b.vx) * 0.55;
-    bubbleBoop(b, 1, 0, 0.5);
+  // Страховка: телепорт если пузырь оказался далеко за границей
+  if (b.x < -b.r * 2 || b.x > canvasWidth + b.r * 2) {
+    b.x  = b.r * 2 + Math.random() * Math.max(canvasWidth - b.r * 4, 1);
+    b.vx = (Math.random() - 0.5) * 0.45;
   }
 
-  /* Нижняя стенка — отталкивание, не лопание */
-  if (b.y + b.r > b._canvasH) {
-    b.y  = b._canvasH - b.r;
-    b.vy = -Math.abs(b.vy) * 0.55;
-    bubbleBoop(b, 0, 1, 0.5);
+  // Мягкое отталкивание от стен — стенка стоит с буфером WALL_PAD + r
+  // Чем ближе к стене, тем сильнее сила. Никакого жёсткого clamp — нет плющения.
+  const wallForce = 0.08;
+  const leftWall   = b.r + WALL_PAD;
+  const rightWall  = canvasWidth  - b.r - WALL_PAD;
+  const bottomWall = canvasHeight - b.r - WALL_PAD;
+
+  if (b.x < leftWall) {
+    const penetration = leftWall - b.x;
+    b.vx += penetration * wallForce;
   }
+  if (b.x > rightWall) {
+    const penetration = b.x - rightWall;
+    b.vx -= penetration * wallForce;
+  }
+  if (b.y > bottomWall) {
+    const penetration = b.y - bottomWall;
+    b.vy -= penetration * wallForce;
+  }
+
+  // Жёсткий clamp только как крайняя страховка (не должен срабатывать в норме)
+  b.x = Math.max(b.r, Math.min(b.x, canvasWidth  - b.r));
+  b.y = Math.max(b.r, Math.min(b.y, canvasHeight - b.r));
 
   const stiff = 0.18, damp = 0.72;
   b.sqVX += (1 - b.sqX) * stiff; b.sqVX *= damp; b.sqX += b.sqVX;
@@ -263,7 +281,7 @@ const hitsLineFromBelow = (b, lineY) => b.y - b.r <= lineY;
 
 const bubbleContains = (b, mx, my) => Math.hypot(mx - b.x, my - b.y) < b.r;
 
-const resolveCollisions = (bubbles) => {
+const resolveCollisions = (bubbles, canvasWidth, canvasHeight) => {
   for (let i = 0; i < bubbles.length; i++) {
     const a = bubbles[i]; if (!a.alive) continue;
     for (let j = i + 1; j < bubbles.length; j++) {
@@ -276,6 +294,11 @@ const resolveCollisions = (bubbles) => {
         const overlap = (minD - dist) * 0.30;
         a.x   -= nx * overlap * 0.5; a.y   -= ny * overlap * 0.5;
         bub.x += nx * overlap * 0.5; bub.y += ny * overlap * 0.5;
+        // Клипаем с учётом буфера — не даём затолкать к самому краю
+        a.x   = Math.max(a.r   + WALL_PAD, Math.min(a.x,   canvasWidth  - a.r   - WALL_PAD));
+        bub.x = Math.max(bub.r + WALL_PAD, Math.min(bub.x, canvasWidth  - bub.r - WALL_PAD));
+        a.y   = Math.max(a.r,              Math.min(a.y,   canvasHeight - a.r));
+        bub.y = Math.max(bub.r,            Math.min(bub.y, canvasHeight - bub.r));
         const dvx = a.vx - bub.vx, dvy = a.vy - bub.vy;
         const dot = dvx * nx + dvy * ny;
         if (dot > 0) {
@@ -526,7 +549,7 @@ const BubbleSkills = ({ getBarriers }) => {
         }
       }
 
-      resolveCollisions(bubbles);
+      resolveCollisions(bubbles, canvas.width, canvas.height);
 
       for (const b of bubbles) {
         if (b.alive) bubbleDraw(ctx, b, performance.now());

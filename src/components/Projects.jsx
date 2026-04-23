@@ -95,7 +95,7 @@ const Projects = () => {
 
       {/* Заголовок секции */}
       <div className={styles.header}>
-        <span className={styles.label}>Сделанные</span>
+        <span className={styles.label}>Кейсы/</span>
         <h2 className={styles.title}>Проекты</h2>
       </div>
 

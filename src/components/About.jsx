@@ -4,7 +4,7 @@ import styles from './About.module.css';
 import useScrollReveal from '../hooks/useScrollReveal';
 import BubbleSkills from './BubbleSkills';
 import VerticalTicker from './VerticalTicker';
-import WaveBackground from './WaveBackground';
+import ShaderCircle from './ShaderCircle';
 import DiplomaPopup from './DiplomaPopup';
 
 const About = () => {
@@ -47,7 +47,6 @@ const About = () => {
 
   return (
     <section id="about" className={styles.about} ref={sectionRef}>
-      <WaveBackground />
       {/* ── Вертикальный ticker ── */}
       <VerticalTicker />
 
@@ -71,15 +70,7 @@ const About = () => {
             </div>
 
             <div className={styles.videoCircle}>
-              <video
-                className={styles.photoVideo}
-                autoPlay
-                muted
-                loop
-                playsInline
-              >
-                <source src="/videos/ocean.mp4" type="video/mp4" />
-              </video>
+              <ShaderCircle />
             </div>
           </div>
 
@@ -100,11 +91,11 @@ const About = () => {
                 Сначала я увлёкся 3D в Blender, но довольно быстро понял, что мне не хватает опоры на конкретику и логику. Хотелось заниматься чем-то на стыке входящих данных, структуры и творчества — в итоге я нашёл это во фронтенде.
 
 Около полугода самостоятельно изучал вёрстку и JavaScript по туториалам, видео и практическим материалам. В какой-то момент понял, что меня действительно затянуло и что это именно то направление, в котором хочется развиваться всерьёз. 
-<br/><br/>После этого решил подойти к обучению глубже и пройти годовые <DiplomaPopup />.
+<br/><br/>После этого решил подойти к обучению глубже и пройти годовые <DiplomaPopup /><br />
 
 Дальше была практика: стажировочные задачи, сайты и лендинги для друзей, а также работа над онлайн-игрой. Именно через реальные задачи я начал лучше понимать, как соединяются дизайн, логика и пользовательский опыт.</p>
               <div className={styles.textCardFooter}>
-                React · CSS · JS · Git · Figma · Blender
+                React · CSS · JS · Git · Figma · Three
               </div>
             </div>
 
