@@ -1,0 +1,130 @@
+.project-sedona {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: "PT Sans", Arial, sans-serif;
+    color: #222;
+    line-height: 1.6;
+  }
+  
+  .project-sedona__title {
+    font-size: 2.4rem;
+    margin-bottom: 24px;
+    font-weight: 700;
+    text-align: center;
+  }
+  
+  .project-sedona__video {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  
+  .project-sedona__video-placeholder {
+    width: 100%;
+    max-width: 700px;
+    height: 400px;
+    background: #ddd;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 1.2rem;
+    font-style: italic;
+    user-select: none;
+  }
+  
+  .project-sedona__link-container {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  
+  .project-sedona__link {
+    display: inline-block;
+    background-color: #007acc;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background-color 0.25s ease;
+  }
+  
+  .project-sedona__link:hover,
+  .project-sedona__link:focus {
+    background-color: #005fa3;
+    outline: none;
+  }
+  
+  .project-sedona__description p {
+    margin-bottom: 16px;
+    font-size: 1.1rem;
+  }
+  
+  .project-sedona__subheading {
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-top: 48px;
+    margin-bottom: 24px;
+    border-bottom: 3px solid #007acc;
+    padding-bottom: 6px;
+  }
+  
+  .project-sedona__achievements {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  @media (min-width: 600px) {
+    .project-sedona__achievements {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  .achievement {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: #f9f9f9;
+    padding: 14px 18px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgb(0 0 0 / 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .achievement:hover {
+    box-shadow: 0 4px 16px rgb(0 0 0 / 0.15);
+  }
+  
+  .achievement__thumb {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #ddd;
+  }
+  
+  .achievement__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .achievement__content {
+    flex-grow: 1;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .achievement__content strong {
+    color: #007acc;
+    font-weight: 700;
+  }
+  
