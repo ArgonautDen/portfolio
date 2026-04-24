@@ -42,46 +42,7 @@
   padding: 0 48px;
 }
 
-/* ── Плавающее превью ── */
-.preview {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 380px;
-  aspect-ratio: 16/10;
-  pointer-events: none;
-  z-index: 10;
-  border-radius: 6px;
-  overflow: hidden;
-  /* Смещаем чтобы не перекрывало курсор */
-  translate: 24px -50%;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-}
-
-.previewMedia {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.previewPlaceholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.previewLabel {
-  font-family: 'Courier New', monospace;
-  font-size: 0.8rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.2);
-}
-
-/* ── Список ── */
+/* ── Адаптив ── */
 .list {
   list-style: none;
   padding: 0;
@@ -136,15 +97,13 @@
   letter-spacing: -0.5px;
   display: flex;
   flex-wrap: wrap;
+  gap: 0.35em;
   transition: letter-spacing 0.4s ease;
+  line-height: 1.1;
 }
 
 .item:hover .name {
-  letter-spacing: 1px;
-}
-
-.char {
-  display: inline-block;
+  letter-spacing: 0;
 }
 
 /* Теги */
@@ -206,7 +165,7 @@
   transform-origin: left;
 }
 
-/* ── Описание проекта ── */
+/* ── Описание проекта — раскрывается при hover ── */
 .desc {
   display: grid;
   grid-template-rows: 0fr;
@@ -218,22 +177,104 @@
 
 .item:hover .desc {
   grid-template-rows: 1fr;
-  padding-bottom: 20px;
+  padding-bottom: 24px;
+}
+
+.descInner {
+  min-height: 0;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 32px;
+  align-items: center;
+}
+
+.descLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-left: 72px; /* выравнивание под текстом названия */
 }
 
 .descText {
-  min-height: 0;
-  overflow: hidden;
   margin: 0;
   font-size: 0.82rem;
   line-height: 1.65;
   color: rgba(255, 255, 255, 0.38);
-  max-width: 520px;
   transition: color 0.3s ease;
 }
 
 .item:hover .descText {
   color: rgba(255, 255, 255, 0.55);
+}
+
+/* ── Кнопка Подробнее ── */
+.moreBtn {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 2px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: 'Courier New', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: not-allowed;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.moreBtn:not(:disabled) {
+  cursor: pointer;
+}
+
+.moreBtn:not(:disabled):hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.moreBtnArrow {
+  transition: transform 0.25s ease;
+}
+
+.moreBtn:not(:disabled):hover .moreBtnArrow {
+  transform: translateX(4px);
+}
+
+/* ── Inline видео справа ── */
+.descRight {
+  flex-shrink: 0;
+}
+
+.inlineVideo,
+.inlinePlaceholder {
+  width: 100%;
+  aspect-ratio: 16/10;
+  border-radius: 4px;
+  overflow: hidden;
+  object-fit: cover;
+  display: block;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.inlinePlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.previewLabel {
+  font-family: 'Courier New', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  text-align: center;
+  padding: 8px;
 }
 
 /* ── Адаптив ── */
@@ -248,10 +289,6 @@
     padding: 0 24px;
   }
 
-  .preview {
-    display: none; /* На мобильных прячем превью */
-  }
-
   .itemLink {
     grid-template-columns: 36px 1fr auto;
     gap: 16px;
@@ -263,6 +300,18 @@
 
   .name {
     font-size: clamp(1.4rem, 6vw, 2rem);
+  }
+
+  .descInner {
+    grid-template-columns: 1fr;
+  }
+
+  .descLeft {
+    padding-left: 0;
+  }
+
+  .descRight {
+    display: none;
   }
 }
 

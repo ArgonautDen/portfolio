@@ -145,7 +145,7 @@ const Hero = () => {
           <button className={`${styles.btn} ${styles.btnOutline}`} onClick={() => {
             document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
           }}>
-            Связаться
+            Контакты
           </button>
         </div>
       </section>

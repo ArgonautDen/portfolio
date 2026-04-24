@@ -193,22 +193,22 @@ const ICONS = { Email: IconEmail, GitHub: IconGitHub, Telegram: IconTelegram };
 const contacts = [
   {
     idx: '01', type: 'Email',    val: 'jokko0704@gmail.com', cta: 'Написать →',
-    href: 'mailto:denis.rodichev@example.com',
-    avatar: '/images/mail.jpg',
+    href: 'mailto:jokko0704@gmail.com',
+    avatar: IconEmail ,
   },
   {
     idx: '02', type: 'GitHub',   val: 'github.com/ArgonautDen', cta: 'Смотреть →',
-    href: 'https://github.com/твойлогин',
-    avatar: '/images/avatar-github.jpg',
+    href: 'https://github.com/ArgonautDen',
+    avatar: IconGitHub,
   },
   {
     idx: '03', type: 'Telegram', val: '@DeniRDV', cta: 'Написать →',
-    href: 'https://t.me/твойник',
-    avatar: '/images/about.webp',
+    href: 'https://t.me/DeniRDV',
+    avatar: IconTelegram,
   },
 ];
 
-const TICKER_TEXT = '◎ ОТКРЫТ К СОТРУДНИЧЕСТВУ ◈ FRONTEND DEVELOPER ◉ REACT · CSS · JAVASCRIPT ◈ Denis RODICHEV';
+const TICKER_TEXT = '◎ ВСЕ УШЛО В ДЫМ ◈ FRONTEND DEVELOPER ◉ REACT · CSS · JAVASCRIPT ◈ SHEIDER';
 const tickerItems = Array(8).fill(TICKER_TEXT);
 
 const TiltCard = ({ c }) => {
@@ -288,36 +288,6 @@ const TiltCard = ({ c }) => {
     startLoop();
   }, [startLoop]);
 
-  const onClick = useCallback(() => {
-    if (spinningRef.current) return;
-    const el = cardRef.current;
-    if (!el) return;
-
-    if (frameRef.current) {
-      cancelAnimationFrame(frameRef.current);
-      frameRef.current = null;
-    }
-
-    const s = stateRef.current;
-    s.rotX = s.rotY = s.targetRotX = s.targetRotY = 0;
-    s.scale = s.targetScale = 1;
-    el.style.transform = 'none';
-    void el.offsetWidth;
-
-    spinningRef.current = true;
-    el.classList.add(styles.spinning);
-
-    const onAnimEnd = () => {
-      el.removeEventListener('animationend', onAnimEnd);
-      el.classList.remove(styles.spinning);
-      el.style.transform = '';
-      spinningRef.current = false;
-      window.open(c.href, '_blank', 'noopener,noreferrer');
-    };
-
-    el.addEventListener('animationend', onAnimEnd);
-  }, [c.href]);
-
   useEffect(() => () => {
     if (frameRef.current) cancelAnimationFrame(frameRef.current);
   }, []);
@@ -326,14 +296,10 @@ const TiltCard = ({ c }) => {
     <div
       className={styles.card}
       ref={cardRef}
-      role="link"
-      tabIndex={0}
       aria-label={`Открыть ${c.type}`}
       onMouseMove={onMouseMove}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      onClick={onClick}
-      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onClick(e); }}
     >
       <div className={styles.cardBgLogoWrap}>
         <BgAvatar src={c.avatar} alt={c.type} />
@@ -355,7 +321,15 @@ const TiltCard = ({ c }) => {
 
       {/* CTA без волны — волна теперь глобальный watermark */}
       <div className={styles.cardCta}>
-        <span className={styles.cardCtaText}>{c.cta}</span>
+            <a
+          href={c.href}
+          className={styles.cardCtaLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {c.cta}
+        </a>
       </div>
     </div>
   );
@@ -386,7 +360,7 @@ const Contact = () => {
       <div className={styles.top} data-reveal="up">
         <span className={styles.label}>Связаться</span>
         <h2 className={styles.title}>
-          Давайте создавать вместе
+          Контакты
         </h2>
       </div>
 
@@ -412,9 +386,9 @@ const Contact = () => {
 
         {/* Футер — снизу */}
         <div className={styles.foot} data-reveal="up" data-reveal-delay="400">
-          <span>© 2024</span>
+          <span>©DeniRDV 2026</span>
           <div className={styles.footBar} />
-          <span>Доступен · {time}</span>
+          <span>#1c1d20 · {time}</span>
         </div>
       </div>
     </section>

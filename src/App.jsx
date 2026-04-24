@@ -5,7 +5,6 @@ import Hero             from './components/Hero';
 import About            from './components/About';
 import Projects         from './components/Projects';
 import Contact          from './components/Contact';
-import CrystalWatermark from './components/CrystalWatermark';
 import './App.css';
 import './scrollReveal.css';
 
@@ -17,7 +16,7 @@ const App = () => {
     <div>
       {loading && <LoadingScreen onFinish={() => setLoading(false)} />}
 
-      <CrystalWatermark />
+      
 
       <Navigation />
       <Hero />

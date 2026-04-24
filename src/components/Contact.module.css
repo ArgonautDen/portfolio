@@ -3,6 +3,10 @@
 /* ─────────────────────────────────────────────
    СЕКЦИЯ
 ───────────────────────────────────────────── */
+a{
+  text-decoration: none;
+  color: inherit;
+}
 .section {
   position: relative;
   background: #eeeeec;
@@ -298,8 +302,8 @@
 
 .card:hover .cardIcon {
   color: rgba(91, 185, 154, 0.9);
-  transform: translateZ(24px) scale(1.08);
-  opacity: 0;
+  transform: translateZ(24px) scale(3.08);
+  opacity: 1;
 }
 
 /* ─────────────────────────────────────────────
@@ -438,8 +442,12 @@
   transition: color 0.3s;
 }
 
-.card:hover .cardCtaText {
-  color: rgba(91, 185, 154, 0.6);
+.cardCta:hover {
+  color: rgb(77, 154, 128);
+  text-shadow: 0 0 5px rgba(83, 169, 140, 0.6),
+               0 0 10px rgba(85, 169, 141, 0.3),
+               0 0 15px rgba(78, 158, 131, 0.1);
+  transition: all 0.3s ease;
 }
 
 /* ─────────────────────────────────────────────

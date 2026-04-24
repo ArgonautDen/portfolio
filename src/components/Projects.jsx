@@ -1,6 +1,6 @@
 import ShaderBackground from './ShaderBackgroundClouds';
 import { useState, useRef, useCallback } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
 import styles from './Projects.module.css';
 
 const projects = [
@@ -54,30 +54,14 @@ const projects = [
 
 const Projects = () => {
   const [activeIndex, setActiveIndex] = useState(null);
-  const containerRef = useRef(null);
-  // Храним refs на все video-элементы чтобы управлять play/pause
   const videoRefs = useRef([]);
-
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const springX = useSpring(mouseX, { stiffness: 180, damping: 22 });
-  const springY = useSpring(mouseY, { stiffness: 180, damping: 22 });
-
-  const handleMouseMove = useCallback((e) => {
-    const rect = containerRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    mouseX.set(e.clientX - rect.left);
-    mouseY.set(e.clientY - rect.top);
-  }, [mouseX, mouseY]);
 
   const handleMouseEnter = useCallback((i) => {
     setActiveIndex(i);
-    // Запускаем видео сразу — оно уже загружено в DOM
     const video = videoRefs.current[i];
     if (video) {
       video.currentTime = 0;
-      video.play().catch(() => {}); // catch на случай autoplay policy
+      video.play().catch(() => {});
     }
   }, []);
 
@@ -93,66 +77,17 @@ const Projects = () => {
     <section id="projects" className={styles.projects}>
       <ShaderBackground />
 
-      {/* Заголовок секции */}
       <div className={styles.header}>
         <span className={styles.label}>Кейсы/</span>
         <h2 className={styles.title}>Проекты</h2>
       </div>
 
-      {/* Список + плавающее превью */}
-      <div
-        ref={containerRef}
-        className={styles.listWrap}
-        onMouseMove={handleMouseMove}
-      >
-        {/* Плавающий контейнер — один на все проекты, без пересоздания video */}
-        <motion.div
-          className={styles.preview}
-          style={{ x: springX, y: springY }}
-          animate={{
-            opacity: activeIndex !== null ? 1 : 0,
-            scale: activeIndex !== null ? 1 : 0.88,
-          }}
-          transition={{ opacity: { duration: 0.2 }, scale: { duration: 0.25 } }}
-        >
-          {projects.map((project, i) => (
-            project.video ? (
-              <video
-                key={i}
-                src={project.video}
-                className={styles.previewMedia}
-                style={{ 
-                  opacity: activeIndex === i ? 1 : 0,
-                  visibility: activeIndex === i ? 'visible' : 'hidden',
-                  position: 'absolute',  // все видео стакаются друг на друга
-                }}
-                ref={el => void (videoRefs.current[i] = el)}
-                muted
-                loop
-                playsInline
-                preload="auto"
-              />
-            ) : (
-              <div
-                key={i}
-                className={styles.previewPlaceholder}
-                style={{
-                  background: project.placeholder,
-                  display: activeIndex === i ? 'flex' : 'none',
-                }}
-              >
-                <span className={styles.previewLabel}>{project.title}</span>
-              </div>
-            )
-          ))}
-        </motion.div>
-
-        {/* Строки проектов */}
+      <div className={styles.listWrap}>
         <ul className={styles.list}>
           {projects.map((project, i) => (
             <motion.li
               key={i}
-              className={styles.item}
+              className={`${styles.item} ${activeIndex === i ? styles.itemActive : ''}`}
               onMouseEnter={() => handleMouseEnter(i)}
               onMouseLeave={() => handleMouseLeave(i)}
               initial={{ opacity: 0, y: 32 }}
@@ -169,13 +104,14 @@ const Projects = () => {
                 <span className={styles.num}>0{i + 1}</span>
 
                 <span className={styles.name}>
-                  {project.title.split('').map((char, ci) => (
+                  {project.title.split(' ').map((word, wi) => (
                     <motion.span
-                      key={ci}
-                      className={styles.char}
-                      transition={{ duration: 0.15, delay: ci * 0.02 }}
+                      key={wi}
+                      className={styles.word}
+                      transition={{ duration: 0.15, delay: wi * 0.03 }}
                     >
-                      {char === ' ' ? '\u00A0' : char}
+                      {word}
+                      {wi < project.title.split(' ').length - 1 ? '\u00A0' : ''}
                     </motion.span>
                   ))}
                 </span>
@@ -189,11 +125,41 @@ const Projects = () => {
                   <span className={styles.arrow}>↗</span>
                 </span>
               </a>
-              {project.description && (
-                <div className={styles.desc}>
-                  <p className={styles.descText}>{project.description}</p>
+
+              {/* Раскрывающаяся панель: описание слева + видео справа */}
+              <div className={styles.desc}>
+                <div className={styles.descInner}>
+                  <div className={styles.descLeft}>
+                    <p className={styles.descText}>{project.description}</p>
+                    <button className={styles.moreBtn} disabled>
+                      <span>Подробнее</span>
+                      <span className={styles.moreBtnArrow}>→</span>
+                    </button>
+                  </div>
+
+                  <div className={styles.descRight}>
+                    {project.video ? (
+                      <video
+                        ref={el => void (videoRefs.current[i] = el)}
+                        src={project.video}
+                        className={styles.inlineVideo}
+                        muted
+                        loop
+                        playsInline
+                        preload="auto"
+                      />
+                    ) : (
+                      <div
+                        className={styles.inlinePlaceholder}
+                        style={{ background: project.placeholder }}
+                      >
+                        <span className={styles.previewLabel}>{project.title}</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              )}
+              </div>
+
               <div className={styles.line}>
                 <motion.div
                   className={styles.lineFill}
