@@ -64,39 +64,59 @@ export default function ProjectVoidRealm() {
   return (
     <article className="pvr">
       {/* ── BACK ── */}
-      <Link to="/" className="pvr__back">
+      <Link to="/" state={{ scrollTo: 'projects' }} className="pce__back ...">
         <span className="pvr__back-arrow">←</span> Назад к проектам
       </Link>
 
-      {/* ── HERO ── */}
+      {/* ── HERO + VIDEO ── */}
       <header className="pvr__hero">
-        <div className="pvr__hero-eyebrow">
-          <span className="pvr__tag">React · WebSocket · Framer Motion</span>
-          <span className="pvr__year">2026</span>
-        </div>
-
-        <h1 className="pvr__hero-title">
-          <span className="pvr__title-void">Void</span>
-          <span className="pvr__title-realm">Realm</span>
-          <span className="pvr__title-sub">Battles</span>
-        </h1>
-
-        <p className="pvr__hero-desc">
-          Браузерная карточная игра 1 на 1 в реальном времени —
-          написана без ТЗ, без готового UI-кита,
-          с нуля от игровой механики до звука
-        </p>
-
-        <div className="pvr__hero-actions">
-          <a
-            href="https://voidrealm-battles.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="pvr__cta pvr__cta--primary"
-          >
-            Играть сейчас <span className="pvr__cta-arrow">↗</span>
-          </a>
-          <span className="pvr__hero-note">нужен второй игрок или режим зрителя</span>
+        <div className="pvr__hero-inner">
+          <div className="pvr__hero-left">
+            <div className="pvr__hero-eyebrow">
+              <span className="pvr__tag">React · WebSocket · Framer Motion</span>
+              <span className="pvr__year">2026</span>
+            </div>
+            <h1 className="pvr__hero-title">
+              <span className="pvr__title-void">Void</span>
+              <span className="pvr__title-realm">Realm</span>
+              <span className="pvr__title-sub">Battles</span>
+            </h1>
+            <p className="pvr__hero-desc">
+              Браузерная карточная игра 1 на 1 в реальном времени —
+              написана без ТЗ, без готового UI-кита,
+              с нуля от игровой механики до звука
+            </p>
+            <div className="pvr__hero-actions">
+              <a
+                href="https://voidrealm-battles.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="pvr__cta pvr__cta--primary"
+              >
+                Играть сейчас <span className="pvr__cta-arrow">↗</span>
+              </a>
+              <span className="pvr__hero-note">нужен второй игрок или режим зрителя</span>
+            </div>
+          </div>
+          <div className="pvr__hero-right">
+            <div className="pvr__video-wrap">
+              {!videoError ? (
+                <video
+                  ref={videoRef}
+                  src="/videos/voidrealm.mov"
+                  className="pvr__video"
+                  controls
+                  muted
+                  playsInline
+                  onError={() => setVideoError(true)}
+                />
+              ) : (
+                <div className="pvr__video-placeholder">
+                  <span className="pvr__video-placeholder-text">▶ Видео с обзором игры</span>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </header>
 
@@ -123,28 +143,7 @@ export default function ProjectVoidRealm() {
         </div>
       </div>
 
-      {/* ── VIDEO ── */}
-      <section className="pvr__media">
-        <div className="pvr__video-wrap">
-          {!videoError ? (
-            <video
-              ref={videoRef}
-              src="/videos/voidrealm.mov"
-              className="pvr__video"
-              controls
-              muted
-              playsInline
-              onError={() => setVideoError(true)}
-            />
-          ) : (
-            <div className="pvr__video-placeholder">
-              <span className="pvr__video-placeholder-text">▶ Видео с обзором игры</span>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* ── ORIGIN STORY ── */}
+{/* ── ORIGIN STORY ── */}
       <section className="pvr__origin">
         <div className="pvr__origin-inner">
           <div className="pvr__origin-quote">
@@ -265,7 +264,7 @@ export default function ProjectVoidRealm() {
         >
           Открыть игру <span className="pvr__cta-arrow">↗</span>
         </a>
-        <Link to="/" className="pvr__back pvr__back--footer">← Все проекты</Link>
+        <Link to="/" state={{ scrollTo: 'projects' }} className="pce__back ...">← Все проекты</Link>
       </footer>
     </article>
   );

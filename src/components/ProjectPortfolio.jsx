@@ -68,35 +68,55 @@ export default function ProjectPortfolio() {
   return (
     <article className="ppt">
       {/* ── BACK ── */}
-      <Link to="/" className="ppt__back">
+      <Link to="/" state={{ scrollTo: 'projects' }} className="pce__back ...">
         <span className="ppt__back-arrow">←</span> Назад к проектам
       </Link>
 
-      {/* ── HERO ── */}
+      {/* ── HERO + VIDEO ── */}
       <header className="ppt__hero">
-        <div className="ppt__hero-eyebrow">
-          <span className="ppt__tag">React · Three.js · WebGL / GLSL · Canvas API · Framer Motion · Vite</span>
-          <span className="ppt__year">2026</span>
+        <div className="ppt__hero-inner">
+          <div className="ppt__hero-left">
+            <div className="ppt__hero-eyebrow">
+              <span className="ppt__tag">React · Three.js · WebGL / GLSL · Canvas API · Framer Motion · Vite</span>
+              <span className="ppt__year">2026</span>
+            </div>
+            <h1 className="ppt__hero-title">
+              <span className="ppt__title-line1">Interactive</span>
+              <span className="ppt__title-line2">Portfolio</span>
+            </h1>
+            <p className="ppt__hero-sub">
+              Сайт-визитка с кастомными WebGL-шейдерами, физикой на Canvas и 3D-эффектами —
+              написанный как отдельный творческий проект
+            </p>
+            <a
+              href="https://portfolio-denisrdv.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ppt__cta"
+            >
+              Открыть сайт <span className="ppt__cta-arrow">↗</span>
+            </a>
+          </div>
+          <div className="ppt__hero-right">
+            <div className="ppt__video-wrap">
+              {!videoError ? (
+                <video
+                  ref={videoRef}
+                  src="/videos/potfolio.mp4"
+                  className="ppt__video"
+                  controls
+                  muted
+                  playsInline
+                  onError={() => setVideoError(true)}
+                />
+              ) : (
+                <div className="ppt__video-ph">
+                  <span>▶ Обзор портфолио</span>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
-
-        <h1 className="ppt__hero-title">
-          <span className="ppt__title-line1">Interactive</span>
-          <span className="ppt__title-line2">Portfolio</span>
-        </h1>
-
-        <p className="ppt__hero-sub">
-          Сайт-визитка с кастомными WebGL-шейдерами, физикой на Canvas и 3D-эффектами —
-          написанный как отдельный творческий проект
-        </p>
-
-        <a
-          href="https://portfolio-denisrdv.vercel.app"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="ppt__cta"
-        >
-          Открыть сайт <span className="ppt__cta-arrow">↗</span>
-        </a>
       </header>
 
       {/* ── STAT BAR ── */}
@@ -122,28 +142,7 @@ export default function ProjectPortfolio() {
         </div>
       </div>
 
-      {/* ── VIDEO ── */}
-      <section className="ppt__media">
-        <div className="ppt__video-wrap">
-          {!videoError ? (
-            <video
-              ref={videoRef}
-              src="/videos/potfolio.mp4"
-              className="ppt__video"
-              controls
-              muted
-              playsInline
-              onError={() => setVideoError(true)}
-            />
-          ) : (
-            <div className="ppt__video-ph">
-              <span>▶ Обзор портфолио</span>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* ── INTRO ── */}
+{/* ── INTRO ── */}
       <section className="ppt__intro">
         <div className="ppt__intro-grid">
           <div className="ppt__intro-text">
@@ -253,7 +252,7 @@ export default function ProjectPortfolio() {
         >
           Открыть сайт <span className="ppt__cta-arrow">↗</span>
         </a>
-        <Link to="/" className="ppt__back ppt__back--footer">← Все проекты</Link>
+        <Link to="/" state={{ scrollTo: 'projects' }} className="pce__back ...">← Все проекты</Link>
       </footer>
     </article>
   );

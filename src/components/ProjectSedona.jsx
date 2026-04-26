@@ -41,7 +41,7 @@ export default function ProjectSedona() {
   return (
     <article className="pse">
       {/* ── BACK ── */}
-      <Link to="/" className="pse__back">
+      <Link to="/" state={{ scrollTo: 'projects' }} className="pce__back ...">
         <span className="pse__back-arrow">←</span> Назад к проектам
       </Link>
 
@@ -286,7 +286,7 @@ export default function ProjectSedona() {
         >
           Посмотреть живой сайт <span className="pse__cta-arrow">↗</span>
         </a>
-        <Link to="/" className="pse__back pse__back--footer">← Все проекты</Link>
+        <Link to="/" state={{ scrollTo: 'projects' }} className="pce__back ...">← Все проекты</Link>
       </footer>
     </article>
   );

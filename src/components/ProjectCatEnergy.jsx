@@ -41,53 +41,50 @@ export default function ProjectCatEnergy() {
   return (
     <article className="pce">
       {/* ── BACK ── */}
-      <Link to="/" className="pce__back">
+      <Link to="/" state={{ scrollTo: 'projects' }} className="pce__back ...">
         <span className="pce__back-arrow">←</span> Назад к проектам
       </Link>
 
-      {/* ── HERO ── */}
+      {/* ── HERO + VIDEO ── */}
       <header className="pce__hero">
-        <div className="pce__hero-meta">
-          <span className="pce__tag">HTML · CSS · Sass · БЭМ · Gulp</span>
-          <span className="pce__year">2025</span>
-        </div>
-        <h1 className="pce__hero-title">
-          Cat&nbsp;Energy
-        </h1>
-        <p className="pce__hero-sub">
-          Адаптивная вёрстка коммерческого сайта — от мобайла до десктопа, без единой библиотеки
-        </p>
-        <a
-          href="https://htmlacademy-adaptive.github.io/2564453-cat-energy-2/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="pce__cta"
-        >
-          Открыть проект <span className="pce__cta-arrow">↗</span>
-        </a>
-      </header>
-
-      {/* ── VIDEO ── */}
-      <section className="pce__media">
-        <div className="pce__video-wrap">
-          {/* Замени src на реальный путь к видео */}
-          <video
-            ref={videoRef}
-            src="/videos/Energy.mp4"
-            className="pce__video"
-            controls
-            muted
-            playsInline
-            poster=""
-          />
-          {/* Placeholder если видео нет */}
-          <div className="pce__video-overlay">
-            <span className="pce__play-hint">▶ Обзор проекта</span>
+        <div className="pce__hero-inner">
+          <div className="pce__hero-left">
+            <div className="pce__hero-meta">
+              <span className="pce__tag">HTML · CSS · Sass · БЭМ · Gulp</span>
+              <span className="pce__year">2025</span>
+            </div>
+            <h1 className="pce__hero-title">Cat&nbsp;Energy</h1>
+            <p className="pce__hero-sub">
+              Адаптивная вёрстка коммерческого сайта — от мобайла до десктопа, без единой библиотеки
+            </p>
+            <a
+              href="https://htmlacademy-adaptive.github.io/2564453-cat-energy-2/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="pce__cta"
+            >
+              Открыть проект <span className="pce__cta-arrow">↗</span>
+            </a>
+          </div>
+          <div className="pce__hero-right">
+            <div className="pce__video-wrap">
+              <video
+                ref={videoRef}
+                src="/videos/Energy.mp4"
+                className="pce__video"
+                controls
+                muted
+                playsInline
+              />
+              <div className="pce__video-overlay">
+                <span className="pce__play-hint">▶ Обзор проекта</span>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
+      </header>
 
-      {/* ── INTRO ── */}
+{/* ── INTRO ── */}
       <section className="pce__intro">
         <div className="pce__intro-grid">
           <div className="pce__intro-text">
@@ -260,7 +257,7 @@ export default function ProjectCatEnergy() {
         >
           Посмотреть живой сайт <span className="pce__cta-arrow">↗</span>
         </a>
-        <Link to="/" className="pce__back pce__back--footer">← Все проекты</Link>
+        <Link to="/" state={{ scrollTo: 'projects' }} className="pce__back ...">← Все проекты</Link>
       </footer>
     </article>
   );

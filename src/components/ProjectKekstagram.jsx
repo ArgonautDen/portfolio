@@ -41,45 +41,47 @@ export default function ProjectKekstagram() {
   return (
     <article className="pkg">
       {/* ── BACK ── */}
-      <Link to="/" className="pkg__back">
+      <Link to="/" state={{ scrollTo: 'projects' }} className="pce__back ...">
         <span className="pkg__back-arrow">←</span> Назад к проектам
       </Link>
 
-      {/* ── HERO ── */}
+      {/* ── HERO + VIDEO ── */}
       <header className="pkg__hero">
-        <div className="pkg__hero-meta">
-          <span className="pkg__tag">JavaScript · API · LocalStorage</span>
-          <span className="pkg__year">2026</span>
+        <div className="pkg__hero-inner">
+          <div className="pkg__hero-left">
+            <div className="pkg__hero-meta">
+              <span className="pkg__tag">JavaScript · API · LocalStorage</span>
+              <span className="pkg__year">2026</span>
+            </div>
+            <h1 className="pkg__hero-title">Kekstagram</h1>
+            <p className="pkg__hero-sub">
+              Интерактивный фотосервис на ванильном JS — загрузка, фильтры, AJAX, валидация без единого фреймворка
+            </p>
+            <a
+              href="https://argonautden.github.io/2564453-kekstagram-2/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="pkg__cta"
+            >
+              Открыть проект <span className="pkg__cta-arrow">↗</span>
+            </a>
+          </div>
+          <div className="pkg__hero-right">
+            <div className="pkg__video-wrap">
+              <video
+                ref={videoRef}
+                src="/videos/Kekstagram.mp4"
+                className="pkg__video"
+                controls
+                muted
+                playsInline
+              />
+            </div>
+          </div>
         </div>
-        <h1 className="pkg__hero-title">Kekstagram</h1>
-        <p className="pkg__hero-sub">
-          Интерактивный фотосервис на ванильном JS — загрузка, фильтры, AJAX, валидация без единого фреймворка
-        </p>
-        <a
-          href="https://argonautden.github.io/2564453-kekstagram-2/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="pkg__cta"
-        >
-          Открыть проект <span className="pkg__cta-arrow">↗</span>
-        </a>
       </header>
 
-      {/* ── VIDEO ── */}
-      <section className="pkg__media">
-        <div className="pkg__video-wrap">
-          <video
-            ref={videoRef}
-            src="/videos/Kekstagram.mp4"
-            className="pkg__video"
-            controls
-            muted
-            playsInline
-          />
-        </div>
-      </section>
-
-      {/* ── INTRO ── */}
+{/* ── INTRO ── */}
       <section className="pkg__intro">
         <div className="pkg__intro-grid">
           <div className="pkg__intro-text">
@@ -204,7 +206,7 @@ export default function ProjectKekstagram() {
         >
           Посмотреть живой сайт <span className="pkg__cta-arrow">↗</span>
         </a>
-        <Link to="/" className="pkg__back pkg__back--footer">← Все проекты</Link>
+        <Link to="/" state={{ scrollTo: 'projects' }} className="pce__back ...">← Все проекты</Link>
       </footer>
     </article>
   );
