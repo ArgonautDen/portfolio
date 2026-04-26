@@ -1,130 +1,474 @@
-.project-sedona {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 0 20px;
-    font-family: "PT Sans", Arial, sans-serif;
-    color: #222;
-    line-height: 1.6;
+/* ============================================================
+   ProjectSedona.css  —  prefix: pse__
+   Palette: чистый белый / тёплый off-white / угольный текст
+   Та же система что у CatEnergy, но чуть теплее
+   ============================================================ */
+
+   :root {
+    --pse-black:   #0f0f0f;
+    --pse-dark:    #1a1a1a;
+    --pse-mid:     #2e2e2e;
+    --pse-border:  #dedbd8;
+    --pse-light:   #f2f0ed;
+    --pse-bg:      #faf9f7;
+    --pse-white:   #ffffff;
+    --pse-muted:   #8a8680;
+    --pse-tag-bg:  #eeece9;
+  
+    --pse-font:    "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --pse-mono:    "SF Mono", "Fira Code", Consolas, monospace;
+  
+    --pse-max:     900px;
+    --pse-gap:     clamp(3rem, 8vw, 7rem);
   }
   
-  .project-sedona__title {
-    font-size: 2.4rem;
-    margin-bottom: 24px;
-    font-weight: 700;
-    text-align: center;
-  }
-  
-  .project-sedona__video {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 24px;
-  }
-  
-  .project-sedona__video-placeholder {
-    width: 100%;
-    max-width: 700px;
-    height: 400px;
-    background: #ddd;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #666;
-    font-size: 1.2rem;
-    font-style: italic;
-    user-select: none;
-  }
-  
-  .project-sedona__link-container {
-    text-align: center;
-    margin-bottom: 32px;
-  }
-  
-  .project-sedona__link {
-    display: inline-block;
-    background-color: #007acc;
-    color: #fff;
-    text-decoration: none;
-    padding: 12px 28px;
-    border-radius: 6px;
-    font-weight: 600;
-    transition: background-color 0.25s ease;
-  }
-  
-  .project-sedona__link:hover,
-  .project-sedona__link:focus {
-    background-color: #005fa3;
-    outline: none;
-  }
-  
-  .project-sedona__description p {
-    margin-bottom: 16px;
-    font-size: 1.1rem;
-  }
-  
-  .project-sedona__subheading {
-    font-weight: 700;
-    font-size: 1.8rem;
-    margin-top: 48px;
-    margin-bottom: 24px;
-    border-bottom: 3px solid #007acc;
-    padding-bottom: 6px;
-  }
-  
-  .project-sedona__achievements {
-    list-style: none;
-    padding: 0;
+  .pse *, .pse *::before, .pse *::after {
+    box-sizing: border-box;
     margin: 0;
+    padding: 0;
+  }
+  
+  .pse {
+    font-family: var(--pse-font);
+    background: var(--pse-bg);
+    color: var(--pse-black);
+    min-height: 100vh;
+    padding: 0 clamp(1.25rem, 5vw, 2.5rem);
+    padding-bottom: 5rem;
+  }
+  
+  /* ── BACK ── */
+  .pse__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem 0;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pse-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .pse__back:hover { color: var(--pse-black); }
+  .pse__back-arrow { transition: transform 0.2s; }
+  .pse__back:hover .pse__back-arrow { transform: translateX(-3px); }
+  
+  /* ── HERO ── */
+  .pse__hero {
+    max-width: var(--pse-max);
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 4rem) 0 clamp(1.5rem, 4vw, 3rem);
+    border-bottom: 1px solid var(--pse-border);
+  }
+  
+  /* Двухколоночный layout: текст слева, видео справа */
+  .pse__hero-inner {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: center;
   }
   
-  @media (min-width: 600px) {
-    .project-sedona__achievements {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-  
-  .achievement {
+  .pse__hero-left {
     display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    background: #f9f9f9;
-    padding: 14px 18px;
+    flex-direction: column;
+  }
+  
+  .pse__hero-right {
+    width: 100%;
+  }
+  
+  /* Видео в герое */
+  .pse__hero-right .pse__video-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 9;
     border-radius: 8px;
-    box-shadow: 0 1px 4px rgb(0 0 0 / 0.1);
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .achievement:hover {
-    box-shadow: 0 4px 16px rgb(0 0 0 / 0.15);
-  }
-  
-  .achievement__thumb {
-    flex-shrink: 0;
-    width: 80px;
-    height: 80px;
-    border-radius: 6px;
     overflow: hidden;
-    background: #ddd;
+    background: var(--pse-dark);
+    border: 1px solid var(--pse-border);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
   }
   
-  .achievement__img {
+  .pse__hero-right .pse__video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
   }
   
-  .achievement__content {
-    flex-grow: 1;
-    font-size: 1rem;
-    color: #333;
+  .pse__hero-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+    gap: 0.6rem;
   }
   
-  .achievement__content strong {
-    color: #007acc;
+  .pse__tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--pse-tag-bg);
+    color: var(--pse-mid);
+    padding: 0.35em 0.9em;
+    border-radius: 100px;
+  }
+  
+  .pse__year {
+    font-size: 0.78rem;
+    color: var(--pse-muted);
+    font-family: var(--pse-mono);
+    letter-spacing: 0.05em;
+  }
+  
+  .pse__hero-title {
+    font-size: clamp(3rem, 8vw, 6.5rem);
     font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.92;
+    color: var(--pse-black);
+    margin-bottom: 1.2rem;
+    font-style: italic;
   }
   
+  .pse__hero-sub {
+    font-size: clamp(0.88rem, 1.6vw, 1rem);
+    color: var(--pse-muted);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  
+  /* ── CTA ── */
+  .pse__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--pse-black);
+    color: var(--pse-white);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 0.9em 1.8em;
+    border-radius: 3px;
+    transition: background 0.22s, transform 0.18s;
+  }
+  .pse__cta:hover { background: var(--pse-mid); transform: translateY(-1px); }
+  .pse__cta--large { font-size: 0.95rem; padding: 1.1em 2.4em; }
+  .pse__cta-arrow { font-size: 1.1em; transition: transform 0.18s; }
+  .pse__cta:hover .pse__cta-arrow { transform: translate(2px, -2px); }
+  
+  /* ── STATS BAR ── */
+  .pse__stats {
+    max-width: var(--pse-max);
+    margin: 0 auto;
+    padding: 2.2rem 0;
+    border-bottom: 1px solid var(--pse-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .pse__stat { text-align: center; flex: 1; min-width: 70px; }
+  .pse__stat-num {
+    display: block;
+    font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--pse-black);
+    margin-bottom: 0.3rem;
+  }
+  .pse__stat-label {
+    font-size: 0.68rem;
+    color: var(--pse-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+  }
+  .pse__stat-divider {
+    width: 1px;
+    height: 34px;
+    background: var(--pse-border);
+    flex-shrink: 0;
+  }
+  
+  
+  
+  /* ── INTRO ── */
+  .pse__intro {
+    max-width: var(--pse-max);
+    margin: 0 auto var(--pse-gap);
+    padding-top: var(--pse-gap);
+    border-top: 1px solid var(--pse-border);
+  }
+  
+  .pse__intro-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: start;
+  }
+  
+  .pse__intro-text p {
+    font-size: clamp(0.93rem, 1.8vw, 1.04rem);
+    line-height: 1.78;
+    color: #3a3834;
+  }
+  .pse__intro-text p + p { margin-top: 1rem; }
+  
+  .pse__intro-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-width: 130px;
+  }
+  
+  .pse__aside-block { text-align: right; }
+  .pse__aside-label {
+    display: block;
+    font-size: 0.63rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--pse-muted);
+    margin-bottom: 0.2rem;
+  }
+  .pse__aside-val {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--pse-black);
+  }
+  
+  /* ── SECTION TITLE ── */
+  .pse__section-title {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--pse-muted);
+    margin-bottom: 1.5rem;
+  }
+  
+  /* ── SHOWCASE ── */
+  .pse__screens {
+    max-width: var(--pse-max);
+    margin: 0 auto var(--pse-gap);
+    padding-top: var(--pse-gap);
+    border-top: 1px solid var(--pse-border);
+  }
+  
+  .pse__showcase-row {
+    display: flex;
+    gap: 1px;
+    background: var(--pse-border);
+    border: 1px solid var(--pse-border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 1.2rem;
+  }
+  .pse__showcase-row:last-child { margin-bottom: 0; }
+  
+  .pse__showcase-row--full    { flex-direction: column; }
+  .pse__showcase-row--mobile-pair { align-items: stretch; }
+  
+  .pse__showcase-fig {
+    flex: 1;
+    background: var(--pse-white);
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+  
+  /* Лейбл */
+  .pse__showcase-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem 0.6rem;
+    border-bottom: 1px solid var(--pse-border);
+  }
+  .pse__showcase-num {
+    font-family: var(--pse-mono);
+    font-size: 0.66rem;
+    color: var(--pse-muted);
+    letter-spacing: 0.1em;
+  }
+  .pse__showcase-desc {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--pse-mid);
+    font-weight: 500;
+  }
+  
+  /* Обёртки под пропорции — БЕЗ aspect-ratio на самой картинке */
+  .pse__img-wrap {
+    width: 100%;
+    overflow: hidden;
+    background: var(--pse-light);
+    flex-shrink: 0;
+    /* Картинка заполняет обёртку целиком */
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  
+  /* Десктопный скрин — 16:9 */
+  .pse__img-wrap--wide {
+    aspect-ratio: 16 / 9;
+  }
+  
+  /* Широкий но не такой высокий — для деталей (форма и т.п.) */
+  .pse__img-wrap--detail {
+    aspect-ratio: 16 / 6;
+  }
+  
+  /* Мобильный — узкий и высокий */
+  .pse__img-wrap--mobile {
+    aspect-ratio: 9 / 19;
+  }
+  
+  /* Сама картинка */
+  .pse__showcase-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    transition: transform 0.45s ease;
+  }
+  .pse__showcase-fig:hover .pse__showcase-img {
+    transform: scale(1.025);
+  }
+  
+  /* Подпись */
+  .pse__showcase-caption {
+    padding: 0.65rem 1rem;
+    font-size: 0.74rem;
+    color: var(--pse-muted);
+    line-height: 1.5;
+    border-top: 1px solid var(--pse-border);
+  }
+  
+  /* ── ACHIEVEMENTS ── */
+  .pse__achievements {
+    max-width: var(--pse-max);
+    margin: 0 auto var(--pse-gap);
+    padding-top: var(--pse-gap);
+    border-top: 1px solid var(--pse-border);
+  }
+  
+  .pse__ach-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .pse__ach-item {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--pse-border);
+  }
+  .pse__ach-item:first-child { border-top: 1px solid var(--pse-border); }
+  
+  .pse__ach-num {
+    font-family: var(--pse-mono);
+    font-size: 0.72rem;
+    color: var(--pse-muted);
+    letter-spacing: 0.06em;
+    padding-top: 0.15rem;
+  }
+  
+  .pse__ach-title {
+    display: block;
+    font-size: 0.93rem;
+    font-weight: 600;
+    color: var(--pse-black);
+    margin-bottom: 0.35rem;
+  }
+  .pse__ach-text {
+    font-size: 0.85rem;
+    color: #5a5652;
+    line-height: 1.65;
+  }
+  
+  /* ── STACK ── */
+  .pse__stack {
+    max-width: var(--pse-max);
+    margin: 0 auto var(--pse-gap);
+    padding-top: var(--pse-gap);
+    border-top: 1px solid var(--pse-border);
+  }
+  
+  .pse__tags-wrap { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  
+  .pse__pill {
+    display: inline-block;
+    background: var(--pse-white);
+    border: 1px solid var(--pse-border);
+    color: var(--pse-mid);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    padding: 0.45em 1em;
+    border-radius: 100px;
+    transition: background 0.18s, border-color 0.18s, color 0.18s;
+  }
+  .pse__pill:hover {
+    background: var(--pse-black);
+    color: var(--pse-white);
+    border-color: var(--pse-black);
+  }
+  
+  /* ── FOOTER ── */
+  .pse__footer {
+    max-width: var(--pse-max);
+    margin: 0 auto;
+    padding-top: var(--pse-gap);
+    border-top: 1px solid var(--pse-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .pse__back--footer { padding: 0; }
+  
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .pse__hero-title { font-style: normal; }
+  
+    /* На мобильных — видео под заголовком */
+    .pse__hero-inner {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    /* Переставляем порядок: сначала текст, потом видео */
+    .pse__hero-left  { order: 1; }
+    .pse__hero-right { order: 2; }
+  
+    .pse__intro-grid { grid-template-columns: 1fr; }
+    .pse__intro-aside {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 1.5rem 2.5rem;
+    }
+    .pse__aside-block { text-align: left; }
+  
+    .pse__showcase-row--mobile-pair { flex-direction: column; }
+  
+    .pse__img-wrap--mobile { aspect-ratio: 9 / 14; }
+  
+    .pse__stats { justify-content: center; }
+    .pse__stat-divider { display: none; }
+  
+    .pse__footer { flex-direction: column; align-items: flex-start; }
+    .pse__hero-meta { flex-direction: column; align-items: flex-start; }
+  }
