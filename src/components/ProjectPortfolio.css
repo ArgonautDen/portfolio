@@ -290,6 +290,13 @@
     object-fit: cover;
     display: block;
   }
+  .ppt__hl-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
   
   .ppt__hl-body {
     padding: 1.3rem;
@@ -315,52 +322,6 @@
     font-size: 0.8rem;
     color: #666;
     line-height: 1.62;
-  }
-  
-  /* ── SCREENSHOTS ── */
-  .ppt__screens {
-    max-width: var(--ppt-max);
-    margin: 0 auto var(--ppt-gap);
-    padding-top: var(--ppt-gap);
-    border-top: 1px solid var(--ppt-border);
-  }
-  
-  .ppt__screens-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--ppt-border);
-    border: 1px solid var(--ppt-border);
-    border-radius: 6px;
-    overflow: hidden;
-  }
-  
-  .ppt__screen-item { background: var(--ppt-white); }
-  .ppt__screen-item--wide { grid-column: 1 / -1; }
-  
-  .ppt__screen-ph {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: var(--ppt-surface);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .ppt__screen-item--wide .ppt__screen-ph { aspect-ratio: 21 / 9; }
-  .ppt__screen-ph span {
-    font-size: 0.7rem;
-    color: var(--ppt-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-  
-  .ppt__screen-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  
-  .ppt__screen-caption {
-    padding: 0.7rem 1rem;
-    font-size: 0.75rem;
-    color: var(--ppt-muted);
-    border-top: 1px solid var(--ppt-border);
   }
   
   /* ── STACK ── */
@@ -420,8 +381,6 @@
     .ppt__aside-block { text-align: left; }
   
     .ppt__hl-grid { grid-template-columns: 1fr; }
-    .ppt__screens-grid { grid-template-columns: 1fr; }
-    .ppt__screen-item--wide { grid-column: 1 / -1; }
   
     .ppt__stats { justify-content: center; }
     .ppt__stat-divider { display: none; }

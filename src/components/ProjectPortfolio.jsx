@@ -9,6 +9,7 @@ const highlights = [
     text: "GLSL на Three.js: FBM-шум в 6 октав, domain-warping через двойной fbm(), fake light scattering — всё в одном фрагментном шейдере. 30 fps cap + IntersectionObserver: рендер только когда секция видна.",
     mediaLabel: "Shader clouds",
     media: null,
+    video: "/videos/smoke.mp4", // ← "/videos/hl-shader.mp4"
   },
   {
     id: "02",
@@ -16,6 +17,7 @@ const highlights = [
     text: "Позиция мыши передаётся в uniform uMouse и uMouseActive. Облака «притягиваются» к курсору, направление fake-света следует за мышью. Плавное появление / исчезновение через lerp на JS-стороне.",
     mediaLabel: "Mouse parallax",
     media: null,
+    video: null,
   },
   {
     id: "03",
@@ -23,6 +25,7 @@ const highlights = [
     text: "50 кривых Catmull-Rom, анимированных синусами с разными фазами и скоростями. Gradient stroke с затуханием к краям. На мобильных отключается полностью — нулевые накладные расходы.",
     mediaLabel: "Canvas waves",
     media: null,
+    video: null,
   },
   {
     id: "04",
@@ -30,6 +33,7 @@ const highlights = [
     text: "Карточки контактов реагируют на движение мыши через perspective(700px) rotateX/Y. Кастомный RAF-луп с lerp(0.1) — никакого дёргания. Glare — CSS-переменные --glare-x / --glare-y, обновляемые из JS.",
     mediaLabel: "Tilt card",
     media: null,
+    video: "/videos/icon-anim.mp4",
   },
   {
     id: "05",
@@ -37,6 +41,7 @@ const highlights = [
     text: "Семь приветствий на разных языках — от «Привет» до «Amour». Шторка уезжает вверх с кубической кривой Безье, отдельный arc-элемент закрывает скруглённый нижний край. Всё на CSS transitions без библиотек.",
     mediaLabel: "Loading screen",
     media: null,
+    video: "/videos/amour.mp4",
   },
   {
     id: "06",
@@ -44,6 +49,7 @@ const highlights = [
     text: "Хитрость: canvas растёт вместе с секцией, но никогда не уменьшается — overflow:hidden на родителе обрезает лишнее. Никакого пересоздания рендерера при hover. ResizeObserver с debounce 80ms и округлением до 64px.",
     mediaLabel: "No-flicker resize",
     media: null,
+    video: null,
   },
   {
     id: "07",
@@ -51,6 +57,7 @@ const highlights = [
     text: "Пузыри со скиллами летают и отталкиваются от фотографии и текстового блока — координаты барьеров высчитываются через getBoundingClientRect() относительно canvas-контейнера.",
     mediaLabel: "Bubble physics",
     media: null,
+    video: "/videos/buble.mp4",
   },
   {
     id: "08",
@@ -58,6 +65,7 @@ const highlights = [
     text: "Кастомный хук useScrollReveal на IntersectionObserver: data-reveal='up/left/right' + data-reveal-delay. Превью проектов — floating видео с Framer Motion spring-анимацией, появляется рядом с курсором.",
     mediaLabel: "Scroll reveal + video",
     media: null,
+    video: null,
   },
 ];
 
@@ -68,7 +76,7 @@ export default function ProjectPortfolio() {
   return (
     <article className="ppt">
       {/* ── BACK ── */}
-      <Link to="/" state={{ scrollTo: 'projects' }} className="pce__back ...">
+      <Link to="/" state={{ scrollTo: "projects" }} className="ppt__back">
         <span className="ppt__back-arrow">←</span> Назад к проектам
       </Link>
 
@@ -106,6 +114,7 @@ export default function ProjectPortfolio() {
                   className="ppt__video"
                   controls
                   muted
+                  autoPlay
                   playsInline
                   onError={() => setVideoError(true)}
                 />
@@ -123,26 +132,26 @@ export default function ProjectPortfolio() {
       <div className="ppt__stats">
         <div className="ppt__stat">
           <span className="ppt__stat-num">3</span>
-          <span className="ppt__stat-label">кастомных<br/>шейдера</span>
+          <span className="ppt__stat-label">кастомных<br />шейдера</span>
         </div>
         <div className="ppt__stat-divider" />
         <div className="ppt__stat">
           <span className="ppt__stat-num">50</span>
-          <span className="ppt__stat-label">кривых<br/>Catmull-Rom</span>
+          <span className="ppt__stat-label">кривых<br />Catmull-Rom</span>
         </div>
         <div className="ppt__stat-divider" />
         <div className="ppt__stat">
           <span className="ppt__stat-num">6</span>
-          <span className="ppt__stat-label">октав<br/>FBM-шума</span>
+          <span className="ppt__stat-label">октав<br />FBM-шума</span>
         </div>
         <div className="ppt__stat-divider" />
         <div className="ppt__stat">
           <span className="ppt__stat-num">0</span>
-          <span className="ppt__stat-label">готовых<br/>эффект-либ</span>
+          <span className="ppt__stat-label">готовых<br />эффект-либ</span>
         </div>
       </div>
 
-{/* ── INTRO ── */}
+      {/* ── INTRO ── */}
       <section className="ppt__intro">
         <div className="ppt__intro-grid">
           <div className="ppt__intro-text">
@@ -177,7 +186,16 @@ export default function ProjectPortfolio() {
           {highlights.map((item) => (
             <div key={item.id} className="ppt__hl-item">
               <div className="ppt__hl-media">
-                {item.media ? (
+                {item.video ? (
+                  <video
+                    className="ppt__hl-video"
+                    src={item.video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                ) : item.media ? (
                   <img src={item.media} alt={item.title} className="ppt__hl-img" />
                 ) : (
                   <div className="ppt__hl-ph">
@@ -191,31 +209,6 @@ export default function ProjectPortfolio() {
                 <p className="ppt__hl-text">{item.text}</p>
               </div>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── SCREENSHOTS ── */}
-      <section className="ppt__screens">
-        <h2 className="ppt__section-title">Скриншоты</h2>
-        <div className="ppt__screens-grid">
-          {[
-            { label: "Hero + Shader Clouds", caption: "Секция героя с WebGL-фоном и mouse-parallax", wide: true },
-            { label: "About + BubbleSkills", caption: "Фото, текст, пузыри со скиллами" },
-            { label: "Projects hover", caption: "Floating видео-превью при наведении" },
-            { label: "Contact + TiltCards", caption: "3D-карточки с glare-эффектом" },
-            { label: "LoadingScreen", caption: "Приветствие на 7 языках + анимация шторки" },
-          ].map((s, i) => (
-            <figure
-              key={i}
-              className={`ppt__screen-item${s.wide ? " ppt__screen-item--wide" : ""}`}
-            >
-              {/* Замени на: <img src="..." alt={s.label} className="ppt__screen-img" /> */}
-              <div className="ppt__screen-ph">
-                <span>{s.label}</span>
-              </div>
-              <figcaption className="ppt__screen-caption">{s.caption}</figcaption>
-            </figure>
           ))}
         </div>
       </section>
@@ -252,7 +245,9 @@ export default function ProjectPortfolio() {
         >
           Открыть сайт <span className="ppt__cta-arrow">↗</span>
         </a>
-        <Link to="/" state={{ scrollTo: 'projects' }} className="pce__back ...">← Все проекты</Link>
+        <Link to="/" state={{ scrollTo: "projects" }} className="ppt__back ppt__back--footer">
+          ← Все проекты
+        </Link>
       </footer>
     </article>
   );
