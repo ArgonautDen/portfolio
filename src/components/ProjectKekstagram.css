@@ -27,6 +27,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    object-fit: contain;
   }
   
   .pkg {
@@ -221,12 +222,15 @@
   .pkg__screen-placeholder {
     width: 100%;
     aspect-ratio: 16 / 9;
-    background: var(--pkg-light);
+    background: white;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .pkg__screen-item--wide .pkg__screen-placeholder { aspect-ratio: 21 / 9; }
+  .pkg__screen-item--wide .pkg__screen-placeholder { 
+    aspect-ratio: 21 / 9; 
+    background-color: white;
+  }
   .pkg__screen-placeholder span {
     font-size: 0.8rem;
     color: var(--pkg-muted);

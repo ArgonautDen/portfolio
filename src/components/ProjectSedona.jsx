@@ -80,6 +80,9 @@ export default function ProjectSedona() {
                 controls
                 muted
                 playsInline
+                loop
+                autoPlay
+                preload="auto"
               />
             </div>
           </div>
@@ -151,7 +154,7 @@ export default function ProjectSedona() {
             </div>
             <div className="pse__img-wrap pse__img-wrap--wide">
               <img
-                src="/images/sedona-desktop-main.webp"
+                src="/images/sedona-hero.webp"
                 alt="Десктопная версия главной страницы Sedona"
                 width="1440"
                 height="900"
@@ -173,7 +176,7 @@ export default function ProjectSedona() {
             </div>
             <div className="pse__img-wrap pse__img-wrap--wide">
               <img
-                src="/images/sedona-desktop-catalog.webp"
+                src="/images/sedona-catalog.webp"
                 alt="Десктопная версия каталога Sedona"
                 width="1440"
                 height="900"
@@ -186,19 +189,19 @@ export default function ProjectSedona() {
           </figure>
         </div>
 
-        {/* РЯД 3 — Форма подписки (широкий скрин детали) */}
-        <div className="pse__showcase-row pse__showcase-row--full">
-          <figure className="pse__showcase-fig">
+        {/* РЯД 4 — Два мобильных, узкие и высокие */}
+        <div className="pse__showcase-row pse__showcase-row--mobile-pair">
+        <figure className="pse__showcase-fig">
             <div className="pse__showcase-label">
               <span className="pse__showcase-num">03</span>
               <span className="pse__showcase-desc">Desktop · Форма подписки</span>
             </div>
             <div className="pse__img-wrap pse__img-wrap--detail">
               <img
-                src="/images/sedona-form.webp"
+                src="/images/subscribe-sedona.webp"
                 alt="Форма подписки с валидацией"
-                width="1440"
-                height="600"
+                width="890"
+                height="330"
                 className="pse__showcase-img"
               />
             </div>
@@ -206,45 +209,23 @@ export default function ProjectSedona() {
               Форма с клиентской валидацией и отправкой на тестовый сервер
             </figcaption>
           </figure>
-        </div>
 
-        {/* РЯД 4 — Два мобильных, узкие и высокие */}
-        <div className="pse__showcase-row pse__showcase-row--mobile-pair">
           <figure className="pse__showcase-fig">
             <div className="pse__showcase-label">
               <span className="pse__showcase-num">04</span>
-              <span className="pse__showcase-desc">Mobile · Главная</span>
+              <span className="pse__showcase-desc">Модальное окно бронирования</span>
             </div>
             <div className="pse__img-wrap pse__img-wrap--mobile">
               <img
-                src="/images/sedona-mobile-main.webp"
-                alt="Мобильная версия главной страницы"
+                src="/images/sedona-modal.webp"
+                alt="Бронирование"
                 width="375"
                 height="812"
                 className="pse__showcase-img"
               />
             </div>
             <figcaption className="pse__showcase-caption">
-              Шапка с интерактивными элементами, типографика PT Sans
-            </figcaption>
-          </figure>
-
-          <figure className="pse__showcase-fig">
-            <div className="pse__showcase-label">
-              <span className="pse__showcase-num">05</span>
-              <span className="pse__showcase-desc">Mobile · Каталог</span>
-            </div>
-            <div className="pse__img-wrap pse__img-wrap--mobile">
-              <img
-                src="/images/sedona-mobile-catalog.webp"
-                alt="Мобильная версия каталога"
-                width="375"
-                height="812"
-                className="pse__showcase-img"
-              />
-            </div>
-            <figcaption className="pse__showcase-caption">
-              Фильтры в мобильной раскладке
+              Модальное окно бронирования на определенные даты
             </figcaption>
           </figure>
         </div>

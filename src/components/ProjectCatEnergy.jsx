@@ -73,6 +73,7 @@ export default function ProjectCatEnergy() {
                 src="/videos/Energy.mp4"
                 className="pce__video"
                 controls
+                autoPlay
                 muted
                 playsInline
               />
@@ -147,7 +148,7 @@ export default function ProjectCatEnergy() {
             </div>
             <div className="pce__img-wrap pce__img-wrap--mobile">
               <img
-                src="/images/mobilecatenergy.webp"
+                src="/images/mobilecatenergy-2.webp"
                 alt="Мобильная версия главной страницы"
                 width="375"
                 height="812"
@@ -166,7 +167,7 @@ export default function ProjectCatEnergy() {
             </div>
             <div className="pce__img-wrap pce__img-wrap--mobile">
               <img
-                src="/images/mobilecatalog.webp"
+                src="/images/pink-mob.webp"
                 alt="Мобильная версия каталога"
                 width="375"
                 height="812"
@@ -174,7 +175,7 @@ export default function ProjectCatEnergy() {
               />
             </div>
             <figcaption className="pce__showcase-caption">
-              Фильтры, рендж-слайдер, пагинация
+              Mobile-friendly магазин
             </figcaption>
           </figure>
         </div>
@@ -188,7 +189,7 @@ export default function ProjectCatEnergy() {
             </div>
             <div className="pce__img-wrap pce__img-wrap--tablet">
               <img
-                src="/images/tablecatenergy.webp"
+                src="/images/tablet-catenergy - init.webp"
                 alt="Планшетная версия"
                 width="768"
                 height="1024"
@@ -196,7 +197,7 @@ export default function ProjectCatEnergy() {
               />
             </div>
             <figcaption className="pce__showcase-caption">
-              Расширенный логотип, горизонтальное меню
+              Интерактивный ползунок "до-после"
             </figcaption>
           </figure>
 
@@ -207,7 +208,7 @@ export default function ProjectCatEnergy() {
             </div>
             <div className="pce__img-wrap pce__img-wrap--tablet">
               <img
-                src="/images/dscatalog.webp"
+                src="/images/ds-catalog-catenergy.webp"
                 alt="Десктопный каталог"
                 width="1440"
                 height="900"
@@ -215,7 +216,7 @@ export default function ProjectCatEnergy() {
               />
             </div>
             <figcaption className="pce__showcase-caption">
-              Трёхколоночный каталог, сайдбар с фильтрами
+              Четырехколоночный каталог, сайдбар с фильтрами
             </figcaption>
           </figure>
         </div>

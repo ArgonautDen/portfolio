@@ -74,6 +74,7 @@ export default function ProjectKekstagram() {
                 className="pkg__video"
                 controls
                 muted
+                autoPlay
                 playsInline
               />
             </div>
@@ -115,7 +116,13 @@ export default function ProjectKekstagram() {
         <div className="pkg__screens-grid">
           <figure className="pkg__screen-item pkg__screen-item--wide">
             <div className="pkg__screen-placeholder">
-              <span>Лента изображений + фильтры</span>
+            <img
+                src="/images/hero-kekstagram.webp"
+                alt="Десктопная версия каталога Sedona"
+                width="1440"
+                height="900"
+                className="pse__showcase-img"
+              />
             </div>
             <figcaption className="pkg__screen-caption">
               Главная страница: миниатюры из API, панель фильтрации
@@ -124,7 +131,13 @@ export default function ProjectKekstagram() {
 
           <figure className="pkg__screen-item">
             <div className="pkg__screen-placeholder">
-              <span>Редактор фото</span>
+            <img
+                src="/images/contr-kekstagram.webp"
+                alt="Десктопная версия каталога Sedona"
+                width="1440"
+                height="900"
+                className="pse__showcase-img"
+              />
             </div>
             <figcaption className="pkg__screen-caption">
               Загрузка, масштаб, эффекты, хэштеги
@@ -133,7 +146,13 @@ export default function ProjectKekstagram() {
 
           <figure className="pkg__screen-item">
             <div className="pkg__screen-placeholder">
-              <span>Полноэкранный просмотр</span>
+            <img
+                src="/images/kekstagram-open.webp"
+                alt="Десктопная версия каталога Sedona"
+                width="1440"
+                height="900"
+                className="pse__showcase-img"
+              />
             </div>
             <figcaption className="pkg__screen-caption">
               big-picture: лайки, комментарии, подгрузка по 5
@@ -142,7 +161,13 @@ export default function ProjectKekstagram() {
 
           <figure className="pkg__screen-item">
             <div className="pkg__screen-placeholder">
-              <span>Валидация формы</span>
+            <img
+                src="/images/kekstagram-validation.webp"
+                alt="Десктопная версия каталога Sedona"
+                width="1440"
+                height="900"
+                className="pse__showcase-img"
+              />
             </div>
             <figcaption className="pkg__screen-caption">
               Pristine: inline-ошибки под каждым полем
@@ -151,7 +176,13 @@ export default function ProjectKekstagram() {
 
           <figure className="pkg__screen-item">
             <div className="pkg__screen-placeholder">
-              <span>noUiSlider — интенсивность</span>
+            <img
+                src="/images/download.webp"
+                alt="Десктопная версия каталога Sedona"
+                width="1440"
+                height="900"
+                className="pse__showcase-img"
+              />
             </div>
             <figcaption className="pkg__screen-caption">
               Ползунок эффекта: grayscale / sepia / blur / invert / brightness

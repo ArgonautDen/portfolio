@@ -98,7 +98,7 @@
   }
   
   .pce__hero-title {
-    font-size: clamp(3.5rem, 11vw, 9rem);
+    font-size: clamp(3.5rem, 11vw, 5rem);
     font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 0.95;
@@ -289,6 +289,7 @@
     flex: 1;
     background: var(--pce-white);
     display: flex;
+    align-items: center;
     flex-direction: column;
     margin: 0;
   }
@@ -333,7 +334,7 @@
   
   /* Мобильный 9:19.5 — узкий и высокий */
   .pce__img-wrap--mobile {
-    aspect-ratio: 9 / 19.5;
+    aspect-ratio: 15 / 19.5;
   }
   
   /* Планшет / полуширокий 4:3 */
@@ -349,6 +350,7 @@
     object-position: top center;
     display: block;
     transition: transform 0.4s ease;
+    background-color: white;
   }
   .pce__showcase-fig:hover .pce__showcase-img {
     transform: scale(1.02);
