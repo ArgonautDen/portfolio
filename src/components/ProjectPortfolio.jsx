@@ -4,38 +4,6 @@ import "./ProjectPortfolio.css";
 
 const highlights = [
   {
-    id: "01",
-    title: "Fragment Shader с процедурными облаками",
-    text: "GLSL на Three.js: FBM-шум в 6 октав, domain-warping через двойной fbm(), fake light scattering — всё в одном фрагментном шейдере. 30 fps cap + IntersectionObserver: рендер только когда секция видна.",
-    mediaLabel: "Shader clouds",
-    media: null,
-    video: "/videos/smoke.mp4", // ← "/videos/hl-shader.mp4"
-  },
-  {
-    id: "02",
-    title: "Mouse-parallax на уровне GPU",
-    text: "Позиция мыши передаётся в uniform uMouse и uMouseActive. Облака «притягиваются» к курсору, направление fake-света следует за мышью. Плавное появление / исчезновение через lerp на JS-стороне.",
-    mediaLabel: "Mouse parallax",
-    media: null,
-    video: null,
-  },
-  {
-    id: "03",
-    title: "Wave Background на Canvas 2D",
-    text: "50 кривых Catmull-Rom, анимированных синусами с разными фазами и скоростями. Gradient stroke с затуханием к краям. На мобильных отключается полностью — нулевые накладные расходы.",
-    mediaLabel: "Canvas waves",
-    media: null,
-    video: null,
-  },
-  {
-    id: "04",
-    title: "3D TiltCard с glare-эффектом",
-    text: "Карточки контактов реагируют на движение мыши через perspective(700px) rotateX/Y. Кастомный RAF-луп с lerp(0.1) — никакого дёргания. Glare — CSS-переменные --glare-x / --glare-y, обновляемые из JS.",
-    mediaLabel: "Tilt card",
-    media: null,
-    video: "/videos/icon-anim.mp4",
-  },
-  {
     id: "05",
     title: "LoadingScreen с дугой",
     text: "Семь приветствий на разных языках — от «Привет» до «Amour». Шторка уезжает вверх с кубической кривой Безье, отдельный arc-элемент закрывает скруглённый нижний край. Всё на CSS transitions без библиотек.",
@@ -44,12 +12,12 @@ const highlights = [
     video: "/videos/amour.mp4",
   },
   {
-    id: "06",
-    title: "ShaderBackgroundClouds без мерцания",
-    text: "Хитрость: canvas растёт вместе с секцией, но никогда не уменьшается — overflow:hidden на родителе обрезает лишнее. Никакого пересоздания рендерера при hover. ResizeObserver с debounce 80ms и округлением до 64px.",
-    mediaLabel: "No-flicker resize",
+    id: "01",
+    title: "Fragment Shader с процедурными облаками",
+    text: "GLSL на Three.js: FBM-шум в 6 октав, domain-warping через двойной fbm(), fake light scattering — всё в одном фрагментном шейдере. 30 fps cap + IntersectionObserver: рендер только когда секция видна.",
+    mediaLabel: "Shader clouds",
     media: null,
-    video: null,
+    video: "/videos/smoke.mp4", // ← "/videos/hl-shader.mp4"
   },
   {
     id: "07",
@@ -60,11 +28,43 @@ const highlights = [
     video: "/videos/buble.mp4",
   },
   {
-    id: "08",
-    title: "Scroll Reveal & Floating Video Preview",
-    text: "Кастомный хук useScrollReveal на IntersectionObserver: data-reveal='up/left/right' + data-reveal-delay. Превью проектов — floating видео с Framer Motion spring-анимацией, появляется рядом с курсором.",
-    mediaLabel: "Scroll reveal + video",
+    id: "03",
+    title: "Wave Background на Canvas 2D",
+    text: "50 кривых Catmull-Rom, анимированных синусами с разными фазами и скоростями. Gradient stroke с затуханием к краям. На мобильных отключается полностью — нулевые накладные расходы.",
+    mediaLabel: "Canvas waves",
     media: null,
+    video: "/videos/smoke-2.mov",
+  },
+  {
+    id: "04",
+    title: "3D TiltCard с glare-эффектом",
+    text: "Карточки контактов реагируют на движение мыши через perspective(700px) rotateX/Y. Кастомный RAF-луп с lerp(0.1) — никакого дёргания. Glare — CSS-переменные --glare-x / --glare-y, обновляемые из JS.",
+    mediaLabel: "Tilt card",
+    media: null,
+    video: "/videos/icon-anim.mp4",
+  },
+  {
+    id: "01",
+    title: "Fragment Shader с процедурными облаками",
+    text: "GLSL на Three.js: FBM-шум в 6 октав, domain-warping через двойной fbm(), fake light scattering — всё в одном фрагментном шейдере. 30 fps cap + IntersectionObserver: рендер только когда секция видна.",
+    mediaLabel: "Shader clouds",
+    media: null,
+    video: "/videos/smoke.mp4", // ← "/videos/hl-shader.mp4"
+  },
+  {
+    id: "06",
+    title: "ShaderBackgroundClouds без мерцания",
+    text: "Хитрость: canvas растёт вместе с секцией, но никогда не уменьшается — overflow:hidden на родителе обрезает лишнее. Никакого пересоздания рендерера при hover. ResizeObserver с debounce 80ms и округлением до 64px.",
+    mediaLabel: "No-flicker resize",
+    media: null,
+    video: "/videos/dim.mp4",
+  },
+  {
+    id: "02",
+    title: "Mobile",
+    text: "Мобильная верстка + резина",
+    mediaLabel: "Mouse-mobile",
+    media: "/images/combo.webp",
     video: null,
   },
 ];
@@ -115,6 +115,7 @@ export default function ProjectPortfolio() {
                   controls
                   muted
                   autoPlay
+                  loop
                   playsInline
                   onError={() => setVideoError(true)}
                 />

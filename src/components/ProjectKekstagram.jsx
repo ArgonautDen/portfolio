@@ -74,6 +74,7 @@ export default function ProjectKekstagram() {
                 className="pkg__video"
                 controls
                 muted
+                loop
                 autoPlay
                 playsInline
               />

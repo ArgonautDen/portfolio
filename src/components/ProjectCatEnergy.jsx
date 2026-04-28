@@ -74,6 +74,7 @@ export default function ProjectCatEnergy() {
                 className="pce__video"
                 controls
                 autoPlay
+                loop
                 muted
                 playsInline
               />
