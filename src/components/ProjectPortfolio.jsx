@@ -44,14 +44,6 @@ const highlights = [
     video: "/videos/icon-anim.mp4",
   },
   {
-    id: "01",
-    title: "Fragment Shader с процедурными облаками",
-    text: "GLSL на Three.js: FBM-шум в 6 октав, domain-warping через двойной fbm(), fake light scattering — всё в одном фрагментном шейдере. 30 fps cap + IntersectionObserver: рендер только когда секция видна.",
-    mediaLabel: "Shader clouds",
-    media: null,
-    video: "/videos/smoke.mp4", // ← "/videos/hl-shader.mp4"
-  },
-  {
     id: "06",
     title: "ShaderBackgroundClouds без мерцания",
     text: "Хитрость: canvas растёт вместе с секцией, но никогда не уменьшается — overflow:hidden на родителе обрезает лишнее. Никакого пересоздания рендерера при hover. ResizeObserver с debounce 80ms и округлением до 64px.",
@@ -64,7 +56,7 @@ const highlights = [
     title: "Mobile",
     text: "Мобильная верстка + резина",
     mediaLabel: "Mouse-mobile",
-    media: "/images/combo.webp",
+    media: "/images/combo.png",
     video: null,
   },
 ];

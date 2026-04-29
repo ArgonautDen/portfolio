@@ -247,9 +247,7 @@
   .ppt__hl-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--ppt-border);
-    border: 1px solid var(--ppt-border);
+    gap: 20px;
     border-radius: 6px;
     overflow: hidden;
   }
