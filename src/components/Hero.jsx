@@ -75,9 +75,35 @@ const GlobeCanvas = () => {
   return <canvas ref={canvasRef} width={48} height={48} className={styles.globeCanvas} />;
 };
 
+const ContactPopup = ({ visible }) => (
+  <div className={`${styles.contactPopup} ${visible ? styles.contactPopupVisible : ''}`}>
+    <div className={styles.contactPopupRow}>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="4" width="20" height="16" rx="2"/>
+        <path d="m22 7-10 7L2 7"/>
+      </svg>
+      <a href="mailto:jokko0704@gmail.com" className={styles.contactPopupLink}>
+        jokko0704@gmail.com
+      </a>
+    </div>
+    <div className={styles.contactPopupDivider} />
+    <div className={styles.contactPopupRow}>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="m22 2-7 20-4-9-9-4Z"/>
+        <path d="M22 2 11 13"/>
+      </svg>
+      <a href="https://t.me/denirdv" target="_blank" rel="noreferrer" className={styles.contactPopupLink}>
+        @denirdv
+      </a>
+    </div>
+  </div>
+);
+
 const Hero = () => {
   const [direction, setDirection] = useState('normal');
+  const [contactVisible, setContactVisible] = useState(false);
   const lastWidthRef = useRef(window.innerWidth);
+  const hideTimeoutRef = useRef(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -90,6 +116,15 @@ const Hero = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const handleContactEnter = () => {
+    clearTimeout(hideTimeoutRef.current);
+    setContactVisible(true);
+  };
+
+  const handleContactLeave = () => {
+    hideTimeoutRef.current = setTimeout(() => setContactVisible(false), 200);
+  };
 
   return (
     <>
@@ -108,19 +143,18 @@ const Hero = () => {
 
         <div className={styles.marqueeOverlay}>
           <div className={`${styles.marqueeContent} ${styles[direction]}`}>
-            <span>Все ушло в дым</span>
-            <span>Все ушло в дым</span>
-            <span>Все ушло в дым</span>
-            <span>Все ушло в дым</span>
-            <span>Все ушло в дым</span>
-            <span>Все ушло в дым</span>
+            <span>Всё ушло в дым</span>
+            <span>Всё ушло в дым</span>
+            <span>Всё ушло в дым</span>
+            <span>Всё ушло в дым</span>
+            <span>Всё ушло в дым</span>
+            <span>Всё ушло в дым</span>
           </div>
         </div>
 
         <div className={styles.subtitleBlock}>
           <span className={styles.subtitleText}>Frontend developer</span>
           <span className={styles.subtitleName}>Родичев Денис</span>
-          {/* Стрелка справа от текста, наклонная вниз-влево ↙ — указывает на текст */}
           <svg
             className={styles.subtitleArrowSvg}
             width="20"
@@ -129,24 +163,40 @@ const Hero = () => {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            {/* линия от верхнего правого к нижнему левому */}
             <line x1="42" y1="6" x2="10" y2="38" stroke="rgba(255,255,255,0.75)" strokeWidth="2" strokeLinecap="round" />
-            {/* наконечник в нижнем левом углу */}
             <polyline points="26,38 10,38 10,22" stroke="rgba(255,255,255,0.75)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
           </svg>
         </div>
 
         <div className={styles.buttons}>
-          <button className={`${styles.btn} ${styles.btnPrimary}`} onClick={() => {
-            document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-          }}>
+          <button
+            className={`${styles.btn} ${styles.btnPrimary}`}
+            onClick={() => {
+              document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
             Проекты
           </button>
-          <button className={`${styles.btn} ${styles.btnOutline}`} onClick={() => {
-            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-          }}>
-            Контакты
-          </button>
+
+          <div
+            className={styles.contactBtnWrapper}
+            onMouseEnter={handleContactEnter}
+            onMouseLeave={handleContactLeave}
+          >
+            <button
+              className={`${styles.btn} ${styles.btnOutline}`}
+              onClick={() => {
+                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Контакты
+            </button>
+            <ContactPopup
+              visible={contactVisible}
+              onMouseEnter={handleContactEnter}
+              onMouseLeave={handleContactLeave}
+            />
+          </div>
         </div>
       </section>
     </>

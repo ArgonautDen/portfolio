@@ -322,7 +322,7 @@
   .pvr__hl-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
   }
   
@@ -389,7 +389,7 @@
     letter-spacing: 0.1em;
   }
   
-  .pvr__screen-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pvr__screen-img { width: 100%; height: 100%; object-fit: contain; display: block; }
   
   .pvr__screen-caption {
     padding: 0.7rem 1rem;

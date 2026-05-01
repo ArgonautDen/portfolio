@@ -2,59 +2,59 @@ import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./ProjectVoidRealm.css";
 
+const isVideo = (src) => /\.(mp4|webm|mov|ogg)$/i.test(src);
+
 const highlights = [
   {
     id: "01",
     title: "Вся игровая логика — на фронтенде",
     text: "Сервер только обсчитывал урон. Все состояния: фазы хода, смена бойца, анимации попаданий, систему очков энергии, HP-бары с плавным спадом — я проектировал и реализовывал сам с нуля.",
-    // Замени на: <img src="/images/voidrealm/logic.png" className="pvr__hl-img" alt="..." />
-    media: null,
+    media: "/images/1-void.webp",
     mediaLabel: "Игровые состояния",
   },
   {
     id: "02",
     title: "Две фазы за один ход + одновременность",
     text: "Движение (ближняя / дальняя дистанция) и атака выбираются скрытно. Оба игрока отправляют действие — результат вычисляется одновременно. Никаких «кто первый нажал».",
-    media: null,
+    media: "/videos/2-void.mp4",
     mediaLabel: "Фаза хода",
   },
   {
     id: "03",
     title: "Анимации и звук — с нуля",
     text: "Музыка и SFX созданы с помощью нейросетей и библиотек свободных звуков (с указанием авторов). Анимации ударов, проджектайлы, переходы между сценами — придуманы и закодированы самостоятельно.",
-    media: null,
+    media: "/videos/3-void.mp4",
     mediaLabel: "Звук и анимации",
   },
   {
     id: "04",
     title: "Режим зрителя",
     text: "Можно зайти в чужое лобби и наблюдать за боем в реальном времени. SpectatorView — отдельный маршрут с полным отображением арены без возможности действовать.",
-    media: null,
+    media: "/images/4-void.webp",
     mediaLabel: "Spectator mode",
   },
   {
     id: "05",
     title: "Battle Restore Guard",
     text: "Если игрок перезагрузил страницу во время боя — приложение автоматически проверяет сервер и возвращает его в игру. Никаких потерянных матчей из-за случайного F5.",
-    media: null,
+    media: "/videos/5-void.mp4",
     mediaLabel: "Восстановление сессии",
   },
   {
     id: "06",
     title: "Интерфейс без макета",
     text: "Часть экранов не была в Figma-макете вообще. Арена, панель способностей, карточки бойцов на арене, лог действий, эффекты статусов — я придумал и сверстал самостоятельно.",
-    media: null,
+    media: "/videos/6-void.mp4",
     mediaLabel: "UI без ТЗ",
   },
 ];
 
-// Медиа-слоты для скриншотов — замени null на путь к картинке
 const screenshots = [
-  { label: "Главное меню", caption: "Список лобби, правила игры, flip-карточка", wide: true },
-  { label: "Арена", caption: "Бой 1 на 1: фазы, бойцы, HP / энергия" },
-  { label: "Выбор отряда", caption: "Squad Picker — 3 бойца перед боем" },
-  { label: "Режим зрителя", caption: "Spectator View — наблюдение без участия" },
-  { label: "Экран победы", caption: "Game Over — анимация результата" },
+  { src: "/videos/voidrealm.mov",label: "Главное меню", caption: "Список лобби, правила игры, flip-карточка", wide: true },
+  { src: "/images/battle-page.webp",label: "Арена", caption: "Бой 1 на 1: фазы, бойцы, HP / энергия" },
+  { src: "/images/squad-picker.webp",label: "Выбор отряда", caption: "Squad Picker — 3 бойца перед боем" },
+  { src: "/images/view-page.webp",label: "Режим зрителя", caption: "Spectator View — наблюдение без участия" },
+  { src: "/videos/game-over.mp4",label: "Экран победы", caption: "Game Over — анимация результата" },
 ];
 
 export default function ProjectVoidRealm() {
@@ -64,7 +64,7 @@ export default function ProjectVoidRealm() {
   return (
     <article className="pvr">
       {/* ── BACK ── */}
-      <Link to="/" state={{ scrollTo: 'projects' }} className="pce__back ...">
+      <Link to="/" state={{ scrollTo: "projects" }} className="pce__back ...">
         <span className="pvr__back-arrow">←</span> Назад к проектам
       </Link>
 
@@ -108,6 +108,8 @@ export default function ProjectVoidRealm() {
                   controls
                   muted
                   playsInline
+                  autoPlay
+                  loop
                   onError={() => setVideoError(true)}
                 />
               ) : (
@@ -124,26 +126,26 @@ export default function ProjectVoidRealm() {
       <div className="pvr__stats">
         <div className="pvr__stat">
           <span className="pvr__stat-num">8</span>
-          <span className="pvr__stat-label">уникальных<br/>бойцов</span>
+          <span className="pvr__stat-label">уникальных<br />бойцов</span>
         </div>
         <div className="pvr__stat-divider" />
         <div className="pvr__stat">
           <span className="pvr__stat-num">2</span>
-          <span className="pvr__stat-label">фазы<br/>за ход</span>
+          <span className="pvr__stat-label">фазы<br />за ход</span>
         </div>
         <div className="pvr__stat-divider" />
         <div className="pvr__stat">
           <span className="pvr__stat-num">3</span>
-          <span className="pvr__stat-label">типа<br/>урона</span>
+          <span className="pvr__stat-label">типа<br />урона</span>
         </div>
         <div className="pvr__stat-divider" />
         <div className="pvr__stat">
           <span className="pvr__stat-num">∞</span>
-          <span className="pvr__stat-label">придумано<br/>без макета</span>
+          <span className="pvr__stat-label">придумано<br />без макета</span>
         </div>
       </div>
 
-{/* ── ORIGIN STORY ── */}
+      {/* ── ORIGIN STORY ── */}
       <section className="pvr__origin">
         <div className="pvr__origin-inner">
           <div className="pvr__origin-quote">
@@ -170,10 +172,21 @@ export default function ProjectVoidRealm() {
         <div className="pvr__hl-grid">
           {highlights.map((item) => (
             <div key={item.id} className="pvr__hl-item">
-              {/* Место под скриншот / гиф */}
               <div className="pvr__hl-media">
                 {item.media ? (
-                  <img src={item.media} alt={item.title} className="pvr__hl-img" />
+                  isVideo(item.media) ? (
+                    <video
+                      src={item.media}
+                      className="pvr__hl-img"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      onError={(e) => { e.currentTarget.style.display = "none"; }}
+                    />
+                  ) : (
+                    <img src={item.media} alt={item.title} className="pvr__hl-img" />
+                  )
                 ) : (
                   <div className="pvr__hl-placeholder">
                     <span>{item.mediaLabel}</span>
@@ -199,12 +212,25 @@ export default function ProjectVoidRealm() {
               key={i}
               className={`pvr__screen-item${s.wide ? " pvr__screen-item--wide" : ""}`}
             >
-              {/* Замени pvr__screen-placeholder на:
-                  <img src="/images/voidrealm/screen-X.png" alt={s.label} className="pvr__screen-img" />
-              */}
-              <div className="pvr__screen-placeholder">
-                <span>{s.label}</span>
-              </div>
+              {s.src ? (
+                isVideo(s.src) ? (
+                  <video
+                    src={s.src}
+                    className="pvr__screen-img"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    onError={(e) => { e.currentTarget.style.display = "none"; }}
+                  />
+                ) : (
+                  <img src={s.src} alt={s.label} className="pvr__screen-img" />
+                )
+              ) : (
+                <div className="pvr__screen-placeholder">
+                  <span>{s.label}</span>
+                </div>
+              )}
               <figcaption className="pvr__screen-caption">{s.caption}</figcaption>
             </figure>
           ))}
@@ -264,7 +290,7 @@ export default function ProjectVoidRealm() {
         >
           Открыть игру <span className="pvr__cta-arrow">↗</span>
         </a>
-        <Link to="/" state={{ scrollTo: 'projects' }} className="pce__back ...">← Все проекты</Link>
+        <Link to="/" state={{ scrollTo: "projects" }} className="pce__back ...">← Все проекты</Link>
       </footer>
     </article>
   );
