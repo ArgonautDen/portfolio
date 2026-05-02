@@ -31,7 +31,7 @@ const achievements = [
   {
     id: "06",
     title: "Чистая архитектура ES-модулей",
-    text: "Каждый файл — отдельный ES2015-модуль с говорящим именем. Неизменяемые экспорты, своевременное добавление и удаление document-обработчиков, textContent вместо innerHTML.",
+    text: "Каждый файл — отдельный модуль с говорящим именем. Неизменяемые экспорты, своевременное добавление и удаление document-обработчиков, textContent вместо innerHTML.",
   },
 ];
 
@@ -91,7 +91,7 @@ export default function ProjectKekstagram() {
               Kekstagram — полноценный фотосервис в духе Instagram, написанный на чистом JavaScript без React, Vue или любого другого UI-фреймворка. Задача: реализовать весь пользовательский сценарий — от выбора файла до просмотра ленты — опираясь только на нативные API браузера.
             </p>
             <p>
-              Проект сделан в рамках профессионального курса по JavaScript. Код разбит на ES2015-модули, работает кроссбраузерно и не оставляет «мусорных» обработчиков событий.
+              Проект сделан в рамках профессионального курса по JavaScript. Код разбит модули, работает кроссбраузерно и не оставляет «мусорных» обработчиков событий.
             </p>
           </div>
           <div className="pkg__intro-stats">
@@ -156,7 +156,7 @@ export default function ProjectKekstagram() {
               />
             </div>
             <figcaption className="pkg__screen-caption">
-              big-picture: лайки, комментарии, подгрузка по 5
+              big-picture: лайки, комментарии и их подгрузка
             </figcaption>
           </figure>
 
@@ -186,7 +186,7 @@ export default function ProjectKekstagram() {
               />
             </div>
             <figcaption className="pkg__screen-caption">
-              Ползунок эффекта: grayscale / sepia / blur / invert / brightness
+              Загрузка изображения на сервер
             </figcaption>
           </figure>
         </div>
@@ -194,7 +194,7 @@ export default function ProjectKekstagram() {
 
       {/* ── ACHIEVEMENTS ── */}
       <section className="pkg__achievements">
-        <h2 className="pkg__section-title">Что было реализовано</h2>
+        <h2 className="pkg__section-title">Что реализовал</h2>
         <ul className="pkg__ach-list">
           {achievements.map((item) => (
             <li key={item.id} className="pkg__ach-item">

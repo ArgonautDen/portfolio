@@ -18,7 +18,7 @@
     --pkg-mono: "SF Mono", "Fira Code", "Consolas", monospace;
   
     --pkg-max: 900px;
-    --pkg-gap: clamp(3rem, 8vw, 7rem);
+    --pkg-gap: 40px;
   }
   
   .pkg *,
@@ -154,7 +154,7 @@
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 3rem;
-    align-items: start;
+    align-items: center;
   }
   
   .pkg__intro-text p {
@@ -209,8 +209,9 @@
   .pkg__screens-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    align-items: end;
     gap: 1px;
-    background: var(--pkg-border);
+    background: #ffffff;
     border: 1px solid var(--pkg-border);
     border-radius: 6px;
     overflow: hidden;
@@ -221,7 +222,6 @@
   
   .pkg__screen-placeholder {
     width: 100%;
-    aspect-ratio: 16 / 9;
     background: white;
     display: flex;
     align-items: center;
