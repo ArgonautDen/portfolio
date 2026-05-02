@@ -121,7 +121,7 @@ export default function ProjectSedona() {
               Задача — не просто перенести дизайн в код, а сохранить визуальную логику и пользовательский сценарий. Макет соблюдён до пикселя: отступы, шрифты, состояния элементов.
             </p>
             <p>
-              Это проект про дисциплину: когда нет фреймворков, нет готовых компонентов — только понимание CSS и внимание к деталям. Именно здесь видно, умеет ли разработчик доводить до результата.
+              Это проект про дисциплину: когда нет фреймворков, нет готовых компонентов — только понимание CSS и внимание к деталям.
             </p>
           </div>
           <div className="pse__intro-aside">
@@ -219,8 +219,8 @@ export default function ProjectSedona() {
               <img
                 src="/images/sedona-modal.webp"
                 alt="Бронирование"
-                width="375"
-                height="812"
+                width="890"
+                height="330"
                 className="pse__showcase-img"
               />
             </div>
@@ -233,7 +233,7 @@ export default function ProjectSedona() {
 
       {/* ── ACHIEVEMENTS ── */}
       <section className="pse__achievements">
-        <h2 className="pse__section-title">Что было реализовано</h2>
+        <h2 className="pse__section-title">Что реализовал</h2>
         <ul className="pse__ach-list">
           {achievements.map((item) => (
             <li key={item.id} className="pse__ach-item">

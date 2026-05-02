@@ -19,7 +19,7 @@
     --pse-mono:    "SF Mono", "Fira Code", Consolas, monospace;
   
     --pse-max:     900px;
-    --pse-gap:     clamp(3rem, 8vw, 7rem);
+    --pse-gap:     40px;
   }
   
   .pse *, .pse *::before, .pse *::after {
@@ -258,7 +258,7 @@
   .pse__screens {
     max-width: var(--pse-max);
     margin: 0 auto var(--pse-gap);
-    padding-top: var(--pse-gap);
+    padding-top: 40px;
     border-top: 1px solid var(--pse-border);
   }
   
@@ -281,6 +281,7 @@
     background: var(--pse-white);
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     margin: 0;
   }
   
@@ -310,7 +311,7 @@
   .pse__img-wrap {
     width: 100%;
     overflow: hidden;
-    background: var(--pse-light);
+    background: #ffffff;
     flex-shrink: 0;
     /* Картинка заполняет обёртку целиком */
     display: flex;
@@ -460,7 +461,7 @@
   
     .pse__showcase-row--mobile-pair { flex-direction: column; }
   
-    .pse__img-wrap--mobile { aspect-ratio: 9 / 14; }
+    .pse__img-wrap--mobile { aspect-ratio: 19 / 14; }
   
     .pse__stats { justify-content: center; }
     .pse__stat-divider { display: none; }
