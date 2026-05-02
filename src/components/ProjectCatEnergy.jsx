@@ -26,7 +26,7 @@ const achievements = [
   {
     id: "05",
     title: "Интерактивная карта",
-    text: "Встроенная Google/Яндекс карта с кастомным маркером. Ширина карты подстраивается под вьюпорт, центр совпадает с макетом.",
+    text: "Встроенная Google/Яндекс карта. Ширина карты подстраивается под вьюпорт, центр совпадает с макетом.",
   },
   {
     id: "06",
@@ -91,7 +91,7 @@ export default function ProjectCatEnergy() {
         <div className="pce__intro-grid">
           <div className="pce__intro-text">
             <p>
-              Cat Energy — двустраничный коммерческий сайт для бренда функционального питания для кошек. Задача: точно перенести макет в код, сохранить визуальную логику на трёх типах устройств и собрать полноценный каталог с фильтрами.
+              Cat Energy — двустраничный коммерческий сайт для бренда корма для кошек. Задача: точно перенести макет в код, сохранить визуальную логику на трёх типах устройств и собрать полноценный каталог с фильтрами.
             </p>
             <p>
               Проект выполнен в рамках профессионального курса по адаптивной вёрстке. Весь код — собственный: HTML5, CSS3, Sass, Gulp. Ни единой сторонней UI-библиотеки.
@@ -225,7 +225,7 @@ export default function ProjectCatEnergy() {
 
       {/* ── ACHIEVEMENTS ── */}
       <section className="pce__achievements">
-        <h2 className="pce__section-title">Что было реализовано</h2>
+        <h2 className="pce__section-title">Что реализовал</h2>
         <ul className="pce__ach-list">
           {achievements.map((item) => (
             <li key={item.id} className="pce__ach-item">
@@ -243,7 +243,7 @@ export default function ProjectCatEnergy() {
       <section className="pce__stack">
         <h2 className="pce__section-title">Стек</h2>
         <div className="pce__tags-wrap">
-          {["HTML5", "CSS3", "Sass (SCSS)", "БЭМ", "Gulp", "SVG", "Retina-графика", "Adaptive Layout"].map((t) => (
+          {["HTML5", "CSS3", "Sass (SCSS)", "БЭМ", "Gulp", "Retina-графика", "Adaptive Layout"].map((t) => (
             <span key={t} className="pce__pill">{t}</span>
           ))}
         </div>
