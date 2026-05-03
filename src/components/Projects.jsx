@@ -18,7 +18,7 @@ const projects = [
   {
     title: 'Interactive Portfolio Website',
     year: '2026',
-    description: 'Кастомный fragment shader с процедурным FBM-шумом, облаками и mouse-parallax эффектом, Оптимизация WebGL, Floating video preview с Framer Motion spring-анимацией',
+    description: 'Кастомный fragment shader с процедурным FBM-шумом, облаками и mouse-parallax эффектом, Оптимизация WebGL',
     tags: ['React', 'Three.js', 'WebGL / GLSL', 'Canvas API', 'Framer Motion', 'Vite'],
     link: 'https://portfolio-denisrdv.vercel.app',
     video: '/videos/potfolio.mp4',

@@ -8,7 +8,7 @@ const highlights = [
   {
     id: "01",
     title: "Вся игровая логика — на фронтенде",
-    text: "Сервер только обсчитывал урон. Все состояния: фазы хода, смена бойца, анимации попаданий, систему очков энергии, HP-бары с плавным спадом — я проектировал и реализовывал сам с нуля.",
+    text: "Все состояния: фазы хода, смена бойца, анимации попаданий, очки энергии, HP-бары с плавным спадом — я проектировал и реализовывал сам.",
     media: "/images/1-void.webp",
     mediaLabel: "Игровые состояния",
   },
@@ -43,7 +43,7 @@ const highlights = [
   {
     id: "06",
     title: "Интерфейс без макета",
-    text: "Часть экранов не была в Figma-макете вообще. Арена, панель способностей, карточки бойцов на арене, лог действий, эффекты статусов — я придумал и сверстал самостоятельно.",
+    text: "отсутствие поведение интерфейса по макету — придумал и сверстал самостоятельно - что бы не выглядело мертвым и плоским.",
     media: "/videos/6-void.mp4",
     mediaLabel: "UI без ТЗ",
   },
@@ -84,7 +84,7 @@ export default function ProjectVoidRealm() {
             <p className="pvr__hero-desc">
               Браузерная карточная игра 1 на 1 в реальном времени —
               написана без ТЗ, без готового UI-кита,
-              с нуля от игровой механики до звука
+              с нуля до звука
             </p>
             <div className="pvr__hero-actions">
               <a
@@ -125,7 +125,7 @@ export default function ProjectVoidRealm() {
       {/* ── STAT BAR ── */}
       <div className="pvr__stats">
         <div className="pvr__stat">
-          <span className="pvr__stat-num">8</span>
+          <span className="pvr__stat-num">15</span>
           <span className="pvr__stat-label">уникальных<br />бойцов</span>
         </div>
         <div className="pvr__stat-divider" />
@@ -135,8 +135,8 @@ export default function ProjectVoidRealm() {
         </div>
         <div className="pvr__stat-divider" />
         <div className="pvr__stat">
-          <span className="pvr__stat-num">3</span>
-          <span className="pvr__stat-label">типа<br />урона</span>
+          <span className="pvr__stat-num">6</span>
+          <span className="pvr__stat-label">типов<br />урона</span>
         </div>
         <div className="pvr__stat-divider" />
         <div className="pvr__stat">
@@ -151,16 +151,16 @@ export default function ProjectVoidRealm() {
           <div className="pvr__origin-quote">
             <span className="pvr__quote-mark">"</span>
             <p className="pvr__quote-text">
-              Нам надо карточную игру. Вот два серверных файла и макет в Фигме нескольких экранов.
+              Нам нужна карточная игра. Вот два серверных файла и макет в Фигме экранов.
             </p>
             <span className="pvr__quote-from">— всё техническое задание</span>
           </div>
           <div className="pvr__origin-text">
             <p>
-              Это был вызов в чистом виде: минимальный бэкенд, половина экранов не задана, никаких требований к стеку. Я взял React, придумал архитектуру состояний, нарисовал в голове то, каким должен быть интерфейс — и построил игру.
+            Неполное ТЗ. Свободный стек. Нет готовых решений. Выбрал React, спроектировал архитектуру состояний, заполнил пробелы — и сдал рабочую игру.
             </p>
             <p>
-              Звуки написаны с помощью нейросетей и библиотек свободного аудио. Анимации — через Framer Motion и CSS. Каждый игровой экран, который не был в макете, я придумал сам. И мне нравится, как вышло.
+              Звуки написаны с помощью нейросетей и библиотек свободного аудио. Анимации — через Framer Motion и CSS. Каждый игровой экран - все состояния, поведения - доделаны и переработаны. И мне нравится, как вышло.
             </p>
           </div>
         </div>
