@@ -19,9 +19,7 @@
   flex-direction: row;
   flex-shrink: 0;
   white-space: nowrap;
-  /* translateZ(0) принудительно создаёт GPU compositing layer в Safari */
   transform: rotate(-90deg) translateX(var(--pos)) translateZ(0);
-  /* backface-visibility убирает Safari-мерцание при composite анимации */
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
@@ -53,7 +51,6 @@
   }
  
   .inner {
-    /* убираем поворот — текст горизонтальный */
     transform: translateX(var(--pos)) translateZ(0);
   }
 }
