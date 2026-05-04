@@ -15,10 +15,6 @@ const vertexShader = /* glsl */`
   }
 `;
 
-// Шейдер идентичен оригинальному, но:
-//   • убраны uMouse / uMouseActive и всё что с ними связано
-//   • fbm: 4 итерации вместо 6
-//   • uv *= 2.4 — чуть крупнее "зум", лучше смотрится в 150px круге
 const fragmentShader = /* glsl */`
   uniform float uTime;
   uniform vec2  uResolution;
@@ -97,7 +93,7 @@ const fragmentShader = /* glsl */`
   }
 `;
 
-const SIZE = 250; // фиксированный размер круга в пикселях
+const SIZE = 250;
 
 const ShaderCircle = () => {
   const mountRef = useRef(null);

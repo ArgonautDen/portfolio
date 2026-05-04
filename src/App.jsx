@@ -21,7 +21,6 @@ const App = () => {
 
   return (
     <Router>
-      {/* ↓ ScrollRestorer должен быть ВНУТРИ <Router> — он использует useLocation */}
       <ScrollRestorer />
 
       {loading && <LoadingScreen onFinish={() => setLoading(false)} />}
