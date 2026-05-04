@@ -177,13 +177,10 @@ const IconTelegram = () => (
   </svg>
 );
 
-const BgAvatar = ({ src, alt }) => (
-  <img
-    className={styles.cardBgLogo}
-    src={src}
-    alt={alt}
-    aria-hidden="true"
-  />
+const BgAvatar = ({ Icon }) => (// eslint-disable-line no-unused-vars
+  <div className={styles.cardBgLogo} aria-hidden="true">
+    <Icon />
+  </div>
 );
 
 // ── 3D-карточка ──────────────────────────────────────────────────────────────
@@ -302,7 +299,7 @@ const TiltCard = ({ c }) => {
       onMouseLeave={onMouseLeave}
     >
       <div className={styles.cardBgLogoWrap}>
-        <BgAvatar src={c.avatar} alt={c.type} />
+        <BgAvatar Icon={c.avatar} />
       </div>
 
       <div className={styles.cardGlare} />
