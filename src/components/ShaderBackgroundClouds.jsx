@@ -202,7 +202,8 @@ const ShaderBackgroundClouds = () => {
 
     // Render loop — 30fps cap
     let rafId;
-    const clock = new THREE.Clock();
+    let elapsed = 0;
+let lastTime = performance.now();
     const FPS_INTERVAL = 1000 / 30;
     let lastFrame = 0;
 
@@ -212,7 +213,10 @@ const ShaderBackgroundClouds = () => {
       if (now - lastFrame < FPS_INTERVAL) return;
       lastFrame = now;
 
-      uniforms.uTime.value = clock.getElapsedTime();
+      const now2 = performance.now();
+        elapsed += (now2 - lastTime) / 1000;
+        lastTime = now2;
+        uniforms.uTime.value = elapsed;
       const cur = uniforms.uMouseActive.value;
       uniforms.uMouseActive.value = cur + (activeTarget - cur) * 0.05;
 
