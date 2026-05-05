@@ -104,6 +104,7 @@ export default function ProjectPortfolio() {
                   ref={videoRef}
                   src="/videos/potfolio.mp4"
                   className="ppt__video"
+                  preload="auto"
                   controls
                   muted
                   autoPlay

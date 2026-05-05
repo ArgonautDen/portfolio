@@ -72,7 +72,7 @@ export default function ProjectCatEnergy() {
                 ref={videoRef}
                 src="/videos/Energy.mp4"
                 className="pce__video"
-                controls
+                preload="auto"
                 autoPlay
                 loop
                 muted

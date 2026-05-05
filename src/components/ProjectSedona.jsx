@@ -77,12 +77,11 @@ export default function ProjectSedona() {
                 ref={videoRef}
                 src="/videos/Sedona.mp4"
                 className="pse__video"
-                controls
+                preload="auto"
                 muted
                 playsInline
                 loop
                 autoPlay
-                preload="auto"
               />
             </div>
           </div>

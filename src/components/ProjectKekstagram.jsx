@@ -72,7 +72,7 @@ export default function ProjectKekstagram() {
                 ref={videoRef}
                 src="/videos/Kekstagram.mp4"
                 className="pkg__video"
-                controls
+                preload="auto"
                 muted
                 loop
                 autoPlay

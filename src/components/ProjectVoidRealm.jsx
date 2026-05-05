@@ -105,7 +105,7 @@ export default function ProjectVoidRealm() {
                   ref={videoRef}
                   src="/videos/voidrealm.mov"
                   className="pvr__video"
-                  controls
+                  preload="auto"
                   muted
                   playsInline
                   autoPlay
