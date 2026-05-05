@@ -103,7 +103,7 @@ export default function ProjectVoidRealm() {
               {!videoError ? (
                 <video
                   ref={videoRef}
-                  src="/videos/voidrealm.mov"
+                  src="/videos/voidrealm.mp4"
                   className="pvr__video"
                   preload="auto"
                   muted

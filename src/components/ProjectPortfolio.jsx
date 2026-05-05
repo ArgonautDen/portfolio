@@ -33,7 +33,7 @@ const highlights = [
     text: "Кастомный GLSL с FBM-шумом и mouse-юниформами. 3D-tilt на голом rAF с lerp-интерполяцией. Catmull-Rom волны с gradient stroke. Всё управляется через IntersectionObserver — ноль лишней работы.",
     mediaLabel: "Canvas waves",
     media: null,
-    video: "/videos/smoke-2.mov",
+    video: "/videos/smoke-2.mp4",
   },
   {
     id: "04",
