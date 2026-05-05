@@ -192,7 +192,7 @@ const Projects = () => {
                           muted
                           loop
                           playsInline
-                          preload="auto"
+                          preload="metadata"
                         />
                       ) : (
                         <div
