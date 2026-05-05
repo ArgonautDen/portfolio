@@ -56,7 +56,7 @@ const highlights = [
     title: "Mobile - Адаптив — не afterthought.",
     text: "Мобильная верстка + резина. Выглядит хорошо на любом экране. Проверено на iPhone. Проверено на Android. Всё работает — просто открой.",
     mediaLabel: "Mouse-mobile",
-    media: "/images/combo.png",
+    media: "/images/combo.webp",
     video: null,
   },
 ];
