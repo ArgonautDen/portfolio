@@ -11,7 +11,7 @@ const projects = [
     description: 'Мультиплеерная карточная игра в реальном времени. Матчмейкинг, состояния сессий, анимации.',
     tags: ['JavaScript', 'API', 'LocalStorage'],
     link: 'https://voidrealm-battles.vercel.app/',
-    video: '/videos/voidrealm.mp4',
+    video: '/videos/voidrealm-2.mp4',
     placeholder: '#1a1500',
     slug: 'voidrealm',
   },

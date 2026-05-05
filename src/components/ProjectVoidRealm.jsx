@@ -50,7 +50,7 @@ const highlights = [
 ];
 
 const screenshots = [
-  { src: "/videos/voidrealm.mov",label: "Главное меню", caption: "Список лобби, правила игры, flip-карточка", wide: true },
+  { src: "/videos/voidrealm-2.mp4",label: "Главное меню", caption: "Список лобби, правила игры, flip-карточка", wide: true },
   { src: "/images/battle-page.webp",label: "Арена", caption: "Бой 1 на 1: фазы, бойцы, HP / энергия" },
   { src: "/images/squad-picker.webp",label: "Выбор отряда", caption: "Squad Picker — 3 бойца перед боем" },
   { src: "/images/view-page.webp",label: "Режим зрителя", caption: "Spectator View — наблюдение без участия" },
@@ -103,7 +103,7 @@ export default function ProjectVoidRealm() {
               {!videoError ? (
                 <video
                   ref={videoRef}
-                  src="/videos/voidrealm.mp4"
+                  src="/videos/voidrealm-2.mp4"
                   className="pvr__video"
                   preload="auto"
                   muted
