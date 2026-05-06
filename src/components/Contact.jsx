@@ -176,8 +176,8 @@ const IconTelegram = () => (
     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8-1.7 8.02c-.12.55-.46.68-.93.42l-2.57-1.89-1.24 1.19c-.14.13-.25.24-.51.24l.18-2.6 4.72-4.26c.2-.18-.05-.28-.32-.1l-5.83 3.67-2.51-.78c-.55-.17-.56-.55.11-.81l9.79-3.77c.45-.16.85.11.81.67z" />
   </svg>
 );
-
-const BgAvatar = ({ Icon }) => (// eslint-disable-line no-unused-vars
+// eslint-disable-next-line no-unused-vars
+const BgAvatar = ({ Icon }) => (
   <div className={styles.cardBgLogo} aria-hidden="true">
     <Icon />
   </div>
@@ -189,17 +189,17 @@ const ICONS = { Email: IconEmail, GitHub: IconGitHub, Telegram: IconTelegram };
 
 const contacts = [
   {
-    idx: '01', type: 'Email',    val: 'jokko0704@gmail.com', cta: 'Написать →',
+    idx: '01', type: 'Email',    val: 'jokko0704@gmail.com',
     href: 'mailto:jokko0704@gmail.com',
-    avatar: IconEmail ,
+    avatar: IconEmail,
   },
   {
-    idx: '02', type: 'GitHub',   val: 'github.com/ArgonautDen', cta: 'Смотреть →',
+    idx: '02', type: 'GitHub',   val: 'github.com/ArgonautDen',
     href: 'https://github.com/ArgonautDen',
     avatar: IconGitHub,
   },
   {
-    idx: '03', type: 'Telegram', val: '@DeniRDV', cta: 'Написать →',
+    idx: '03', type: 'Telegram', val: '@DeniRDV',
     href: 'https://t.me/DeniRDV',
     avatar: IconTelegram,
   },
@@ -290,7 +290,10 @@ const TiltCard = ({ c }) => {
   }, []);
 
   return (
-    <div
+    <a
+      href={c.href}
+      target="_blank"
+      rel="noopener noreferrer"
       className={styles.card}
       ref={cardRef}
       aria-label={`Открыть ${c.type}`}
@@ -315,20 +318,7 @@ const TiltCard = ({ c }) => {
 
       <span className={styles.cardType}>{c.type}</span>
       <span className={styles.cardVal}>{c.val}</span>
-
-      {/* CTA без волны — волна теперь глобальный watermark */}
-      <div className={styles.cardCta}>
-            <a
-          href={c.href}
-          className={styles.cardCtaLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()}
-        >
-          {c.cta}
-        </a>
-      </div>
-    </div>
+    </a>
   );
 };
 
@@ -338,7 +328,6 @@ const Contact = () => {
   const [time, setTime] = useState('');
   const sectionRef = useRef(null);
 
-  // Передаём ref-объект — хук сам читает .current внутри useEffect
   useScrollReveal(sectionRef);
 
   useEffect(() => {
@@ -353,7 +342,6 @@ const Contact = () => {
     <section className={styles.section} id="contact" ref={sectionRef}>
       <ShaderBg />
 
-      {/* Заголовок — снизу */}
       <div className={styles.top} data-reveal="up">
         <span className={styles.label}>Связаться</span>
         <h2 className={styles.title}>
@@ -370,7 +358,6 @@ const Contact = () => {
       <div className={styles.inner}>
         <div className={styles.cards}>
           {contacts.map((c, idx) => (
-            /* Каждая карточка выезжает снизу с нарастающей задержкой */
             <div
               key={idx}
               data-reveal="up"
@@ -381,7 +368,6 @@ const Contact = () => {
           ))}
         </div>
 
-        {/* Футер — снизу */}
         <div className={styles.foot} data-reveal="up" data-reveal-delay="400">
           <span>©DeniRDV 2026</span>
           <div className={styles.footBar} />

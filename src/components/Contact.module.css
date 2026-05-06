@@ -3,10 +3,11 @@
 /* ─────────────────────────────────────────────
    СЕКЦИЯ
 ───────────────────────────────────────────── */
-a{
+a {
   text-decoration: none;
   color: inherit;
 }
+
 .section {
   position: relative;
   background: #eeeeec;
@@ -57,7 +58,6 @@ a{
   overflow: visible;
 }
 
-/* Кружок залитый — начинается за 30px от текста */
 .title::after {
   content: '';
   position: absolute;
@@ -72,7 +72,6 @@ a{
   opacity: 0.2;
 }
 
-/* Линия — стартует сразу после кружка, уходит вправо */
 .title::before {
   content: '';
   position: absolute;
@@ -143,7 +142,7 @@ a{
 }
 
 /* ─────────────────────────────────────────────
-   КАРТОЧКА — 3D tilt
+   КАРТОЧКА — 3D tilt + ссылка
 ───────────────────────────────────────────── */
 .card {
   padding: 40px 36px;
@@ -153,6 +152,8 @@ a{
   position: relative;
   overflow: hidden;
   border-radius: 16px;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
 
   background: linear-gradient(
     155deg,
@@ -185,6 +186,16 @@ a{
     0 20px 60px rgba(0, 0, 0, 0.55),
     0 4px 16px rgba(0, 0, 0, 0.35),
     0 0 40px rgba(91, 185, 154, 0.06);
+}
+
+/* ── Анимация нажатия ── */
+.card:active {
+  transform: perspective(700px) scale3d(0.96, 0.96, 0.96) !important;
+  transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 0 0 1px rgba(91, 185, 154, 0.10),
+    0 4px 16px rgba(0, 0, 0, 0.4) !important;
 }
 
 /* Верхний глянцевый блик */
@@ -225,7 +236,7 @@ a{
 }
 
 /* ─────────────────────────────────────────────
-   SPIN — быстрые обороты при клике (~1 сек)
+   SPIN
 ───────────────────────────────────────────── */
 @keyframes cardSpin {
   0%   { transform: perspective(900px) scale3d(1,    1,    1); }
@@ -288,11 +299,6 @@ a{
 }
 
 /* ─────────────────────────────────────────────
-   GLARE OVERLAY
-───────────────────────────────────────────── */
-
-
-/* ─────────────────────────────────────────────
    ИКОНКА
 ───────────────────────────────────────────── */
 .cardIcon {
@@ -343,7 +349,7 @@ a{
 }
 
 /* ─────────────────────────────────────────────
-   ТИПЫ / ЗНАЧЕНИЯ / CTA
+   ТИПЫ / ЗНАЧЕНИЯ
 ───────────────────────────────────────────── */
 .cardType {
   position: relative;
@@ -382,81 +388,6 @@ a{
 }
 
 /* ─────────────────────────────────────────────
-   ВОЛНА-КРИСТАЛЛЫ — в строке с CTA, слева
-───────────────────────────────────────────── */
-.cardWave {
-  flex: 1;
-  min-width: 0;
-  height: 28px;
-  pointer-events: none;
-  overflow: visible;
-  /* полупрозрачная по умолчанию — всегда видна */
-  opacity: 0.22;
-  transition: opacity 0.4s ease;
-}
-
-.card[data-hovered] .cardWave {
-  opacity: 0.65;
-}
-
-.waveLine {
-  stroke: rgba(255, 255, 255, 0.25);
-  stroke-width: 0.6;
-}
-
-.waveCrystal {
-  fill: rgba(255, 255, 255, 0.85);
-}
-
-.waveDot {
-  fill: rgba(255, 255, 255, 1.0);
-}
-
-@keyframes crystalPulse {
-  0%, 100% { opacity: 0.85; }
-  50%       { opacity: 0.30; }
-}
-
-.card[data-hovered] .waveCrystal {
-  animation: crystalPulse 2.0s ease-in-out infinite;
-}
-
-.card[data-hovered] .waveDot {
-  animation: crystalPulse 2.0s ease-in-out 0.3s infinite;
-}
-
-/* ─────────────────────────────────────────────
-   CTA — волна слева, текст справа
-───────────────────────────────────────────── */
-.cardCta {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: auto;
-}
-
-.cardCtaText {
-  font-size: 0.55rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.15);
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: color 0.3s;
-}
-
-.cardCta:hover {
-  color: rgb(77, 154, 128);
-  text-shadow: 0 0 5px rgba(83, 169, 140, 0.6),
-               0 0 10px rgba(85, 169, 141, 0.3),
-               0 0 15px rgba(78, 158, 131, 0.1);
-  transition: all 0.3s ease;
-}
-
-/* ─────────────────────────────────────────────
    ФУТЕР
 ───────────────────────────────────────────── */
 .foot {
@@ -489,7 +420,10 @@ a{
     transform: none !important;
   }
 
-  /* На мобильных логотип показываем статично */
+  .card:active {
+    transform: scale(0.97) !important;
+  }
+
   .cardBgLogoWrap {
     opacity: 0.4;
     transform: scale(1) rotate(0deg);
