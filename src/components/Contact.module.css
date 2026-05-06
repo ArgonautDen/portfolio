@@ -108,7 +108,7 @@ a{
   display: flex;
   gap: 60px;
   width: max-content;
-  animation: ticker 22s linear infinite;
+  animation: ticker 30s linear infinite;
   font-size: 0.60rem;
   letter-spacing: 4px;
   text-transform: uppercase;
