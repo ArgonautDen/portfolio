@@ -109,7 +109,7 @@
   background-repeat: no-repeat;
   background-size: contain;
   z-index: 1;
-  opacity: 0.77;
+  filter: contrast(0.8) brightness(1.05);
 }
 
 .marqueeOverlay {
@@ -121,7 +121,7 @@
   display: flex;
   align-items: center;
   pointer-events: none;
-  z-index: 5;
+  z-index: 0;
 }
 
 .marqueeContent {
@@ -216,26 +216,28 @@
 }
 
 .btnPrimary {
-  background: rgb(236, 236, 236);
-  color: #1c1d20;
+  background: #1f2025c9;
+  color: rgb(236, 236, 236);
 }
 
 .btnPrimary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(234, 234, 234, 0.2);
+  box-shadow: 0 5px 15px rgba(28, 29, 32, 0.4);
 }
 
 .btnOutline {
-  background: transparent;
-  color: rgb(233, 233, 233);
-  border: 2px solid rgb(239, 239, 239);
-  backdrop-filter: blur(5px);
+  background: #1c1d20;
+  color: rgb(236, 236, 236);
+  border: 2px solid #393a3cc9;
 }
 
 .btnOutline:hover {
-  background: rgb(232, 232, 232);
-  color: #1c1d20;
+  background: #00000029;
+  color: #282b31;
+  border: 2px solid #262729c9;
+  backdrop-filter: blur(5px);
   transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(28, 29, 32, 0.4);
 }
 
 /* ─── Contact Btn Wrapper + Popup ─── */
