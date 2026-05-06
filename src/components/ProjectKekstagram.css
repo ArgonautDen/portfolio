@@ -226,11 +226,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden; /* ← добавь */
   }
-  .pkg__screen-item--wide .pkg__screen-placeholder { 
-    aspect-ratio: 21 / 9; 
-    background-color: white;
+
+  .pkg__screen-item--wide .pkg__screen-placeholder {
+  aspect-ratio: 21 / 9;
+  background-color: white;
   }
+  
+    /* ← добавь для обычных (не wide) элементов */
+  .pkg__screen-item:not(.pkg__screen-item--wide) .pkg__screen-placeholder {
+    aspect-ratio: 4 / 3;
+  }
+
   .pkg__screen-placeholder span {
     font-size: 0.8rem;
     color: var(--pkg-muted);

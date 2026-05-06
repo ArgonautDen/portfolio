@@ -122,7 +122,7 @@ export default function ProjectKekstagram() {
                 alt="Десктопная версия каталога Sedona"
                 width="1440"
                 height="900"
-                className="pse__showcase-img"
+                className="pkg__screen-img"
               />
             </div>
             <figcaption className="pkg__screen-caption">
@@ -137,7 +137,7 @@ export default function ProjectKekstagram() {
                 alt="Десктопная версия каталога Sedona"
                 width="1440"
                 height="900"
-                className="pse__showcase-img"
+                className="pkg__screen-img"
               />
             </div>
             <figcaption className="pkg__screen-caption">
@@ -152,7 +152,7 @@ export default function ProjectKekstagram() {
                 alt="Десктопная версия каталога Sedona"
                 width="1440"
                 height="900"
-                className="pse__showcase-img"
+                className="pkg__screen-img"
               />
             </div>
             <figcaption className="pkg__screen-caption">
@@ -167,7 +167,7 @@ export default function ProjectKekstagram() {
                 alt="Десктопная версия каталога Sedona"
                 width="1440"
                 height="900"
-                className="pse__showcase-img"
+                className="pkg__screen-img"
               />
             </div>
             <figcaption className="pkg__screen-caption">
@@ -182,7 +182,7 @@ export default function ProjectKekstagram() {
                 alt="Десктопная версия каталога Sedona"
                 width="1440"
                 height="900"
-                className="pse__showcase-img"
+                className="pkg__screen-img"
               />
             </div>
             <figcaption className="pkg__screen-caption">
