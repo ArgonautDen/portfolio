@@ -128,15 +128,20 @@ const Hero = () => {
 
   return (
     <>
-      <div className={styles.locationTab}>
+      <a
+      href="https://t.me/DeniRDV"
+      target="_blank"
+      rel="noopener noreferrer"
+      className={styles.locationTab}
+    >
         <div className={styles.locationText}>
-          <span className={styles.locationLabel}>город</span>
-          <span className={styles.locationCity}>Москва</span>
+          <span className={styles.locationLabel}>telegram</span>
+          <span className={styles.locationCity}>@DeniRDV</span>
         </div>
         <div className={styles.locationGlobe}>
           <GlobeCanvas />
         </div>
-      </div>
+      </a>
 
       <section id="hero" className={styles.hero}>
         <ShaderBackground />

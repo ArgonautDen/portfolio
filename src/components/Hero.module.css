@@ -28,10 +28,55 @@
   padding: 14px 8px 14px 20px;
   box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.4);
   user-select: none;
-  opacity: 0.7;
-  display: none;
+  
+  /* ✨ Исходные значения для анимации */
+  opacity: 0.85;
+  box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.4);
+  
+  /* ✨ Плавные переходы для всех изменяемых свойств */
+  transition: 
+    opacity 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+    box-shadow 0.4s ease-out;
 }
 
+.locationTab:hover {
+  opacity: 0.75;
+  
+  /* Начальное свечение (основа для пульсации) */
+  box-shadow:
+    0 0 15px rgba(255, 255, 255, 0.25),
+    0 0 30px rgba(255, 255, 255, 0.12),
+    0 0 60px rgba(255, 255, 255, 0.06),
+    2px 4px 20px rgba(0, 0, 0, 0.4); /* сохраняем базовую тень для глубины */
+  
+  animation: gentlePulse 2s ease-in-out infinite;
+  animation-delay: 0.15s; /* небольшая задержка перед пульсацией */
+}
+
+/* Более мягкая и плавная пульсация */
+@keyframes gentlePulse {
+  0% {
+    box-shadow:
+      0 0 15px rgba(255, 255, 255, 0.25),
+      0 0 30px rgba(255, 255, 255, 0.12),
+      0 0 60px rgba(255, 255, 255, 0.06),
+      2px 4px 20px rgba(0, 0, 0, 0.4);
+  }
+  50% {
+    box-shadow:
+      0 0 22px rgba(255, 255, 255, 0.45),
+      0 0 45px rgba(255, 255, 255, 0.22),
+      0 0 80px rgba(255, 255, 255, 0.1),
+      2px 4px 22px rgba(0, 0, 0, 0.5);
+  }
+  100% {
+    box-shadow:
+      0 0 15px rgba(255, 255, 255, 0.25),
+      0 0 30px rgba(255, 255, 255, 0.12),
+      0 0 60px rgba(255, 255, 255, 0.06),
+      2px 4px 20px rgba(0, 0, 0, 0.4);
+  }
+}
 .locationText {
   display: flex;
   flex-direction: column;
@@ -66,6 +111,10 @@
   justify-content: center;
   flex-shrink: 0;
   overflow: hidden;
+}
+
+.locationTab:hover .locationGlobe {
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
 }
 
 .globeCanvas {
@@ -350,6 +399,7 @@
   }
   .locationTab {
     padding: 10px 6px 10px 14px;
+    display: none;
   }
   .locationCity {
     font-size: 0.75rem;
