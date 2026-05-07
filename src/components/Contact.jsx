@@ -206,7 +206,7 @@ const contacts = [
 ];
 
 const TICKER_TEXT = '◎ ВСЕ УШЛО В ДЫМ ◈ FRONTEND DEVELOPER ◉ REACT · CSS · JAVASCRIPT ◈ SHEIDER';
-const tickerItems = Array(8).fill(TICKER_TEXT);
+const tickerItems = Array(4).fill(TICKER_TEXT);
 
 const TiltCard = ({ c }) => {
   const cardRef     = useRef(null);
@@ -350,10 +350,22 @@ const Contact = () => {
       </div>
 
       <div className={styles.tickerWrap}>
-        <div className={styles.ticker}>
-          {tickerItems.map((t, idx) => <span key={idx}>{t}</span>)}
-        </div>
-      </div>
+  <div className={styles.ticker}>
+    {/* Трек 1 */}
+    <div className={styles.tickerTrack} aria-hidden="false">
+      {tickerItems.map((t, idx) => (
+        <span key={idx}>{t}</span>
+      ))}
+    </div>
+    {/* Трек 2 — точная копия */}
+    <div className={styles.tickerTrack} aria-hidden="true">
+      {tickerItems.map((t, idx) => (
+        <span key={idx}>{t}</span>
+      ))}
+    </div>
+  </div>
+</div>
+
 
       <div className={styles.inner}>
         <div className={styles.cards}>

@@ -26,14 +26,10 @@
   background: #1c1d20;
   border-radius: 0 40px 40px 0;
   padding: 14px 8px 14px 20px;
-  box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.4);
   user-select: none;
-  
-  /* ✨ Исходные значения для анимации */
+  text-decoration: none;
   opacity: 0.85;
   box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.4);
-  
-  /* ✨ Плавные переходы для всех изменяемых свойств */
   transition: 
     opacity 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1),
     box-shadow 0.4s ease-out;
@@ -41,19 +37,15 @@
 
 .locationTab:hover {
   opacity: 0.75;
-  
-  /* Начальное свечение (основа для пульсации) */
   box-shadow:
     0 0 15px rgba(255, 255, 255, 0.25),
     0 0 30px rgba(255, 255, 255, 0.12),
     0 0 60px rgba(255, 255, 255, 0.06),
-    2px 4px 20px rgba(0, 0, 0, 0.4); /* сохраняем базовую тень для глубины */
-  
+    2px 4px 20px rgba(0, 0, 0, 0.4);
   animation: gentlePulse 2s ease-in-out infinite;
-  animation-delay: 0.15s; /* небольшая задержка перед пульсацией */
+  animation-delay: 0.15s;
 }
 
-/* Более мягкая и плавная пульсация */
 @keyframes gentlePulse {
   0% {
     box-shadow:
@@ -77,6 +69,7 @@
       2px 4px 20px rgba(0, 0, 0, 0.4);
   }
 }
+
 .locationText {
   display: flex;
   flex-direction: column;
@@ -162,6 +155,24 @@
   filter: contrast(0.7) brightness(0.99);
 }
 
+/* ═══════════════════════════════════════════════════════
+   MARQUEE — проверенный паттерн без субпиксельных рывков
+
+   Принцип:
+   - .marqueeOverlay — overflow:hidden контейнер, flex
+   - два .marqueeTrack внутри, каждый flex с белспейс:nowrap
+   - каждый трек анимируется translateX(0) → translateX(-100%)
+     то есть уезжает ровно на свою собственную ширину
+   - второй трек стартует сразу после первого (они в потоке flex)
+   - когда первый уехал на -100% — второй занял его место,
+     анимация перезапускается — никакого скачка
+   - direction меняет animation-direction на обоих треках
+
+   Почему нет рывков:
+   - translateX оперирует процентами от собственной ширины элемента
+   - не зависит от gap, внешних размеров, округления пикселей
+   - GPU-composited transform — никаких layout recalculations
+═══════════════════════════════════════════════════════ */
 .marqueeOverlay {
   position: absolute;
   top: 0;
@@ -172,34 +183,51 @@
   align-items: center;
   pointer-events: none;
   z-index: 0;
+  overflow: hidden;           /* ← обрезаем вышедшие за пределы треки */
 }
 
-.marqueeContent {
+.marqueeTrack {
   display: flex;
-  gap: 50px;
-  width: max-content;
+  flex-shrink: 0;             /* ← не сжимается, всегда полная ширина */
+  white-space: nowrap;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  /* Типографика — без изменений */
   font-size: clamp(6rem, 20vw, 15rem);
   font-weight: 900;
   text-transform: uppercase;
-  white-space: nowrap;
   color: rgb(245, 245, 245);
   opacity: 0.2;
   letter-spacing: 10px;
   user-select: none;
-  animation: marquee 25s linear infinite;
+
+  animation: marqueeScroll 25s linear infinite;
 }
 
-.marqueeContent.normal {
+/* Разделитель между элементами внутри трека */
+.marqueeItem {
+  padding: 0 40px;            /* ← gap через padding, не через gap CSS */
+}
+
+/* Направление — меняется при resize */
+.marqueeTrack.normal {
   animation-direction: normal;
 }
 
-.marqueeContent.reverse {
+.marqueeTrack.reverse {
   animation-direction: reverse;
 }
 
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+/*
+  translateX(-100%) = ровно ширина одного трека.
+  Второй трек в это время занимает позицию первого.
+  При следующей итерации — seamless loop.
+*/
+@keyframes marqueeScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
 }
 
 /* ─── Subtitle block ─── */
@@ -223,7 +251,8 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   line-height: 1;
 }
-.subtitleName{
+
+.subtitleName {
   font-size: 1.8rem;
   font-weight: 600;
   letter-spacing: 1px;
@@ -241,7 +270,7 @@
   opacity: 0.75;
 }
 
-/* ─── Кнопки — по центру ─── */
+/* ─── Кнопки ─── */
 .buttons {
   position: relative;
   z-index: 10;
@@ -294,6 +323,7 @@
 .contactBtnWrapper {
   position: relative;
   display: inline-flex;
+  flex-shrink: 0;
 }
 
 .contactPopup {
@@ -317,7 +347,6 @@
   backdrop-filter: blur(12px);
 }
 
-/* маленький треугольник-хвостик снизу */
 .contactPopup::after {
   content: '';
   position: absolute;
@@ -367,8 +396,8 @@
   background: rgba(255, 255, 255, 0.08);
   margin: 0 -2px;
 }
-/* ─── End Contact Popup ─── */
 
+/* ─── Адаптив ─── */
 @media (max-width: 968px) {
   .subtitleBlock {
     font-size: 1.2rem;
@@ -378,7 +407,7 @@
   .subtitleText {
     font-size: 1.2rem;
   }
-  .marqueeContent {
+  .marqueeTrack {
     font-size: clamp(4rem, 15vw, 8rem);
     opacity: 0.25;
     letter-spacing: 5px;
@@ -423,7 +452,6 @@
     height: 20px;
     margin-top: -84px;
   }
-  /* на мобиле попап открывается вверх с небольшим смещением */
   .contactPopup {
     left: 50%;
   }
@@ -439,5 +467,5 @@
 
 @keyframes fadeIn {
   from { opacity: 0; }
-  to { opacity: 1; }
+  to   { opacity: 1; }
 }

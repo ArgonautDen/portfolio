@@ -99,6 +99,9 @@ const ContactPopup = ({ visible }) => (
   </div>
 );
 
+// Текст одного трека — достаточно копий чтобы покрыть экран
+const MARQUEE_ITEMS = ['Всё ушло в дым', 'Всё ушло в дым', 'Всё ушло в дым', 'Всё ушло в дым'];
+
 const Hero = () => {
   const [direction, setDirection] = useState('normal');
   const [contactVisible, setContactVisible] = useState(false);
@@ -129,11 +132,11 @@ const Hero = () => {
   return (
     <>
       <a
-      href="https://t.me/DeniRDV"
-      target="_blank"
-      rel="noopener noreferrer"
-      className={styles.locationTab}
-    >
+        href="https://t.me/DeniRDV"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.locationTab}
+      >
         <div className={styles.locationText}>
           <span className={styles.locationLabel}>telegram</span>
           <span className={styles.locationCity}>@DeniRDV</span>
@@ -146,14 +149,25 @@ const Hero = () => {
       <section id="hero" className={styles.hero}>
         <ShaderBackground />
 
+        {/*
+          ── Marquee — проверенный паттерн ──────────────────────────────
+          Враппер overflow:hidden, внутри два идентичных трека (.marqueeTrack).
+          Каждый трек анимируется translateX от 0 до -100% своей ширины.
+          Когда первый трек уходит влево на 100% — второй занимает его место,
+          затем первый мгновенно сбрасывается в начало (iteration restart).
+          Браузер видит непрерывный поток — никакого скачка.
+          direction меняет animation-direction, оба трека синхронно.
+        */}
         <div className={styles.marqueeOverlay}>
-          <div className={`${styles.marqueeContent} ${styles[direction]}`}>
-            <span>Всё ушло в дым</span>
-            <span>Всё ушло в дым</span>
-            <span>Всё ушло в дым</span>
-            <span>Всё ушло в дым</span>
-            <span>Всё ушло в дым</span>
-            <span>Всё ушло в дым</span>
+          <div className={`${styles.marqueeTrack} ${styles[direction]}`} aria-hidden="true">
+            {MARQUEE_ITEMS.map((text, i) => (
+              <span key={i} className={styles.marqueeItem}>{text}</span>
+            ))}
+          </div>
+          <div className={`${styles.marqueeTrack} ${styles[direction]}`} aria-hidden="true">
+            {MARQUEE_ITEMS.map((text, i) => (
+              <span key={i} className={styles.marqueeItem}>{text}</span>
+            ))}
           </div>
         </div>
 
