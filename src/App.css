@@ -20,3 +20,8 @@ body {
 section {
   width: 100%;
 }
+
+svg[stroke] {
+  shape-rendering: geometricPrecision;
+  vector-effect: non-scaling-stroke;
+}
