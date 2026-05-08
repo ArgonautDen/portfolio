@@ -159,6 +159,7 @@ a {
   border-radius: 16px;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
+  -webkit-transform-style: preserve-3d;
 
   background: linear-gradient(
     155deg,
@@ -312,14 +313,17 @@ a {
   margin-bottom: 20px;
   color: rgba(91, 185, 154, 0.45);
   transition: color 0.35s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease;
-  transform-style: preserve-3d;
-  transform: translateZ(0px);
+  /* убрали transform-style: preserve-3d */
   width: fit-content;
+  /* форсируем отдельный compositing layer — Safari рендерит чётко */
+  will-change: transform;
+  -webkit-transform: translateZ(0);
 }
 
 .card:hover .cardIcon {
   color: rgba(91, 185, 154, 0.9);
-  transform: translateZ(24px) scale(3.08);
+  /* убрали translateZ(24px) — только 2D scale */
+  transform: scale(3.08);
   opacity: 1;
 }
 
