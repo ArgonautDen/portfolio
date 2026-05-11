@@ -16,16 +16,6 @@ const projects = [
     slug: 'voidrealm',
   },
   {
-    title: 'Interactive Portfolio Website',
-    year: '2026',
-    description: 'Кастомный fragment shader с процедурным FBM-шумом, облаками и mouse-parallax эффектом, Оптимизация WebGL',
-    tags: ['React', 'Three.js', 'WebGL / GLSL', 'Canvas API', 'Framer Motion', 'Vite'],
-    link: 'https://portfolio-denisrdv.vercel.app',
-    video: '/videos/potfolio.mp4',
-    placeholder: '#1a1500',
-    slug: 'portfolio',
-  },
-  {
     title: 'JavaScript. Разработка веб-интерфейсов',
     year: '2026',
     description: 'Кекстаграм — сервис просмотра изображений. Пользователям предоставлена возможность загружать свои фотографии или просматривать фотографии, загруженные ранее другими пользователями. Интерактивное приложение с внешним API и LocalStorage. Динамичный UI без фреймворков.',
@@ -46,6 +36,16 @@ const projects = [
     slug: 'catenergy',
   },
   {
+    title: 'Interactive Portfolio Website',
+    year: '2026',
+    description: 'Кастомный fragment shader с процедурным FBM-шумом, облаками и mouse-parallax эффектом, Оптимизация WebGL',
+    tags: ['React', 'Three.js', 'WebGL / GLSL', 'Canvas API', 'Framer Motion', 'Vite'],
+    link: 'https://portfolio-denisrdv.vercel.app',
+    video: '/videos/potfolio.mp4',
+    placeholder: '#1a1500',
+    slug: 'portfolio',
+  },
+  {
     title: 'HTML и CSS. Профессиональная вёрстка сайтов',
     year: '2025',
     description: 'Лендинг с нуля — только HTML и CSS3.',
@@ -56,7 +56,6 @@ const projects = [
     slug: 'sedona',
   }
 ];
-// ^^^ Замени ссылки на реальные когда будешь готов
 
 const Projects = () => {
   const [activeIndex, setActiveIndex] = useState(null);
