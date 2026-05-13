@@ -1,11 +1,3 @@
-// ShaderCircle.jsx
-// Оптимизированный шейдер облаков для маленького круглого контейнера.
-// - Без мыши / без uMouseActive
-// - fbm: 4 октавы вместо 6 (экономия ~30% фрагментных вычислений)
-// - Фиксированный размер 150×150, pixelRatio = 1
-// - Рендер только когда элемент виден (IntersectionObserver)
-// - 30 fps cap
-
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 

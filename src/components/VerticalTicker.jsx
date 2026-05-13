@@ -24,7 +24,6 @@ const VerticalTicker = () => {
         if (posRef.current <= -oneWidth) {
           posRef.current += oneWidth;
         }
-        // CSS var вместо style.transform — GPU подхватывает без лишних reflow
         wrap.style.setProperty('--pos', `${posRef.current}px`);
         rafRef.current = requestAnimationFrame(loop);
       };

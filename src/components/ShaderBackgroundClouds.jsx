@@ -1,4 +1,3 @@
-// ShaderBackgroundClouds.jsx
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
@@ -122,21 +121,12 @@ const ShaderBackgroundClouds = () => {
 
     const section = el.parentElement;
 
-    // ═══════════════════════════════════════════════════════════════
-    // Ключевая идея: запоминаем максимальные размеры canvas.
-    // setSize вызываем ТОЛЬКО когда секция стала БОЛЬШЕ (ширина
-    // или высота превысили предыдущий максимум).
-    // Когда секция уменьшается (hover ушёл, desc схлопнулся) —
-    // canvas остаётся большим, CSS overflow:hidden на секции
-    // обрезает лишнее. Никаких мерцаний.
-    // ═══════════════════════════════════════════════════════════════
     let maxW = 0;
     let maxH = 0;
     let resizeTimer;
 
     const applySize = (w, h) => {
-      // Округляем вверх до ближайших 64px — чтобы не ресайзить
-      // из-за каждого пикселя при плавной анимации высоты
+
       const ceilW = Math.ceil(w / 64) * 64;
       const ceilH = Math.ceil(h / 64) * 64;
 
@@ -157,7 +147,6 @@ const ShaderBackgroundClouds = () => {
       }
     };
 
-    // Дебаунс на ResizeObserver — но первый вызов мгновенный
     const onResize = () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
@@ -169,13 +158,11 @@ const ShaderBackgroundClouds = () => {
     const ro = new ResizeObserver(onResize);
     ro.observe(section);
 
-    // Первоначальная установка — сразу без дебаунса
     {
       const rect = section.getBoundingClientRect();
       applySize(rect.width, rect.height);
     }
 
-    // IntersectionObserver — рендер только когда видно
     let isVisible = false;
     const io = new IntersectionObserver(
       ([entry]) => { isVisible = entry.isIntersecting; },
@@ -247,7 +234,7 @@ let lastTime = performance.now();
         inset: 0,
         zIndex: 0,
         pointerEvents: 'none',
-        overflow: 'hidden',          // ← обрезаем лишний canvas
+        overflow: 'hidden',
         willChange: 'transform',
         transform: 'translateZ(0)',
       }}

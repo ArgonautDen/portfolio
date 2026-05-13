@@ -7,20 +7,17 @@ export default function ScrollRestorer() {
 
   useEffect(() => {
     if (scrollTo) {
-      // Элемент уже в DOM (keep-alive), таймаут только для плавности
       const timer = setTimeout(() => {
         const el = document.getElementById(scrollTo)
         if (el) {
           el.scrollIntoView({ behavior: 'smooth', block: 'start' })
         }
-      }, 50) // было 80 — уменьшили, элемент уже есть
+      }, 50) 
       return () => clearTimeout(timer)
     } else {
-      // Скролл наверх при переходе на страницу проекта
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
     }
 
-    // BFCache — перезапуск видео после возврата кнопкой браузера
     const handlePageShow = (e) => {
       if (e.persisted) {
         document.querySelectorAll('video').forEach(video => {

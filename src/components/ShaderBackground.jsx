@@ -149,8 +149,7 @@ const ShaderBackground = () => {
     );
     io.observe(el);
 
-    // Mouse — слушаем на секции, не на window
-    // target — родительская секция (el — это абсолютный div внутри неё)
+    
     const section = el.parentElement;
 
     const onMouseMove = (e) => {

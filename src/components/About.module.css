@@ -1,7 +1,3 @@
-/* ─────────────────────────────────────────────
-   About.module.css
-───────────────────────────────────────────── */
-
 .about {
   padding: 80px 0 0 ;
   background:#eeeeec;
@@ -10,7 +6,6 @@
   font-family: 'Raleway', sans-serif;
 }
 
-/* ── Заголовок ── */
 .title {
   display: inline-block;
   font-size: 2.5rem;
@@ -30,7 +25,6 @@
   align-items: start;
 }
 
-/* ── Вертикальный ticker — абсолютный, на весь блок .about ── */
 .verticalTickerWrap {
   position: absolute;
   top: 0;
@@ -70,16 +64,8 @@
   to   { transform: rotate(180deg) translateY(-50%); }
 }
 
-/* ══════════════════════════════════════════════
-   ЛЕВАЯ КОЛОНКА
-   .imageWrapper — relative-контейнер
-   .imagePlaceholder — круглое фото (250×250)
-   .videoCircle — круглое видео поверх фото,
-     нижняя треть, немного левее центра
-══════════════════════════════════════════════ */
 .imageWrapper {
   position: relative;
-  /* высота = фото + выступ видеокружка снизу */
   height: 310px;
   display: flex;
   justify-content: center;
@@ -104,10 +90,6 @@
   object-fit: cover;
 }
 
-/* ── Круглое видео поверх фото ── */
-/* Размер ~40% от фото = ~100px
-   Нижняя треть фото: top ≈ 250 * 0.58 = 145px
-   Левее центра: left-смещение из центра 250/2=125, сдвиг -55px → left≈35px */
 .videoCircle {
   position: absolute;
   top: 112px;           /* нижняя треть фото */
@@ -128,7 +110,6 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  /* ч/б + сдвиг чёрных тонов в #1c1d20 (~холодный тёмный) */
   filter:
     grayscale(100%)
     brightness(0.88)

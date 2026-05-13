@@ -15,7 +15,6 @@ import ScrollRestorer from './components/ScrollRestorer';
 import './App.css';
 import './scrollReveal.css';
 
-// Keep-alive: все страницы живут в DOM, скрываются через display:none
 const KeepAliveRoutes = () => {
   const location = useLocation();
   const path = location.pathname;

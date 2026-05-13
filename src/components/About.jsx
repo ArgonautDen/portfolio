@@ -15,11 +15,6 @@ const About = () => {
 
   useScrollReveal(sectionRef);
 
-  /**
-   * Возвращает барьеры в координатах canvas (bubblesWrap):
-   * - rect  — AABB прямоугольник фото
-   * - lineY — Y нижнего края текстового блока (горизонтальная линия-барьер)
-   */
   const getBarriers = useCallback(() => {
     if (!bubblesWrapRef.current) return null;
 

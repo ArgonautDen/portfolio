@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&family=Raleway:wght@200&display=swap');
 
-/* ─────────────────────────────────────────────
-   СЕКЦИЯ
-───────────────────────────────────────────── */
 a {
   text-decoration: none;
   color: inherit;
@@ -111,7 +108,7 @@ a {
 .tickerTrack {
   display: flex;
   gap: 60px;
-  padding-right: 60px;          /* = gap, чтобы стык между треками был ровный */
+  padding-right: 60px;          
   flex-shrink: 0;
   animation: tickerScroll 30s linear infinite;
   font-size: 0.60rem;
@@ -313,11 +310,10 @@ a {
   margin-bottom: 20px;
   color: rgba(91, 185, 154, 0.45);
   transition: color 0.35s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease;
-  /* убрали transform-style: preserve-3d */
   width: fit-content;
-  /* форсируем отдельный compositing layer — Safari рендерит чётко */
   will-change: transform;
   -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .card:hover .cardIcon {

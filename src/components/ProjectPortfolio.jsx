@@ -17,7 +17,7 @@ const highlights = [
     text: "GLSL на Three.js: FBM-шум в 6 октав, domain-warping через двойной fbm, fake light scattering — всё в одном фрагментном шейдере. 30 fps cap + IntersectionObserver: рендер только когда секция видна.",
     mediaLabel: "Shader clouds",
     media: null,
-    video: "/videos/smoke.mp4", // ← "/videos/hl-shader.mp4"
+    video: "/videos/smoke.mp4",
   },
   {
     id: "07",

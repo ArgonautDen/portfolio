@@ -155,24 +155,6 @@
   filter: contrast(0.7) brightness(0.99);
 }
 
-/* ═══════════════════════════════════════════════════════
-   MARQUEE — проверенный паттерн без субпиксельных рывков
-
-   Принцип:
-   - .marqueeOverlay — overflow:hidden контейнер, flex
-   - два .marqueeTrack внутри, каждый flex с белспейс:nowrap
-   - каждый трек анимируется translateX(0) → translateX(-100%)
-     то есть уезжает ровно на свою собственную ширину
-   - второй трек стартует сразу после первого (они в потоке flex)
-   - когда первый уехал на -100% — второй занял его место,
-     анимация перезапускается — никакого скачка
-   - direction меняет animation-direction на обоих треках
-
-   Почему нет рывков:
-   - translateX оперирует процентами от собственной ширины элемента
-   - не зависит от gap, внешних размеров, округления пикселей
-   - GPU-composited transform — никаких layout recalculations
-═══════════════════════════════════════════════════════ */
 .marqueeOverlay {
   position: absolute;
   top: 0;
@@ -220,11 +202,6 @@
   animation-direction: reverse;
 }
 
-/*
-  translateX(-100%) = ровно ширина одного трека.
-  Второй трек в это время занимает позицию первого.
-  При следующей итерации — seamless loop.
-*/
 @keyframes marqueeScroll {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-100%); }

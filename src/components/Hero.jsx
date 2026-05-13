@@ -149,15 +149,6 @@ const Hero = () => {
       <section id="hero" className={styles.hero}>
         <ShaderBackground />
 
-        {/*
-          ── Marquee — проверенный паттерн ──────────────────────────────
-          Враппер overflow:hidden, внутри два идентичных трека (.marqueeTrack).
-          Каждый трек анимируется translateX от 0 до -100% своей ширины.
-          Когда первый трек уходит влево на 100% — второй занимает его место,
-          затем первый мгновенно сбрасывается в начало (iteration restart).
-          Браузер видит непрерывный поток — никакого скачка.
-          direction меняет animation-direction, оба трека синхронно.
-        */}
         <div className={styles.marqueeOverlay}>
           <div className={`${styles.marqueeTrack} ${styles[direction]}`} aria-hidden="true">
             {MARQUEE_ITEMS.map((text, i) => (
