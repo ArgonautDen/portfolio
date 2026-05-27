@@ -29,7 +29,6 @@
   transform: translate(0, 0);
 }
 
-/* ── Уважаем prefers-reduced-motion ── */
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] {
     opacity: 1;
