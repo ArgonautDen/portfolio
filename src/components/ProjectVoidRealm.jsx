@@ -1,5 +1,6 @@
-import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { FiArrowLeft, FiArrowUpRight } from "react-icons/fi";
 import "./ProjectVoidRealm.css";
 
 const isVideo = (src) => /\.(mp4|webm|mov|ogg)$/i.test(src);
@@ -60,12 +61,21 @@ const screenshots = [
 export default function ProjectVoidRealm() {
   const videoRef = useRef(null);
   const [videoError, setVideoError] = useState(false);
+  const rootRef = useRef(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname !== "/projects/voidrealm") return;
+    rootRef.current?.querySelectorAll("video").forEach((v) => {
+      v.play().catch(() => {});
+    });
+  }, [location.pathname]);
 
   return (
-    <article className="pvr">
+    <article className="pvr" ref={rootRef}>
       {/* ── BACK ── */}
       <Link to="/" state={{ scrollTo: "projects" }} className="pce__back ...">
-        <span className="pvr__back-arrow">←</span> Назад к проектам
+        <span className="pvr__back-arrow"><FiArrowLeft /></span> Назад к проектам
       </Link>
 
       {/* ── HERO + VIDEO ── */}
@@ -93,7 +103,7 @@ export default function ProjectVoidRealm() {
                 rel="noopener noreferrer"
                 className="pvr__cta pvr__cta--primary"
               >
-                Играть сейчас <span className="pvr__cta-arrow">↗</span>
+                Играть сейчас <span className="pvr__cta-arrow"><FiArrowUpRight /></span>
               </a>
               <span className="pvr__hero-note">нужен второй игрок или режим зрителя</span>
             </div>
@@ -288,9 +298,11 @@ export default function ProjectVoidRealm() {
           rel="noopener noreferrer"
           className="pvr__cta pvr__cta--primary pvr__cta--large"
         >
-          Открыть игру <span className="pvr__cta-arrow">↗</span>
+          Открыть игру <span className="pvr__cta-arrow"><FiArrowUpRight /></span>
         </a>
-        <Link to="/" state={{ scrollTo: "projects" }} className="pce__back ...">← Все проекты</Link>
+        <Link to="/" state={{ scrollTo: "projects" }} className="pce__back ...">
+          <span className="pvr__back-arrow"><FiArrowLeft /></span> Все проекты
+        </Link>
       </footer>
     </article>
   );

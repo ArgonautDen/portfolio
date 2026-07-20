@@ -518,6 +518,17 @@
   width: 100%;
 }
 
+/* На мобильных — видео под заголовком (эта версия важна: должна идти
+   после базового .pce__hero-inner выше, иначе каскад его перебьёт) */
+@media (max-width: 640px) {
+  .pce__hero-inner {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .pce__hero-left  { order: 1; }
+  .pce__hero-right { order: 2; }
+}
+
 .pce__hero-right .pce__video-wrap {
   width: 100%;
   aspect-ratio: 16 / 9;

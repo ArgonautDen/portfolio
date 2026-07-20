@@ -338,9 +338,6 @@
   
   /* ── RESPONSIVE ── */
   @media (max-width: 640px) {
-    .pkg__hero-inner { grid-template-columns: 1fr; }
-    .pkg__hero-left  { order: 1; }
-    .pkg__hero-right { order: 2; }
     .pkg__hero-title { font-size: clamp(2.5rem, 10vw, 4rem); }
     .pkg__intro-grid { grid-template-columns: 1fr; }
     .pkg__intro-stats {
@@ -372,7 +369,15 @@
   .pkg__hero-right {
     width: 100%;
   }
-  
+
+  /* На мобильных — видео под заголовком (после базового .pkg__hero-inner,
+     иначе каскад его перебьёт) */
+  @media (max-width: 640px) {
+    .pkg__hero-inner { grid-template-columns: 1fr; }
+    .pkg__hero-left  { order: 1; }
+    .pkg__hero-right { order: 2; }
+  }
+
   .pkg__hero-right .pkg__video-wrap {
     width: 100%;
     aspect-ratio: 16 / 9;

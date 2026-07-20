@@ -1,5 +1,6 @@
-import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { FiArrowLeft, FiArrowUpRight } from "react-icons/fi";
 import "./ProjectPortfolio.css";
 
 const highlights = [
@@ -64,12 +65,21 @@ const highlights = [
 export default function ProjectPortfolio() {
   const videoRef = useRef(null);
   const [videoError, setVideoError] = useState(false);
+  const rootRef = useRef(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname !== "/projects/portfolio") return;
+    rootRef.current?.querySelectorAll("video").forEach((v) => {
+      v.play().catch(() => {});
+    });
+  }, [location.pathname]);
 
   return (
-    <article className="ppt">
+    <article className="ppt" ref={rootRef}>
       {/* ── BACK ── */}
       <Link to="/" state={{ scrollTo: "projects" }} className="ppt__back">
-        <span className="ppt__back-arrow">←</span> Назад к проектам
+        <span className="ppt__back-arrow"><FiArrowLeft /></span> Назад к проектам
       </Link>
 
       {/* ── HERO + VIDEO ── */}
@@ -94,7 +104,7 @@ export default function ProjectPortfolio() {
               rel="noopener noreferrer"
               className="ppt__cta"
             >
-              Открыть сайт <span className="ppt__cta-arrow">↗</span>
+              Открыть сайт <span className="ppt__cta-arrow"><FiArrowUpRight /></span>
             </a>
           </div>
           <div className="ppt__hero-right">
@@ -236,10 +246,10 @@ export default function ProjectPortfolio() {
           rel="noopener noreferrer"
           className="ppt__cta ppt__cta--large"
         >
-          Открыть сайт <span className="ppt__cta-arrow">↗</span>
+          Открыть сайт <span className="ppt__cta-arrow"><FiArrowUpRight /></span>
         </a>
         <Link to="/" state={{ scrollTo: "projects" }} className="ppt__back ppt__back--footer">
-          ← Все проекты
+          <span className="ppt__back-arrow"><FiArrowLeft /></span> Все проекты
         </Link>
       </footer>
     </article>

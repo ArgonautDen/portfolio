@@ -1,5 +1,6 @@
-import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { FiArrowLeft, FiArrowUpRight } from "react-icons/fi";
 import "./ProjectCatEnergy.css";
 
 const achievements = [
@@ -37,12 +38,21 @@ const achievements = [
 
 export default function ProjectCatEnergy() {
   const videoRef = useRef(null);
+  const rootRef = useRef(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname !== "/projects/catenergy") return;
+    rootRef.current?.querySelectorAll("video").forEach((v) => {
+      v.play().catch(() => {});
+    });
+  }, [location.pathname]);
 
   return (
-    <article className="pce">
+    <article className="pce" ref={rootRef}>
       {/* ── BACK ── */}
       <Link to="/" state={{ scrollTo: 'projects' }} className="pce__back ...">
-        <span className="pce__back-arrow">←</span> Назад к проектам
+        <span className="pce__back-arrow"><FiArrowLeft /></span> Назад к проектам
       </Link>
 
       {/* ── HERO + VIDEO ── */}
@@ -63,7 +73,7 @@ export default function ProjectCatEnergy() {
               rel="noopener noreferrer"
               className="pce__cta"
             >
-              Открыть проект <span className="pce__cta-arrow">↗</span>
+              Открыть проект <span className="pce__cta-arrow"><FiArrowUpRight /></span>
             </a>
           </div>
           <div className="pce__hero-right">
@@ -257,9 +267,11 @@ export default function ProjectCatEnergy() {
           rel="noopener noreferrer"
           className="pce__cta pce__cta--large"
         >
-          Посмотреть живой сайт <span className="pce__cta-arrow">↗</span>
+          Посмотреть живой сайт <span className="pce__cta-arrow"><FiArrowUpRight /></span>
         </a>
-        <Link to="/" state={{ scrollTo: 'projects' }} className="pce__back ...">← Все проекты</Link>
+        <Link to="/" state={{ scrollTo: 'projects' }} className="pce__back ...">
+          <span className="pce__back-arrow"><FiArrowLeft /></span> Все проекты
+        </Link>
       </footer>
     </article>
   );

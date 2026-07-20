@@ -487,9 +487,6 @@
   
   /* ── RESPONSIVE ── */
   @media (max-width: 680px) {
-    .pvr__hero-inner { grid-template-columns: 1fr; }
-    .pvr__hero-left  { order: 1; }
-    .pvr__hero-right { order: 2; }
     .pvr__hero-title { gap: 0; }
     .pvr__title-sub { font-size: 1.2rem; }
   
@@ -522,7 +519,15 @@
   .pvr__hero-right {
     width: 100%;
   }
-  
+
+  /* На мобильных — видео под заголовком (после базового .pvr__hero-inner,
+     иначе каскад его перебьёт) */
+  @media (max-width: 680px) {
+    .pvr__hero-inner { grid-template-columns: 1fr; }
+    .pvr__hero-left  { order: 1; }
+    .pvr__hero-right { order: 2; }
+  }
+
   .pvr__hero-right .pvr__video-wrap {
     width: 100%;
     aspect-ratio: 16 / 9;

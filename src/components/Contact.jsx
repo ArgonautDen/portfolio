@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import * as THREE from 'three';
+import { FiArrowUpRight } from 'react-icons/fi';
 import styles from './Contact.module.css';
 import useScrollReveal from '../hooks/useScrollReveal';
 
@@ -309,7 +310,7 @@ const TiltCard = ({ c }) => {
 
       <div className={styles.cardHeader}>
         <span className={styles.cardIdx}>{c.idx}</span>
-        <span className={styles.cardArrow}>↗</span>
+        <span className={styles.cardArrow}><FiArrowUpRight /></span>
       </div>
 
       <div className={styles.cardIcon}>

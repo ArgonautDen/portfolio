@@ -365,9 +365,6 @@
   
   /* ── RESPONSIVE ── */
   @media (max-width: 680px) {
-    .ppt__hero-inner { grid-template-columns: 1fr; }
-    .ppt__hero-left  { order: 1; }
-    .ppt__hero-right { order: 2; }
     .ppt__hero-eyebrow { flex-direction: column; }
     .ppt__title-line2 { padding-left: 0; }
   
@@ -402,7 +399,15 @@
   .ppt__hero-right {
     width: 100%;
   }
-  
+
+  /* На мобильных — видео под заголовком (после базового .ppt__hero-inner,
+     иначе каскад его перебьёт) */
+  @media (max-width: 680px) {
+    .ppt__hero-inner { grid-template-columns: 1fr; }
+    .ppt__hero-left  { order: 1; }
+    .ppt__hero-right { order: 2; }
+  }
+
   .ppt__hero-right .ppt__video-wrap {
     width: 100%;
     aspect-ratio: 16 / 9;

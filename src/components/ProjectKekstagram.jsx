@@ -1,5 +1,6 @@
-import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { FiArrowLeft, FiArrowUpRight } from "react-icons/fi";
 import "./ProjectKekstagram.css";
 
 const achievements = [
@@ -37,12 +38,21 @@ const achievements = [
 
 export default function ProjectKekstagram() {
   const videoRef = useRef(null);
+  const rootRef = useRef(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname !== "/projects/kekstagram") return;
+    rootRef.current?.querySelectorAll("video").forEach((v) => {
+      v.play().catch(() => {});
+    });
+  }, [location.pathname]);
 
   return (
-    <article className="pkg">
+    <article className="pkg" ref={rootRef}>
       {/* ── BACK ── */}
       <Link to="/" state={{ scrollTo: 'projects' }} className="pce__back ...">
-        <span className="pkg__back-arrow">←</span> Назад к проектам
+        <span className="pkg__back-arrow"><FiArrowLeft /></span> Назад к проектам
       </Link>
 
       {/* ── HERO + VIDEO ── */}
@@ -63,7 +73,7 @@ export default function ProjectKekstagram() {
               rel="noopener noreferrer"
               className="pkg__cta"
             >
-              Открыть проект <span className="pkg__cta-arrow">↗</span>
+              Открыть проект <span className="pkg__cta-arrow"><FiArrowUpRight /></span>
             </a>
           </div>
           <div className="pkg__hero-right">
@@ -236,9 +246,11 @@ export default function ProjectKekstagram() {
           rel="noopener noreferrer"
           className="pkg__cta pkg__cta--large"
         >
-          Посмотреть живой сайт <span className="pkg__cta-arrow">↗</span>
+          Посмотреть живой сайт <span className="pkg__cta-arrow"><FiArrowUpRight /></span>
         </a>
-        <Link to="/" state={{ scrollTo: 'projects' }} className="pce__back ...">← Все проекты</Link>
+        <Link to="/" state={{ scrollTo: 'projects' }} className="pce__back ...">
+          <span className="pkg__back-arrow"><FiArrowLeft /></span> Все проекты
+        </Link>
       </footer>
     </article>
   );

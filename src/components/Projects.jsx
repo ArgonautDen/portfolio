@@ -3,6 +3,7 @@ import { useState, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import styles from './Projects.module.css';
 import { Link } from "react-router-dom";
+import { FiArrowUpRight, FiArrowRight } from 'react-icons/fi';
 
 const projects = [
   {
@@ -125,7 +126,7 @@ const Projects = () => {
             
                     <span className={styles.meta}>
                       <span className={styles.year}>{project.year}</span>
-                      <span className={styles.arrow}>↗</span>
+                      <span className={styles.arrow}><FiArrowUpRight /></span>
                     </span>
                   </Link>
                 ) : (
@@ -156,7 +157,7 @@ const Projects = () => {
             
                     <span className={styles.meta}>
                       <span className={styles.year}>{project.year}</span>
-                      <span className={styles.arrow}>↗</span>
+                      <span className={styles.arrow}><FiArrowUpRight /></span>
                     </span>
                   </a>
                 )}
@@ -171,12 +172,12 @@ const Projects = () => {
                       {project.slug ? (
                         <Link to={`/projects/${project.slug}`} className={styles.moreBtn}>
                           <span>Подробнее</span>
-                          <span className={styles.moreBtnArrow}>→</span>
+                          <span className={styles.moreBtnArrow}><FiArrowRight /></span>
                         </Link>
                       ) : (
                         <button className={styles.moreBtn} disabled>
                           <span>Подробнее</span>
-                          <span className={styles.moreBtnArrow}>→</span>
+                          <span className={styles.moreBtnArrow}><FiArrowRight /></span>
                         </button>
                       )}
                     </div>
