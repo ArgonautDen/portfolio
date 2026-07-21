@@ -7,6 +7,16 @@ import { FiArrowUpRight, FiArrowRight } from 'react-icons/fi';
 
 const projects = [
   {
+    title: 'Рекламный лендинг CRM-сервиса',
+    year: '2026',
+    description: 'Первая в России CRM с современным интерфейсом для практикующих ветврачей — картотека, календарь, онлайн-запись и анкеты. Кастомная дизайн-система на CSS-переменных, 6 собственных UI-мокапов, продуманная воронка от Hero до Pricing.',
+    tags: ['React', 'TypeScript', 'Tailwind', 'shadcn/ui'],
+    link: 'https://vetremote.ru',
+    video: '/videos/video-remote.mp4',
+    placeholder: '#0f1826',
+    slug: 'vetremote',
+  },
+  {
     title: 'Карточная онлайн игра 1vs1',
     year: '2026',
     description: 'Мультиплеерная карточная игра в реальном времени. Матчмейкинг, состояния сессий, анимации.',
