@@ -12,6 +12,7 @@ import ProjectKekstagram from './components/ProjectKekstagram';
 import ProjectVoidRealm  from './components/ProjectVoidRealm';
 import ProjectPortfolio  from './components/ProjectPortfolio';
 import ProjectVetRemote  from './components/ProjectVetRemote';
+import ProjectVetCRM     from './components/ProjectVetCRM';
 import ScrollRestorer from './components/ScrollRestorer';
 import './App.css';
 import './scrollReveal.css';
@@ -34,6 +35,7 @@ const KeepAliveRoutes = () => {
       <div style={{ display: path === '/projects/voidrealm'  ? 'contents' : 'none' }}><ProjectVoidRealm /></div>
       <div style={{ display: path === '/projects/portfolio'  ? 'contents' : 'none' }}><ProjectPortfolio /></div>
       <div style={{ display: path === '/projects/vetremote'  ? 'contents' : 'none' }}><ProjectVetRemote /></div>
+      <div style={{ display: path === '/projects/vetcrm'     ? 'contents' : 'none' }}><ProjectVetCRM /></div>
     </>
   );
 };
