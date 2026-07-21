@@ -150,14 +150,18 @@ const Hero = () => {
         <ShaderBackground />
 
         <div className={styles.marqueeOverlay}>
+          {/* Одна дорожка с задвоенным контентом: translateX(-50%) всегда
+              ровно половина ЕЁ ЖЕ ширины — то есть ширина одной копии.
+              Сравнивать не с чем, поэтому шва/рывка на стыке не бывает
+              (в отличие от двух раздельных div с translateX(-100%) каждый,
+              где рывок появлялся из-за сабпиксельного расхождения ширины
+              между независимо посчитанными элементами). */}
           <div className={`${styles.marqueeTrack} ${styles[direction]}`} aria-hidden="true">
             {MARQUEE_ITEMS.map((text, i) => (
-              <span key={i} className={styles.marqueeItem}>{text}</span>
+              <span key={`a-${i}`} className={styles.marqueeItem}>{text}</span>
             ))}
-          </div>
-          <div className={`${styles.marqueeTrack} ${styles[direction]}`} aria-hidden="true">
             {MARQUEE_ITEMS.map((text, i) => (
-              <span key={i} className={styles.marqueeItem}>{text}</span>
+              <span key={`b-${i}`} className={styles.marqueeItem}>{text}</span>
             ))}
           </div>
         </div>

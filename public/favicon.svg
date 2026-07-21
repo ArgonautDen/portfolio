@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#232428"/>
+      <stop offset="100%" stop-color="#131315"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#d8dce2"/>
+    </linearGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2.4"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="64" height="64" rx="14" fill="url(#bg)"/>
+
+  <!-- мягкое свечение под молнией -->
+  <polygon points="33.3,9 20.6,36.6 32,36.6 30.7,55 43.4,27.4 32,27.4"
+           fill="#ffffff" opacity="0.55" filter="url(#glow)"/>
+
+  <!-- сама молния — тонкая, лаконичная -->
+  <polygon points="33.3,9 20.6,36.6 32,36.6 30.7,55 43.4,27.4 32,27.4"
+           fill="url(#bolt)"/>
+</svg>
