@@ -27,6 +27,16 @@ const projects = [
     slug: 'voidrealm',
   },
   {
+    title: 'Сайт ветеринарного врача-невролога',
+    year: '2026',
+    description: 'Коммерческий сайт для реального специалиста с онлайн-записью через мою CRM VetRemote. Статический экспорт Next.js на хостинге Рег.ру, SEO под Google и Яндекс (JSON-LD, OpenGraph, sitemap), дизайн-система на Tailwind v4.',
+    tags: ['Next.js', 'TypeScript', 'Tailwind', 'Motion'],
+    link: 'https://proshkina-vet.ru',
+    video: '/videos/proshkina.mp4',
+    placeholder: '#0f1826',
+    slug: 'proshkina',
+  },
+  {
     title: 'JavaScript. Разработка веб-интерфейсов',
     year: '2026',
     description: 'Кекстаграм — сервис просмотра изображений. Пользователям предоставлена возможность загружать свои фотографии или просматривать фотографии, загруженные ранее другими пользователями. Интерактивное приложение с внешним API и LocalStorage. Динамичный UI без фреймворков.',
