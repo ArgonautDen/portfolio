@@ -6,6 +6,7 @@ import BubbleSkills from './BubbleSkills';
 import VerticalTicker from './VerticalTicker';
 import ShaderCircle from './ShaderCircle';
 import DiplomaPopup from './DiplomaPopup';
+import NeuroText from './NeuroText';
 
 const About = () => {
   const sectionRef     = useRef(null);
@@ -89,7 +90,7 @@ const About = () => {
 <br/><br/>После этого решил подойти к обучению глубже и пройти годовые <DiplomaPopup /><br />
 
 Дальше была практика: стажировочные задачи, сайты и лендинги для друзей, а также работа над онлайн-игрой. Именно через реальные задачи я начал лучше понимать, как соединяются дизайн, логика и пользовательский опыт.
-<br/><br/>В практике использую нейросети — для меня это такой же рабочий инструмент, как Figma или Git. Они помогают быстрее прототипировать, разбираться в незнакомых технологиях и проверять свои решения.</p>
+<br/><br/><NeuroText /></p>
               <div className={styles.textCardFooter}>
                 React · CSS · JS · Git · Figma · Three
               </div>

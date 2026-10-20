@@ -1,0 +1,47 @@
+.wrap {
+  position: relative;
+  display: block;
+  cursor: default;
+}
+
+/* невидимая копия задаёт высоту, анимированный слой лежит поверх и на неё не влияет */
+.sizer {
+  display: block;
+  visibility: hidden;
+}
+
+.live {
+  position: absolute;
+  inset: 0;
+  color: rgba(19, 18, 18, 0.45);
+  transition: color 0.4s ease;
+}
+
+.resolved .live {
+  color: inherit;
+}
+
+/* помехи: редкие рывки на пиксель с красно-синим RGB-сдвигом */
+.idle .live {
+  animation: interference 2.6s steps(1) infinite;
+}
+
+@keyframes interference {
+  0%, 100% { transform: none; text-shadow: none; }
+  7%  { transform: translate(1px, 0); text-shadow: -1px 0 rgba(255, 0, 80, 0.35), 1px 0 rgba(0, 170, 255, 0.35); }
+  9%  { transform: none; text-shadow: none; }
+  41% { transform: translate(-1px, 0.5px); text-shadow: 1px 0 rgba(255, 0, 80, 0.3), -1px 0 rgba(0, 170, 255, 0.3); }
+  43% { transform: translate(0.5px, -0.5px); }
+  45% { transform: none; text-shadow: none; }
+  78% { transform: translate(0, -1px); text-shadow: -2px 0 rgba(255, 0, 80, 0.25), 2px 0 rgba(0, 170, 255, 0.25); }
+  80% { transform: none; text-shadow: none; }
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
