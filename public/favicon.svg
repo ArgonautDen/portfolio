@@ -1,25 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#232428"/>
-      <stop offset="100%" stop-color="#131315"/>
+      <stop offset="0%" stop-color="#34363b"/>
+      <stop offset="100%" stop-color="#1b1c1f"/>
     </linearGradient>
-    <linearGradient id="bolt" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="100%" stop-color="#d8dce2"/>
-    </linearGradient>
-    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
-      <feGaussianBlur stdDeviation="2.4"/>
-    </filter>
   </defs>
-
-  <rect x="0" y="0" width="64" height="64" rx="14" fill="url(#bg)"/>
-
-  <!-- мягкое свечение под молнией -->
-  <polygon points="33.3,9 20.6,36.6 32,36.6 30.7,55 43.4,27.4 32,27.4"
-           fill="#ffffff" opacity="0.55" filter="url(#glow)"/>
-
-  <!-- сама молния — тонкая, лаконичная -->
-  <polygon points="33.3,9 20.6,36.6 32,36.6 30.7,55 43.4,27.4 32,27.4"
-           fill="url(#bolt)"/>
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="13.25" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1.5"/>
+  <text x="32" y="33" text-anchor="middle" dominant-baseline="central"
+        font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="700"
+        font-size="30" letter-spacing="-1.5" fill="#ffffff">RD</text>
 </svg>
